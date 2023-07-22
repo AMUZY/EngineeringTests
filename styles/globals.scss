@@ -1,0 +1,111 @@
+@use 'sass:math';
+@use 'home';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+$darkblue : #243470;
+$lightblue: #399BDA;
+$darkorange: #FF6700;
+$lightorange : #FFA86C;
+$white: #FFFFFF;
+$black: #2B3146;
+// FONT FAMILY
+$bold : 'Inter-Bold';
+$sbold : 'Inter-SemiBold';
+
+.white{
+  color: $white;
+}
+.black{
+  color: $black;
+}
+.dorange{
+  color : $darkorange;
+}
+.bckorange{
+  background-color: $darkorange;
+}
+
+@font-face {
+  font-family: $sbold;
+  src: url('../font/inter/Inter-SemiBold.ttf');
+}
+@font-face {
+  font-family: $bold;
+  src: url('../font/inter/Inter-Bold.ttf');
+}
+
+@function torem ($pixels) {
+  $result : (math.div($pixels, 16)*1rem);
+  @return $result;
+}
+
+.bckgrnd {
+  background-image: linear-gradient(to bottom , $darkblue , $lightblue);
+}
+// SECTION
+.section{
+  padding : 1% 5%;
+  width : 100%;
+}
+
+.tsmall{
+  font-family: $sbold;
+  font-size: torem(10);
+  line-height: 150%;
+}
+.tbase {
+  font-family: $sbold;
+  font-size: torem(16);
+}
+.ttitle{
+  font-family: $bold;
+  font-size: torem(32);
+}
+.tsubtitle{
+  font-family: $bold;
+  font-size: torem(20);
+}
+
+@media only screen and (min-width : "976px") {
+  .section{
+    padding : 2% 10%;
+    width : 100%;
+  }
+  .tsmall{
+    font-family: $sbold;
+    font-size: torem(12);
+    line-height: 150%;
+  }
+  .tbase {
+    font-family: $sbold;
+    font-size: torem(18);
+  }
+  .ttitle{
+    font-family: $bold;
+    font-size: torem(48);
+  }
+  .tsubtitle{
+    font-family: $bold;
+    font-size: torem(28);
+  }
+}
+// BUTTONS
+.fill {
+  border: 1px solid $darkorange;
+  border-radius: 5px;
+  color: $white;
+  @extend .tbase;
+  @apply bg-[#FF6700] px-4 py-2 md:px-5 md:py-3 hover:bg-transparent hover:border-[#2B3146] hover:text-[#2B3146] hover:border
+}
+
+.nofill {
+  border-radius: 5px;
+  border: 1px solid $white;
+  color: $white;
+  @extend .tbase;
+  @apply px-4 py-2 md:py-3 md:px-5 hover:border-[#2B3146] hover:text-[#2B3146]
+}

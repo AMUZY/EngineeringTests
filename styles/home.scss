@@ -1,0 +1,226 @@
+$darkblue : #243470;
+$lightblue: #399BDA;
+$darkorange: #FF6700;
+$lightorange : #FFA86C;
+$white: #FFFFFF;
+$black: #2B3146;
+
+// @function torem ($pixels) {
+//     $result : (math.div($pixels, 16)*1rem);
+//     @return $result;
+//   }
+
+// @function grow ($height){
+//     $result : ($height * 3);
+//     @return $result;
+// }
+
+// @keyframes grow {
+//     0%{
+//         height: 0px;
+//     }
+//     100%{
+//         height: grow();
+//     }
+// }
+
+@keyframes growspans1 {
+    0%{
+        transform: translateY(0%);
+    }
+    50%{
+        transform: translateY(-100%);
+    }
+    100%{
+        transform: translateY(0%);
+    }
+}
+
+@keyframes growspans2 {
+    0%{
+        transform: translateY(0%);
+    }
+    50%{
+        transform: translateY(100%);
+    }
+    100%{
+        transform: translateY(0%);
+    }
+}
+.growspan1{
+    animation: growspans1 1.6s ease-out ;
+}
+.growspan2{
+    animation: growspans2 1.6s ease-out ;
+}
+
+.white{
+    color: $white;
+  }
+  .black{
+    color: $black;
+  }
+  .dorange{
+    color : $darkorange;
+  }
+  .bckorange{
+    background-color: $darkorange;
+  }
+
+.video{
+    max-width: 160%;
+}
+
+// BOXES
+.hide{
+    opacity: 0;
+    filter: blur(5px);
+    transform: translateX(-100%);
+    transition: all 1s;
+}
+.other{
+    opacity: 0;
+    filter: blur(5px);
+    transform: translateX(100%);
+    transition: all 1s;
+}
+.span{
+    opacity: 0;
+    filter: blur(5px);
+    transform: translateY(-100%);
+    transition: all 1s;
+}
+.span_second{
+    opacity: 0;
+    filter: blur(5px);
+    transform: translateY(10%);
+    transition: all 1s;
+}
+.show{
+    opacity: 1;
+    filter: blur(0);
+    transform: translateX(0);
+    transform: translateY(0);
+}
+
+.gridcont :nth-child(2){
+    transition-delay: 200ms;
+}
+.gridcont :nth-child(3){
+    transition-delay: 400ms;
+}
+.gridcont :nth-child(4){
+    transition-delay: 600ms;
+}
+
+.animespans1{
+    overflow: hidden;
+    display: flex;
+    justify-content: space-between;
+    width : max-content;
+    height: max-content;
+    span{
+      width:70px;
+      margin : 0 10px;
+      border-radius: 0 0 20px 20px;
+    //   transform: translateY(-100%);
+    }
+    .span-1{
+        height: 120px;
+    }
+    .span-2{
+        height: 290px;
+    }
+    .span-3{
+        height: 345px;
+    }
+    .span-4{
+        height: 215px;
+    }
+  }
+  .animespans2{
+    overflow: hidden;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    width : max-content;
+    height: max-content;
+    border-radius: 0 0 50px 0;
+    span{
+      width:70px;
+      margin : 0 10px;
+      border-radius: 20px 20px 0 0;
+    //   transform: translateY(100%);
+    }
+    .span-1{
+        height: 450px;
+    }
+    .span-2{
+        height: 715px;
+    }
+    .span-3{
+        height: 845px;
+    }
+    .span-4{
+        height: 1050px;
+    }
+    .span-5{
+        height: 790px;
+    }
+    .span-6{
+        height: 535px;
+    }
+    .span-7{
+        height: 621px;
+        margin-left: 10px;
+        margin-right: 0px;
+        // border-radius: 20px 20px 50px 0;
+    }
+  }
+  .animespans1 :nth-child(even){
+    background-color: $darkorange;
+  }
+  .animespans1 :nth-child(odd){
+    background-color: $lightblue;
+  }
+  .animespans2 :nth-child(even){
+    background-color: $lightblue;
+  }
+  .animespans2 :nth-child(odd){
+    background-color: $darkorange;
+  }
+
+  .gridcont{
+    display: grid;
+    grid-gap : 2em;
+    grid-template-columns: repeat(auto-fit, minmax(10em, 1fr));
+  }
+.gridcont{
+    div{
+        display: flex;
+        flex-flow: column nowrap;
+        justify-content: center;
+        align-items: center;
+        // width: max-content;
+        padding: 1em 2em;
+        // margin: 0 15px;
+        border-radius: 20px;
+        box-shadow: 0px 4px 4px 0px rgb(0, 0, 0, .25);
+    }
+}
+
+@media only screen and (min-width : "768px") {
+    .video{
+        max-width: 100%;
+    }
+    .animespans1{
+        span{
+            width: 110px;
+        }
+    }
+    .animespans2{
+        span{
+            width: 110px;
+        }
+    }
+}
