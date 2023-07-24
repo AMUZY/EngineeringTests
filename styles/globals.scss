@@ -13,11 +13,15 @@ $lightorange : #FFA86C;
 $white: #FFFFFF;
 $black: #2B3146;
 // FONT FAMILY
+$reg : 'Inter-Regular';
 $bold : 'Inter-Bold';
 $sbold : 'Inter-SemiBold';
 
 .white{
   color: $white;
+}
+.white_bg{
+  background-color: $white;
 }
 .black{
   color: $black;
@@ -28,7 +32,10 @@ $sbold : 'Inter-SemiBold';
 .bckorange{
   background-color: $darkorange;
 }
-
+@font-face {
+  font-family: $reg;
+  src: url('../font/inter/Inter-Regular.ttf');
+}
 @font-face {
   font-family: $sbold;
   src: url('../font/inter/Inter-SemiBold.ttf');
@@ -43,8 +50,11 @@ $sbold : 'Inter-SemiBold';
   @return $result;
 }
 
-.bckgrnd {
+.bluegradient {
   background-image: linear-gradient(to bottom , $darkblue , $lightblue);
+}
+.orangegradient {
+  background-image: linear-gradient(to bottom , $darkorange , $lightorange);
 }
 // SECTION
 .section{
@@ -53,12 +63,12 @@ $sbold : 'Inter-SemiBold';
 }
 
 .tsmall{
-  font-family: $sbold;
+  font-family: $reg;
   font-size: torem(10);
   line-height: 150%;
 }
 .tbase {
-  font-family: $sbold;
+  font-family: $reg;
   font-size: torem(16);
 }
 .ttitle{
@@ -76,12 +86,12 @@ $sbold : 'Inter-SemiBold';
     width : 100%;
   }
   .tsmall{
-    font-family: $sbold;
+    font-family: $reg;
     font-size: torem(12);
     line-height: 150%;
   }
   .tbase {
-    font-family: $sbold;
+    font-family: $reg;
     font-size: torem(18);
   }
   .ttitle{

@@ -5,25 +5,6 @@ $lightorange : #FFA86C;
 $white: #FFFFFF;
 $black: #2B3146;
 
-// @function torem ($pixels) {
-//     $result : (math.div($pixels, 16)*1rem);
-//     @return $result;
-//   }
-
-// @function grow ($height){
-//     $result : ($height * 3);
-//     @return $result;
-// }
-
-// @keyframes grow {
-//     0%{
-//         height: 0px;
-//     }
-//     100%{
-//         height: grow();
-//     }
-// }
-
 @keyframes growspans1 {
     0%{
         transform: translateY(0%);
@@ -57,15 +38,15 @@ $black: #2B3146;
 .white{
     color: $white;
   }
-  .black{
-    color: $black;
-  }
-  .dorange{
-    color : $darkorange;
-  }
-  .bckorange{
-    background-color: $darkorange;
-  }
+.black{
+color: $black;
+}
+.dorange{
+color : $darkorange;
+}
+.bckorange{
+background-color: $darkorange;
+}
 
 .video{
     max-width: 160%;
@@ -208,9 +189,21 @@ $black: #2B3146;
         box-shadow: 0px 4px 4px 0px rgb(0, 0, 0, .25);
     }
 }
+.cardgrid{
+    display: grid;
+    grid-gap : 2em;
+    // grid-template-columns: repeat(auto-fit, minmax(15em, 1fr));
+    // grid-template-rows: repeat(4, 1fr);
+    div{
+        box-shadow: 0px 4px 4px 0px rgb(0, 0, 0, .25);
+        div{
+            box-shadow: none;
+        }
+    }
+}
 
 @media only screen and (min-width : "768px") {
-    .video{
+    .ca  .video{
         max-width: 100%;
     }
     .animespans1{
@@ -222,5 +215,27 @@ $black: #2B3146;
         span{
             width: 110px;
         }
+    }
+    .cardgrid :nth-child(1){
+        grid-row: 1/3;
+        grid-column: 2/3;
+    }
+    .cardgrid :nth-child(2){
+        grid-row: 2/4;
+        grid-column: 1/2;
+    }
+    .cardgrid :nth-child(3){
+        grid-row: 3/5;
+        grid-column: 2/3;
+    }
+    .cardgrid :nth-child(4){
+        grid-row: 4/6;
+        grid-column: 1/2;
+    }
+}
+
+@media only screen and (min-width : "976px") {
+    .cardgrid{
+        grid-gap: 5em;
     }
 }
