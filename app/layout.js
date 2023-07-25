@@ -1,6 +1,5 @@
 import React from "react";
 import "@styles/globals.scss";
-import Nav from "@components/Nav";
 import Head from "next/head";
 
 
@@ -50,8 +49,7 @@ const rootlayout = ({ children }) => {
         </title>
       </head>
       <body>
-        <main>
-          <Nav />  
+        <main> 
           {children}
         </main>
       </body>

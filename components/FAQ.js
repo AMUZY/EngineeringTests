@@ -30,7 +30,7 @@ const FAQ = () => {
   return (
     <div className='mt-16 flex flex-row w-full'>
         <div className='w-full xl:w-[70%]'>
-            <h1 className='nohighlight ttitle text-white'> FAQs </h1>
+            <h1 id='FAQ' className='nohighlight ttitle text-white'> FAQs </h1>
             <FAQrow id={0} Expand = {Expand} state={expanded[0].state} question={`Do I need to be an engineering student to use EngineeringTests?`} answer={`No, you don’t have to be an engineering student to use EngineeringTests, our platform is available to everyone on a research`} />
             <FAQrow id={1} Expand = {Expand} state={expanded[1].state} question={`Do I have to pay to use EngineeringTests?`} answer={`our platform is available to everyone on a research`} />
             <FAQrow id={2} Expand = {Expand} state={expanded[2].state} question={`Can I create presentation slides with EngineeringTests?`} answer={`our platform is available to everyone on a research`} />

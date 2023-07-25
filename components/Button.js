@@ -1,18 +1,18 @@
-
+import Link from "next/link"
 // FILL BUTTON
-export const FillBtn = ({text,addclass})=>{
+export const FillBtn = ({href,text,addclass})=>{
     return (
-        <button className={"fill "+ addclass}>
+        <Link href={href} className={"fill "+ addclass}>
             {text}
-        </button>
+        </Link>
     )
 }
 
 // NO FILL BUTTON
-export const NoFillBtn = ({text,addclass})=>{
+export const NoFillBtn = ({href,text,addclass})=>{
     return (
-        <button className={"nofill "+ addclass}>
+        <Link href={href} className={"nofill "+ addclass}>
             {text}
-        </button>
+        </Link>
     )
 }

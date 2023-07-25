@@ -64,6 +64,20 @@ $sbold : 'Inter-SemiBold';
   user-select: none;
 }
 
+.input:focus {
+  outline-color: gray;
+  outline-style: outset;
+}
+
+.input::selection {
+  background: gray; /* WebKit/Blink Browsers */
+}
+
+
+.input::-moz-selection {
+  background: gray; /* Gecko Browsers */
+}
+
 .bluegradient {
   background-color: rgba(36,52,112,0.8);
 }
