@@ -1,15 +1,15 @@
-'use client'
 import React from 'react'
 import Image from 'next/image'
 import { FillBtn,NoFillBtn } from '@components/Button'
 import Card from '@components/Card'
 import Spans from '@components/Spans'
+import FAQ from '@components/FAQ'
 
 const Home = () => {
 
   return (
     <section className='overflow-hidden'>
-      <section className='section bg-[rgba(0,0,0,0.8)] relative z-1 h-max w-max flex flex-col md:flex-row justify-evenly items-center'>
+      <section className='section bluegradient relative z-1 h-max w-max flex flex-col md:flex-row justify-evenly items-center'>
           <video className='video' loop autoPlay muted playsInline disablePictureInPicture>
               <source src = '/assets/videos/ET_1920.mp4' type='video/mp4' />
           </video>
@@ -58,8 +58,17 @@ const Home = () => {
         </div>
       </section>
 
-      <section className='h-[100svh] section bluegradient bg-[rgba(0,0,0,1)]'>
+      <section className='min-h-[100svh] section bluegradient'>
+        <div className='flex flex-row'>
+            {/* FAQ */}
+            <FAQ />
+            <div>
 
+            </div>
+        </div>
+        <div>
+
+        </div>
       </section>
   
     </section>

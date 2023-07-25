@@ -50,8 +50,16 @@ $sbold : 'Inter-SemiBold';
   @return $result;
 }
 
+.nohighlight {
+  user-select: none; // chrome and Opera
+  -moz-user-select: none; // Firefox
+  -webkit-text-select: none; // IOS Safari
+  -webkit-user-select: none; // Safari
+
+}
+
 .bluegradient {
-  background-image: linear-gradient(to bottom , $darkblue , $lightblue);
+  background-color: rgba(36,52,112,0.8);
 }
 .orangegradient {
   background-image: linear-gradient(to bottom , $darkorange , $lightorange);

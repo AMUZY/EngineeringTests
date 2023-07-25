@@ -209,6 +209,10 @@ background-color: $darkorange;
     }
 }
 
+.smooth{
+    transition: .25s ease-out;
+}
+
 @media only screen and (min-width : "768px") {
     .video{
         max-width: 100%;
