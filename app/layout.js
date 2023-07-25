@@ -2,10 +2,16 @@ import React from "react";
 import "@styles/globals.scss";
 import Nav from "@components/Nav";
 
+
 export const metadata = {
   title: "EngineeringTests",
   description: "Create,store and manage your engineering results",
 };
+
+// const observer = new IntersectionObserver(()=>{
+
+// })
+// observer.observe()
 
 const rootlayout = ({ children }) => {
   return (
@@ -21,7 +27,7 @@ const rootlayout = ({ children }) => {
       </head>
       <body>
         <main>
-          <Nav />
+          <Nav />  
           {children}
         </main>
       </body>

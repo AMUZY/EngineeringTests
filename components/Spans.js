@@ -29,8 +29,18 @@ const Spans = () => {
 
   return (
     <>
-        <div className='section relative overflow-hidden'>
+        <div style={{backgroundColor : 'rgb(255,255,255)'}} className='section relative overflow-hidden'>
             <div className='mb-32'>
+                {/* MOVING SPANS */}
+                <div className='z-[-1] w-full h-1/2'>
+                    <div className='animespans1 ml-[60%] '>
+                        <span className='span span-1'></span>
+                        <span className='span span-2'></span>
+                        <span className='span span-3'></span>
+                        <span className='span span-4'></span>
+                    </div>
+                </div>
+
                 <div className='hide'>
                     <Image className='mr-4 md:mr-10' src = '/assets/svgs/cart.svg' width={100} height={100} alt='cart' />
                 </div>
@@ -47,40 +57,35 @@ const Spans = () => {
             </div>
 
 
-        <div className='flex flex-row justify-end items-center'>
-            <div className='w-max md:w-1/2'>
-            <div className='other'>
-                <Image className='mr-4 md:mr-10' src = '/assets/svgs/search.svg' width={100} height={100} alt='cart' />
-            </div>
-            <div className='other rounded-xl p-2 mb-8 bg-[rgba(255,255,255,0.5)] lg:bg-transparent'>
-                <h2 className='tsubtitle'> Ease of Search </h2>
-                <p className='tbase mb-3 mr-0'> Find your charts easily by searching for type of tests, date of creation, name of x and y axes or chart title </p>
-            </div>
-            <div className='w-full md:w-[60%]'>
-                <Image className='other' src = '/assets/svgs/charts.svg' width={740} height={440} alt='charts'/>
-            </div>
-            </div>
-        </div>
-            {/* MOVING SPANS */}
-            <div className='z-[-1] absolute top-0 left-0 w-full h-1/2'>
-                <div className='animespans1 ml-[60%] '>
-                    <span className='span span-1'></span>
-                    <span className='span span-2'></span>
-                    <span className='span span-3'></span>
-                    <span className='span span-4'></span>
+            <div className='flex flex-col lg:flex-row'>
+                <div className='z-[2] w-full flex flex-row justify-end items-center lg:translate-x-[-50%] xl:translate-x-0 lg:order-2'>
+                    <div className='w-full md:ml-0 xl:ml-32'>
+                        <div className='other'>
+                            <Image className='mr-4 md:mr-10' src = '/assets/svgs/search.svg' width={100} height={100} alt='cart' />
+                        </div>
+                        <div className='other rounded-xl p-2 mb-8 bg-[rgba(255,255,255,0.5)] xl:bg-transparent'>
+                            <h2 className='tsubtitle'> Ease of Search </h2>
+                            <p className='tbase mb-3 mr-0 xl:w-1/2'> Find your charts easily by searching for type of tests, date of creation, name of x and y axes or chart title </p>
+                        </div>
+                        <div className='w-full'>
+                            <Image className='other' src = '/assets/svgs/charts.svg' width={740} height={440} alt='charts'/>
+                        </div>
+                    </div>
+                </div>
+                {/* MOVING SPANS 2 */}
+                <div className='hidden w-full lg:block lg:w-1/2'>
+                    <div className='animespans2'>
+                        <span className='span_second span-1'></span>
+                        <span className='span_second span-2'></span>
+                        <span className='span_second span-3'></span>
+                        <span className='span_second span-4'></span>
+                        <span className='span_second span-5'></span>
+                        <span className='span_second span-6'></span>
+                        <span className='span_second span-7'></span>
+                    </div>
                 </div>
             </div>
-            <div className='z-[-1] absolute bottom-0 left-0 w-full h-1/2'>
-                <div className='animespans2 mr-[40%] '>
-                    <span className='span_second span-1'></span>
-                    <span className='span_second span-2'></span>
-                    <span className='span_second span-3'></span>
-                    <span className='span_second span-4'></span>
-                    <span className='span_second span-5'></span>
-                    <span className='span_second span-6'></span>
-                    <span className='span_second span-7'></span>
-                </div>
-            </div>
+            
         </div>
     </>
     

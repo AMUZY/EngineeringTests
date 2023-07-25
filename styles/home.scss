@@ -50,6 +50,13 @@ background-color: $darkorange;
 
 .video{
     max-width: 160%;
+    z-index: -1;
+    top: 0;
+    right: 0;
+    left: -25%;
+    bottom: 0;
+    position: absolute;
+    opacity: .8;
 }
 
 // BOXES
@@ -203,8 +210,9 @@ background-color: $darkorange;
 }
 
 @media only screen and (min-width : "768px") {
-    .ca  .video{
+    .video{
         max-width: 100%;
+        left: 0;
     }
     .animespans1{
         span{

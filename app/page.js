@@ -1,3 +1,4 @@
+'use client'
 import React from 'react'
 import Image from 'next/image'
 import { FillBtn,NoFillBtn } from '@components/Button'
@@ -5,11 +6,15 @@ import Card from '@components/Card'
 import Spans from '@components/Spans'
 
 const Home = () => {
+
   return (
     <section className='overflow-hidden'>
-      <section className='section h-[100svh] flex flex-col md:flex-row justify-evenly items-center bluegradient'>
+      <section className='section bg-[rgba(0,0,0,0.8)] relative z-1 h-max w-max flex flex-col md:flex-row justify-evenly items-center'>
+          <video className='video' loop autoPlay muted playsInline disablePictureInPicture>
+              <source src = '/assets/videos/ET_1920.mp4' type='video/mp4' />
+          </video>
         {/* INTRO DIV */}
-        <div className='flex flex-col justify-start w-full mb-32 md:mb-0 md:w-1/2 p-2 m-0'> 
+        <div className='h-[100svh] flex flex-col justify-center w-full mb-32 md:mb-0 md:w-1/2 p-2 m-0'> 
           <div className='mt-0 mb-16 md:mb-24'>
             <div className='flex flex-col md:flex-row md:flex-wrap'>
               <div className='block md:flex'>
@@ -52,14 +57,8 @@ const Home = () => {
           <FillBtn text='Get started' />
         </div>
       </section>
-      
-      <section className='flex justify-center'>
-          <video className='video' loop autoPlay muted playsInline>
-              <source src = '/assets/videos/ET_1920.mp4' type='video/mp4' />
-          </video>
-      </section>
 
-      <section className='h-[100svh] section bluegradient'>
+      <section className='h-[100svh] section bluegradient bg-[rgba(0,0,0,1)]'>
 
       </section>
   
