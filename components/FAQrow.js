@@ -20,7 +20,7 @@ const FAQrow = ({id, state, question, answer, Expand}) => {
     <div onClick={()=>{
         Expand(id); 
         showhide()
-        }} className='smooth py-8 border-gray-200 border-b-[1px] cursor-pointer'>
+        }} className='nohighlight smooth py-8 border-gray-200 border-b-[1px] cursor-pointer'>
         <div className='flex flex-row justify-between items-center'>
             <p className='nohighlight mb-4 tsubtitle text-white'>{question}</p>
             <Image className={`nohighlight smooth m-2 ${rotation}`} src='/assets/svgs/arrow.svg' width={16} height={8} alt='arrow logo' />
