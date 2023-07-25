@@ -1,6 +1,7 @@
 import React from "react";
 import "@styles/globals.scss";
 import Nav from "@components/Nav";
+import Head from "next/head";
 
 
 export const metadata = {
@@ -16,9 +17,26 @@ export const metadata = {
 const rootlayout = ({ children }) => {
   return (
     <html >
+      <Head>
+        <title>
+            EngineeringTests - Create,store and manage your engineering results
+        </title>
+        <meta
+          name="description"
+          content="Create,store and manage your engineering results"
+          key="desc"
+        />
+      </Head>
       <head>
-        <meta></meta>
-        <meta></meta>
+        <meta property="og:title" content="EngineeringTests" />
+        <meta
+          property="og:description"
+          content="Create,store and manage your engineering results"
+        />
+        <meta property="og:url" content="https://engineeringtests.netlify.app/" />
+        <meta property="og:type" content="website" />
+        <meta property="og:image" content="/assets/images/meta_image.png" />
+        {/* <meta name="twitter:card" content="summary" /> */}
         <meta charSet="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link rel="icon" href="/favicon.ico" sizes="any" />
