@@ -28,14 +28,19 @@ const rootlayout = ({ children }) => {
         />
       </Head>
       <head>
+        <meta property="og:site_name" content="EngineeringTests" />
         <meta property="og:title" content="EngineeringTests" />
         <meta
           property="og:description"
           content="Create,store and manage your engineering results"
         />
-        <meta property="og:url" content="https://engineeringtests.netlify.app/" />
+        <meta property="og:url" content="https://engineeringtests.netlify.app" />
         <meta property="og:type" content="website" />
-        <meta property="og:image" content="/assets/images/meta_image.png" />
+        <meta property="og:image" content="/assets/images/meta_image.jpg" />
+        <meta property="og:image:type"  content="image/jpeg" />
+
+        <meta property="og:image:width" content="296" />
+        <meta property="og:image:height" content="296" />
         {/* <meta name="twitter:card" content="summary" /> */}
         <meta charSet="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
