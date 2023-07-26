@@ -6,6 +6,7 @@ import Card from "@components/Card";
 import Spans from "@components/Spans";
 import FAQ from "@components/FAQ";
 import Nav from "@components/Nav";
+import Footer from "@components/Footer";
 
 function ScrollToTitle(href){
   document.querySelector("#" + href).scrollIntoView({
@@ -115,10 +116,11 @@ const Home = () => {
           <div className="flex flex-row">
             {/* FAQ */}
             <FAQ />
-            <div></div>
           </div>
-          <div></div>
         </section>
+      </section>
+      <section className="bg-white section">
+          <Footer />
       </section>
     </>
   );

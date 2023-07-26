@@ -4,6 +4,7 @@ $darkorange: #FF6700;
 $lightorange : #FFA86C;
 $white: #FFFFFF;
 $black: #2B3146;
+$grey: 3A3B3C;
 
 @keyframes growspans1 {
     0%{
@@ -39,16 +40,20 @@ $black: #2B3146;
     color: $white;
   }
 .black{
-color: $black;
+    color: $black;
+    }
+.grey{
+    color: $grey;
 }
 .dorange{
-color : $darkorange;
-}
+    color : $darkorange;
+    }
 .bckorange{
-background-color: $darkorange;
-}
+    background-color: $darkorange;
+    }
 
 .video{
+    transform: translateY(50%);
     max-width: 160%;
     z-index: -1;
     top: 0;
@@ -215,6 +220,7 @@ background-color: $darkorange;
 
 @media only screen and (min-width : "768px") {
     .video{
+        transform: translateY(0);
         max-width: 100%;
         left: 0;
     }

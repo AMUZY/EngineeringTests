@@ -22,7 +22,7 @@ const rootlayout = ({ children }) => {
         </title>
         <meta
           name="description"
-          content="Create, store and manage your test engineering results , tensile, hardness , impact , flexural , FTIR tests e.t.c "
+          content="Create, store and manage your engineering test results , tensile, hardness , impact , flexural , FTIR tests e.t.c "
           key="desc"
         />
       </Head>
@@ -31,32 +31,30 @@ const rootlayout = ({ children }) => {
         <meta property="og:title" content="EngineeringTests" />
         <meta
           property="og:description"
-          content="Create, store and manage your test engineering results , tensile, hardness , impact , flexural , FTIR tests e.t.c "
+          content="Create, store and manage your engineering test results , tensile, hardness , impact , flexural , FTIR tests e.t.c "
         />
         <meta property="og:url" content="https://engineeringtests.netlify.app/" />
         <meta property="og:type" content="website" />
         {/* OTHER SOCIAL MEDIA IMAGE (FACEBOOK) */}
-        <meta property="og:image:secure_url" content="https://engineeringtests.netlify.app/assets/images/meta_image.png" />
-        <meta property="og:image:type"  content="image/png" />
+        <meta property="og:image:secure_url" content="https://engineeringtests.netlify.app/assets/images/meta_image.jpg" />
+        <meta property="og:image:type"  content="image/jpg" />
         {/* LINKEDIN */}
-        <meta property="og:image" content="https://engineeringtests.netlify.app/assets/images/meta_image.png" />
-        <meta property="og:image:width" content="300" />
-        <meta property="og:image:height" content="300" />
+        <meta property="og:image" content="https://engineeringtests.netlify.app/assets/images/meta_image.jpg" />
         {/* <meta name="twitter:card" content="summary" /> */}
         <meta charSet="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
         {/* TWITTER */}
-        <meta name="twitter:card" content="https://engineeringtests.netlify.app/assets/images/meta_image.png" />
+        <meta name="twitter:card" content="https://engineeringtests.netlify.app/assets/images/meta_image.jpg" />
         <meta name="twitter:site" content="https://engineeringtests.netlify.app/" />
         <meta name="twitter:title" content="EngineeringTests" />
-        <meta name="twitter:description" content="Create, store and manage your test engineering results , tensile, hardness , impact , flexural , FTIR tests e.t.c " />
-        <meta name="twitter:image:secure_url" content="https://engineeringtests.netlify.app/assets/images/meta_image.png" />
+        <meta name="twitter:description" content="Create, store and manage your engineering test results , tensile, hardness , impact , flexural , FTIR tests e.t.c " />
+        <meta name="twitter:image:secure_url" content="https://engineeringtests.netlify.app/assets/images/meta_image.jpg" />
 
 
         <link rel="icon" href="/favicon.ico" sizes="any" />
         <title>
-          EngineeringTests - Create, store and manage your test engineering results , tensile, hardness , impact , flexural , FTIR tests e.t.c 
+          EngineeringTests - Create, store and manage your engineering test results , tensile, hardness , impact , flexural , FTIR tests e.t.c 
         </title>
       </head>
       <body>

@@ -7,7 +7,6 @@ const FAQrow = ({id, state, question, answer, Expand}) => {
     const [showspan,setShowSpan] = useState('h-0')
 
     const showhide = ()=>{
-        console.log(state)
         if(rotation == '-rotate-180' || showspan == 'h-0'){
             setRotation(`rotate-0`); 
             setShowSpan(`block h-auto my-6`)
