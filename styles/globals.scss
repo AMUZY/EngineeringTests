@@ -137,7 +137,7 @@ $sbold : 'Inter-SemiBold';
   border-radius: 5px;
   color: $white;
   @extend .tbase;
-  @apply bg-[#FF6700] px-4 py-2 md:px-5 md:py-3 hover:bg-transparent hover:border-[#FF6700] hover:text-[#FF6700] hover:border
+  @apply bg-[#FF6700] px-4 py-2 md:px-5 md:py-3
 }
 
 .nofill {
@@ -146,6 +146,19 @@ $sbold : 'Inter-SemiBold';
   color: $white;
   @extend .tbase;
   @apply px-4 py-2 md:py-3 md:px-5 hover:border-[#FF6700] hover:text-[#FF6700]
+}
+
+@media (hover: hover) {
+  .fill:hover {
+    border-color: #FF6700;
+    color: #FF6700;
+    background-color: transparent;
+  }
+  .nofill:hover {
+    border-color: #FF6700;
+    color: #FF6700;
+    background-color: transparent;
+  }
 }
 
 :root {
