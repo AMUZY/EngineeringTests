@@ -36,10 +36,10 @@ const rootlayout = ({ children }) => {
         <meta property="og:url" content="https://engineeringtests.netlify.app/" />
         <meta property="og:type" content="website" />
         <meta property="og:image" content="https://engineeringtests.netlify.app/assets/images/meta_image.png" />
-        <meta property="og:image:type"  content="image/jpeg" />
+        <meta property="og:image:type"  content="image/png" />
 
-        <meta property="og:image:width" content="296" />
-        <meta property="og:image:height" content="296" />
+        <meta property="og:image:width" content="300" />
+        <meta property="og:image:height" content="300" />
         {/* <meta name="twitter:card" content="summary" /> */}
         <meta charSet="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
