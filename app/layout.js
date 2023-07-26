@@ -33,9 +33,9 @@ const rootlayout = ({ children }) => {
           property="og:description"
           content="Create,store and manage your engineering results"
         />
-        <meta property="og:url" content="https://engineeringtests.netlify.app" />
+        <meta property="og:url" content="https://engineeringtests.netlify.app/" />
         <meta property="og:type" content="website" />
-        <meta property="og:image" content="/assets/images/meta_image.jpg" />
+        <meta property="og:image" content="https://engineeringtests.netlify.app/assets/images/meta_image.png" />
         <meta property="og:image:type"  content="image/jpeg" />
 
         <meta property="og:image:width" content="296" />
