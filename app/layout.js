@@ -35,7 +35,10 @@ const rootlayout = ({ children }) => {
         />
         <meta property="og:url" content="https://engineeringtests.netlify.app/" />
         <meta property="og:type" content="website" />
-        <meta property="og:image" content="https://engineeringtests.netlify.app/assets/images/meta_image.png" />
+        {/* WHATSAPP IMAGE */}
+        <meta property="og:image:secure_url" itemprop="image" content="https://engineeringtests.netlify.app/assets/images/meta_image.png" />
+        {/* OTHER SOCIAL MEDIA IMAGE (FACEBOOK) */}
+        <meta property="og:image:secure_url" content="https://engineeringtests.netlify.app/assets/images/ET_trans.png" />
         <meta property="og:image:type"  content="image/png" />
 
         <meta property="og:image:width" content="300" />
@@ -43,6 +46,16 @@ const rootlayout = ({ children }) => {
         {/* <meta name="twitter:card" content="summary" /> */}
         <meta charSet="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+        {/* TWITTER */}
+        <meta name="twitter:card" content="https://engineeringtests.netlify.app/assets/images/ET_trans.png" />
+        <meta name="twitter:site" content="https://engineeringtests.netlify.app/" />
+        <meta name="twitter:title" content="EngineeringTests" />
+        <meta name="twitter:description" content="Create,store and manage your engineering results" />
+        <meta name="twitter:image:secure_url" content="https://engineeringtests.netlify.app/assets/images/meta_image.png" />
+        {/* FACEBOOK */}
+
+
         <link rel="icon" href="/favicon.ico" sizes="any" />
         <title>
           EngineeringTests - Create,store and manage your engineering results
