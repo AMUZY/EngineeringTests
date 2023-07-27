@@ -33,13 +33,13 @@ const Home = () => {
           {/* INTRO DIV */}
           <div className="h-[100svh] flex flex-col justify-center w-full mb-32 md:mb-0 md:w-1/2 p-2 m-0">
             <div className="mt-0 mb-16 md:mb-24">
-              <div className="flex flex-col md:flex-row md:flex-wrap">
-                <div className="block md:flex">
+              <div className="flex flex-row">
+                <div className="block flex">
                   <h1 className="dorange ttitle">Engineering</h1>
                   <h1 className="white ttitle">Tests</h1>
                 </div>
                 <Image
-                  className="mr-2 md:mx-2 order-first md:order-3"
+                  className="ml-2 md:mx-2 md:order-3"
                   src="/assets/svgs/logo.svg"
                   width={45}
                   height={48}
@@ -113,7 +113,7 @@ const Home = () => {
         </section>
 
         <section className="min-h-[100svh] section bluegradient">
-          <div className="flex flex-row">
+          <div className="h-full flex flex-row items-center">
             {/* FAQ */}
             <FAQ />
           </div>

@@ -68,14 +68,14 @@ const signup = () => {
   return (
     <section className="min-h-[100svh] section bluegradient flex flex-col">
       <div className='flex flex-row justify-start'>
-        <Link className='w-max flex flex-row items-center hover:scale-125 transition-all' href={'/'}> 
+        <Link className='p-2 w-max flex flex-row items-center hover:scale-125 transition-all' href={'/'}> 
           <Image src='/assets/svgs/backarrow.svg' width={40} height={42} alt='engineeringtests logo transparent' /> 
           <h3 className='hidden tbase text-white lg:inline'>Go back </h3>
         </Link>
       </div>
       <div className='w-full flex flex-row'>
         <div className='hidden lg:block w-1/2'>
-          <Image src='/assets/images/ET_trans.png' width={622} height={722} alt='engineeringtests logo transparent' />
+          <Image className='hover:scale-105 transition-all' src='/assets/images/ET_trans.png' width={622} height={722} alt='engineeringtests logo transparent' />
         </div>
 
         <div className='w-full lg:w-1/2'>

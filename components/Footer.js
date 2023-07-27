@@ -16,9 +16,9 @@ const Footer = () => {
             <h3 className='tsubtitle grey my-2'>Have questions for us?</h3>
             <p className='tbase grey my-2'>Please leave us a message using one of our social media links provided below :</p>
             <div className='w-max mt-5 flex justify-between'>
-              <Link href={links['lkdn']} className='mr-3'><Image src='/assets/svgs/linkedin.svg' width={30} height={30} alt='linkedin icon'/></Link>
-              <Link href={links['mail']} className='mr-3'><Image src='/assets/svgs/mail.svg' width={30} height={30} alt='mail icon'/></Link>
-              <Link href={links['tw']} className='mr-3'><Image src='/assets/svgs/twitter.svg' width={30} height={30} alt='twitter icon'/></Link>
+              <Link target="_blank" rel="noreferrer" href={links['lkdn']} className='mr-3'><Image src='/assets/svgs/linkedin.svg' width={30} height={30} alt='linkedin icon'/></Link>
+              <Link target="_blank" rel="noreferrer" href={links['mail']} className='mr-3'><Image src='/assets/svgs/mail.svg' width={30} height={30} alt='mail icon'/></Link>
+              <Link target="_blank" rel="noreferrer" href={links['tw']} className='mr-3'><Image src='/assets/svgs/twitter.svg' width={30} height={30} alt='twitter icon'/></Link>
             </div>
           </div>
         </div>
