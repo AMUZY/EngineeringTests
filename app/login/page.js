@@ -48,9 +48,9 @@ const login = () => {
   return (
     <section className="min-h-[100svh] section bluegradient flex flex-col">
       <div className='flex flex-row justify-start'>
-        <Link className='w-max flex flex-row items-center tbase text-white' href={'/'}> 
+        <Link className='w-max flex flex-row items-center hover:scale-125 transition-all' href={'/'}> 
           <Image src='/assets/svgs/backarrow.svg' width={40} height={42} alt='engineeringtests logo transparent' /> 
-          Go back 
+          <h3 className='hidden tbase text-white lg:inline'>Go back </h3>
         </Link>
       </div>
       <div className='w-full flex flex-row'>

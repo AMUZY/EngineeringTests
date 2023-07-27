@@ -101,11 +101,11 @@ $sbold : 'Inter-SemiBold';
 }
 .ttitle{
   font-family: $bold;
-  font-size: torem(32);
+  font-size: torem(24);
 }
 .tsubtitle{
   font-family: $bold;
-  font-size: torem(20);
+  font-size: torem(18);
 }
 
 @media only screen and (min-width : "976px") {
@@ -124,11 +124,11 @@ $sbold : 'Inter-SemiBold';
   }
   .ttitle{
     font-family: $bold;
-    font-size: torem(48);
+    font-size: torem(44);
   }
   .tsubtitle{
     font-family: $bold;
-    font-size: torem(28);
+    font-size: torem(24);
   }
 }
 // BUTTONS
