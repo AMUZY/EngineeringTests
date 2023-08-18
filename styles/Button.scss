@@ -1,0 +1,133 @@
+@use 'sass:math';
+
+$darkblue : rgba(36,52,112,0.8);
+$lightblue: #399BDA;
+$darkorange: #FF6700;
+$lightorange : #FFA86C;
+$white: #FFFFFF;
+$black: #2B3146;
+$bckgreen : #00D809;
+$bckred : #DE0000;
+
+  // FONT FAMILY
+$reg : 'Inter-Regular';
+$bold : 'Inter-Bold';
+$sbold : 'Inter-SemiBold';
+
+@font-face {
+    font-family: $reg;
+    src: url('../font/inter/Inter-Regular.ttf');
+  }
+  @font-face {
+    font-family: $sbold;
+    src: url('../font/inter/Inter-SemiBold.ttf');
+  }
+  @font-face {
+    font-family: $bold;
+    src: url('../font/inter/Inter-Bold.ttf');
+  }
+  
+  @function torem ($pixels) {
+    $result : (math.div($pixels, 16)*1rem);
+    @return $result;
+  }
+
+  .tbase {
+    font-family: $reg;
+    font-size: torem(16);
+  }
+
+@media only screen and (min-width : "976px") {
+    .tbase {
+        font-family: $reg;
+        font-size: torem(18);
+    }
+}
+
+// BUTTONS
+.fill {
+    border: 1px solid $darkorange;
+    border-radius: 999px;
+    color: $white;
+    @extend .tbase;
+    @apply bg-[#FF6700] px-4 py-2 md:px-5 md:py-3
+  }
+
+  .bluefill {
+    border: 1px solid $darkblue;
+    border-radius: 999px;
+    color: $white;
+    @extend .tbase;
+    @apply bg-[rgba(36,52,112,0.8)] px-4 py-2 md:px-5 md:py-3
+  }
+  
+  .nofill {
+    border-radius: 999px;
+    border: 1px solid $white;
+    color: $white;
+    @extend .tbase;
+    @apply px-4 py-2 md:py-3 md:px-5 hover:border-[#FF6700] hover:text-[#FF6700]
+  }
+  .normal {
+    border-radius: 999px;
+    border: 1px solid ;
+    color: black;
+    @extend .tbase;
+    @apply px-4 py-2 md:py-3 md:px-5 border-gray-300 hover:border-[#FF6700] hover:text-[#FF6700]
+  }
+
+  .save {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid $bckgreen;
+    border-radius: 999px;
+    color: $white;
+    @extend .tbase;
+    @apply bg-[#00D809] px-4 py-2 md:px-5 md:py-3
+  }
+
+  .cancel {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid $bckred;
+    border-radius: 999px;
+    color: $white;
+    @extend .tbase;
+    @apply bg-[#DE0000] px-4 py-2 md:px-5 md:py-3
+  }
+
+  @media (hover: hover) {
+    .fill:hover {
+    border-color: #FF6700;
+    color: #FF6700;
+      background-color: transparent;
+    }
+    .bluefill:hover{
+      border-color: rgba(36,52,112,0.8);
+      color: rgba(36,52,112,0.8);
+      background-color: transparent;
+    }
+    .nofill:hover {
+      border-color: #FF6700;
+      color: #FF6700;
+      background-color: transparent;
+    }
+    .normal:hover {
+      border-color: #FF6700;
+      color: #FF6700;
+      background-color: transparent;
+    }
+    .save:hover {
+        border-color: #00D809;
+        color: #00D809;
+        background-color: transparent;
+      }
+    .cancel:hover {
+    border-color: #DE0000;
+    color: #DE0000;
+    background-color: transparent;
+    }
+  }
+  

@@ -1,0 +1,224 @@
+@use 'sass:math';
+@use 'home';
+@use 'dashboard';
+@use 'Button';
+@use 'Charts';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+$newcol : rgba(190, 157, 65, 0.5);
+
+$darkblue : rgba(36,52,112,0.8);
+$lightblue: #399BDA;
+$darkorange: #FF6700;
+$lightorange : #FFA86C;
+$white: #FFFFFF;
+$black: #2B3146;
+// FONT FAMILY
+$reg : 'Inter-Regular';
+$bold : 'Inter-Bold';
+$sbold : 'Inter-SemiBold';
+
+
+.white{
+  color: $white;
+}
+.white_bg{
+  background-color: $white;
+}
+.black{
+  color: $black;
+}
+.dorange{
+  color : $darkorange;
+}
+.bckorange{
+  background-color: $darkorange;
+}
+.bckblue{
+  background-color: $darkblue;
+}
+@font-face {
+  font-family: $reg;
+  src: url('../font/inter/Inter-Regular.ttf');
+}
+@font-face {
+  font-family: $sbold;
+  src: url('../font/inter/Inter-SemiBold.ttf');
+}
+@font-face {
+  font-family: $bold;
+  src: url('../font/inter/Inter-Bold.ttf');
+}
+
+@function torem ($pixels) {
+  $result : (math.div($pixels, 16)*1rem);
+  @return $result;
+}
+
+.nohighlight {
+  user-select: none; // chrome and Opera
+  -moz-user-select: none; // Firefox
+  -webkit-text-select: none; // IOS Safari
+  -webkit-user-select: none; // Safari
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.input:focus {
+  outline-color: gray;
+  outline-style: outset;
+}
+
+.input::selection {
+  background: gray; /* WebKit/Blink Browsers */
+}
+
+
+.input::-moz-selection {
+  background: gray; /* Gecko Browsers */
+}
+
+.bluegradient {
+  background-color: $darkblue;
+}
+.orangegradient {
+  background-image: linear-gradient(to bottom , $darkorange , $lightorange);
+}
+// SECTION
+.section{
+  padding : 1% 5%;
+  width : 100%;
+}
+
+.tsmall{
+  font-family: $reg;
+  font-size: torem(10);
+  line-height: 150%;
+}
+.tbase {
+  font-family: $reg;
+  font-size: torem(16);
+}
+.tbasebold {
+  font-family: $bold;
+  font-size: torem(16);
+}
+.ttitle{
+  font-family: $bold;
+  font-size: torem(24);
+}
+.tsubtitle{
+  font-family: $bold;
+  font-size: torem(18);
+}
+
+.pwordcont {
+  border: 1px solid white;
+  border-radius: 5px;
+  padding-right: 8px;
+  span{
+    cursor: pointer;
+    span{
+      width: max-content;
+    }
+  }
+}
+
+@media only screen and (min-width : "976px") {
+  .section{
+    padding : 2% 10%;
+    width : 100%;
+  }
+  .tsmall{
+    font-family: $reg;
+    font-size: torem(12);
+    line-height: 150%;
+  }
+  .tbase {
+    font-family: $reg;
+    font-size: torem(18);
+  }
+  .tbasebold {
+    font-family: $bold;
+    font-size: torem(18);
+  }
+  .ttitle{
+    font-family: $bold;
+    font-size: torem(44);
+  }
+  .tsubtitle{
+    font-family: $bold;
+    font-size: torem(24);
+  }
+}
+
+
+@media (hover: hover) {
+  .fill:hover {
+    border-color: #FF6700;
+    color: #FF6700;
+    background-color: transparent;
+  }
+  .nofill:hover {
+    border-color: #FF6700;
+    color: #FF6700;
+    background-color: transparent;
+  }
+}
+
+:root {
+  /* theme color variables to use in RGB declarations */
+  --red: 200;
+  --green: 60;
+  --blue: 255;
+  /*the threshold at which colors are considered "light". 
+Range: decimals from 0 to 1,
+recommended 0.5 - 0.6*/
+  --threshold: 0.5;
+  /*the threshold at which a darker border will be applied.
+Range: decimals from 0 to 1,
+recommended 0.8+*/
+  // --border-threshold: 0.8;
+}
+
+.switch-col{
+  /*sets the background for the base class*/
+  background : rgb(var(--red), var(--green), var(--blue));
+
+/* 
+Calcs perceived brightness using the 
+sRGB Luma method
+lightness = (red * 0.2126 + green * 0.7152 + blue * 0.0722) / 255
+*/
+  --r: calc(var(--red) * 0.2126);
+  --g: calc(var(--green) * 0.7152);
+  --b: calc(var(--blue) * 0.0722);
+  --sum: calc(var(--r) + var(--g) + var(--b));
+  
+  --perceived-lightness: calc(var(--sum) / 255);
+  
+/*
+1) Any lightness value above the threshold will be considered "light", therefore apply a black text color. Any bellow will be considered dark, and use white color. 
+This results from appying either a sub-zero (negative) or a higher-than-100 lightness value, which are capped to 0 and 100 respectively, to a HSL declaration
+*/
+  color: hsl(0, 0%, calc((var(--perceived-lightness) - var(--threshold)) * -10000000%));
+  
+/*
+2) sets the border as a 50% darker shade of the base color, ONLY if background color luma is higher than the border threshold.
+To achieve this I use the same sub-zero or higher-than-max technique, only this time using the Alpha value from an RGBA declaration. 
+This results in a border that's either fully transparent or fully opaque
+*/
+//  --border-alpha: calc((var(--perceived-lightness) - var(--border-threshold)) * 100);
+  
+  // border-width: .2em;
+  // border-style: solid;
+  // border-color: rgba(calc(var(--red) - 50), calc(var(--green) - 50), calc(var(--blue) - 50), var(--border-alpha));
+}

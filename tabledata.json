@@ -1,0 +1,16 @@
+[
+    {
+    "id" : 0,
+    "labels" : ["5%","10%","15%","20%"], 
+    "comps" : ["snail","cow","rat"], 
+    "table" : [["23","34","45","73"],["36","46","67","38"],["12","37","44","19"]],
+    "testtype" : "Flexural",
+    "charttype" : "Line Chart",
+    "unit" : "MPa",
+    "date" : "3-8-2023",
+    "time" : "13:05",
+    "title" : "Some Test Title",
+    "subtitle" : "A new subtitle",
+    "conclusion" : "The conclusion of this result is that it works!"
+    }
+]

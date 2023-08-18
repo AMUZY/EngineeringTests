@@ -1,0 +1,129 @@
+'use client'
+import React from "react";
+import Image from "next/image";
+import { FillBtn, NoFillBtn } from "@components/Button";
+import Card from "@components/Card";
+import Spans from "@components/Spans";
+import FAQ from "@components/FAQ";
+import Nav from "@components/Nav";
+import Footer from "@components/Footer";
+
+function ScrollToTitle(href){
+  document.querySelector("#" + href).scrollIntoView({
+      behavior : "smooth"
+  })
+}
+
+const Home = () => {
+  return (
+    <>
+      <Nav ScrollToTitle={ScrollToTitle} />
+      <section className="overflow-hidden">
+        <section className="section bluegradient relative z-1 h-max w-max flex flex-col md:flex-row justify-evenly items-center">
+          <video
+            className="video"
+            loop
+            autoPlay
+            muted
+            playsInline
+            disablePictureInPicture
+          >
+            <source src="/assets/videos/ET_1920.mp4" type="video/mp4" />
+          </video>
+          {/* INTRO DIV */}
+          <div className="h-[100svh] flex flex-col justify-center w-full mb-32 md:mb-0 md:w-1/2 p-2 m-0">
+            <div className="mt-0 mb-16 md:mb-24">
+              <div className="flex flex-row">
+                <div className="block flex">
+                  <h1 className="dorange ttitle">Engineering</h1>
+                  <h1 className="white ttitle">Tests</h1>
+                </div>
+                <Image
+                  className="ml-2 md:mx-2 md:order-3"
+                  src="/assets/svgs/logo.svg"
+                  width={45}
+                  height={48}
+                  alt="logo icon"
+                />
+              </div>
+              <p className="tsubtitle white my-2">
+                create, store and manage all your mechanical test results from
+                one place
+              </p>
+            </div>
+            <div className="flex flex-row flex-wrap md:justify-between md:items-center w-max">
+              <FillBtn href={"/signup"} text="Create an account" />
+              <h1 className="tbase white mx-4 my-2 md:mx-8"> or </h1>
+              <NoFillBtn href={"/login"} text="Sign In" />
+            </div>
+          </div>
+          {/* IMAGES */}
+          <div className="flex flex-col w-full hidden md:block md:w-1/2">
+            <Image
+              className="mr-4 md:mr-10"
+              src="/assets/images/barchart.png"
+              width={700}
+              height={400}
+              alt="barchart"
+            />
+            <Image
+              className="ml-4 md:ml-10"
+              src="/assets/images/linechart.png"
+              width={700}
+              height={400}
+              alt="linechart"
+            />
+          </div>
+        </section>
+
+        <section className="h-max">
+          <Spans />
+        </section>
+
+        <section className="px-[5%] md:px-[10%] py-16 md:py-24">
+          <div className="cardgrid">
+            <Card
+              addclass="other"
+              src="/assets/svgs/chart_emoji.svg"
+              sub="Pick a chart"
+              para="Choose any of the preset test charts available or create your own custom chart"
+            />
+            <Card
+              addclass="hide"
+              src="/assets/svgs/pencil.svg"
+              sub="Fill in data"
+              para="Fill in your data set for both x and y axes"
+            />
+            <Card
+              addclass="other"
+              src="/assets/svgs/greencheck.svg"
+              sub="Save on-the-go"
+              para="Don't forget to click save as you fill"
+            />
+            <Card
+              addclass="hide"
+              src="/assets/svgs/download.svg"
+              sub="Download and share"
+              para="Download as PDF to share with colleagues, prepare presentations and much more"
+            />
+          </div>
+          <div className="mt-10 lg:mt-20 flex justify-center items-center">
+            <FillBtn href={"/signup"} text="Get started" />
+          </div>
+        </section>
+
+        <section className="min-h-[100svh] section bluegradient">
+          <div className="h-full flex flex-row items-center">
+            {/* FAQ */}
+            <FAQ />
+          </div>
+        </section>
+      </section>
+      <section className="bg-white section">
+          <Footer />
+      </section>
+    </>
+  );
+};
+
+export default Home;
