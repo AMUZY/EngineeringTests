@@ -38,11 +38,11 @@ function reducer(state, action) {
   }
 }
 
-const container =
+export const container =
   "relative flex flex-col md:flex-row items-start md:items-center justify-between my-2 lg:my-4";
-const labelclass =
+export const labelclass =
   "nohighlight bg-transparent tbase text-white mb-2 mr-4 md:mb-0 lg:mr-12";
-const inputclass =
+export const inputclass =
   "input bg-transparent w-full md:w-auto tbase text-white focus:outline-none flex-grow py-1 px-2 lg:py-3 lg:px-4 ";
 
 const signup = () => {
@@ -71,11 +71,12 @@ const signup = () => {
     setAllProviders();
   }, []);
 
+
   const handleSubmit = async (username, email, pword, confpword) => {
     if (pword === confpword) {
       setLoading(true)
 
-      const AwaitUserCreate = async () => {
+      const AwaitUserCreate = new Promise(async (res,rej) => {
         await axios
           .post(`/api/create-user`, {
             username: username,
@@ -99,13 +100,15 @@ const signup = () => {
             };
             loginRes();
             setLoading(false);
+            res()
           }).catch((error)=>{
             setLoading(false);
+            rej()
           });
-      };
+      })
 
       promisetoast(
-        AwaitUserCreate(),
+        AwaitUserCreate,
         "Account creation in progress",
         "Account created successfully",
         "Error, something went wrong"
@@ -294,7 +297,7 @@ const signup = () => {
               disabled={loading}
               className={`my-3 mx-auto fill w-full md:w-max  ${
                 loading
-                  ? "border-gray-500 bg-gray-500 cursor-not-allowed"
+                  ? "border-gray-500 bg-gray-500 text-gray-400 hover:bg-gray-500 hover:text-gray-400 cursor-not-allowed"
                   : "cursor-pointer"
               }`}
             >
@@ -308,7 +311,7 @@ const signup = () => {
             <button
               onClick={() => {
                 signIn(providers.google.id, {
-                  callbackUrl: `/dashboard/home?userid=`,
+                  callbackUrl: `/dashboard/home`,
                 });
               }}
               className="my-2 mx-auto"
@@ -324,7 +327,7 @@ const signup = () => {
             <button
               onClick={() => {
                 signIn(providers.likedin.id, {
-                  callbackUrl: `/dashboard/home?userid=`,
+                  callbackUrl: `/dashboard/home`,
                 });
               }}
               className="my-2 mx-auto"

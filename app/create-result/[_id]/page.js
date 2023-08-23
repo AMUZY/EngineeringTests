@@ -1,9 +1,9 @@
 'use client'
-import React, { useState,useReducer, useRef } from "react"
+import React, { useState, useEffect, useRef } from "react"
 import {v4 as uuidv4} from 'uuid';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { failuretoast } from "@toasts/Toasts";
+import { failuretoast, promisetoast } from "@toasts/Toasts";
 import BarChart from "@components/BarChart";
 import LineChart from "@components/LineChart";
 import { testTypes,chartTypes } from "@components/TestTypes";
@@ -13,16 +13,21 @@ import { NoDuplicate } from "@components/NoDuplicate";
 import { inputstyle,labelstyle,inputcont } from "@components/TestTypes";
 import Image from "next/image"
 import { SaveBtn,NormalBtn,CanDelBtn } from '@components/Button'
+import axios from "axios";
+import { useRouter } from "next/navigation";
 
-const page = () => {
-    //   
+const page = ({params}) => {
+    //  FETCHED PROJECTS
+    const [allprojects,setAllProjects] = useState([])
+    const [chosenid,setChosenId] = useState()
     // ALL INFORMATION FROM USER
     const [labels,setLabels] = useState([])
     const [comps,setComps] = useState([])
     const [table,setTable] = useState([])
-    const [chosentest,setChosenTest] = useState('')
-    const [chosenunit,setChosenUnit] = useState('')
-    const [chosenchart,setChosenChart] = useState('')
+    const [chosentest,setChosenTest] = useState("")
+    const [chosenunit,setChosenUnit] = useState("")
+    const [chosenchart,setChosenChart] = useState("")
+    const [chosenproject,setChosenProject] = useState("")
     const [title,setTitle] = useState("")
     const [subtitle,setSubTitle] = useState("")
     const [conclusion,setConclusion] = useState("")
@@ -39,6 +44,7 @@ const page = () => {
     const [show,setShow] = useState(false);
     const [testobj,setTestobj] = useState()
     
+    const router = useRouter()
     
     // THE DISABLED FOR THE AUTOCOMPLETE COMPONENT
     const [disabled,setDisabled] = useState(false)
@@ -46,6 +52,53 @@ const page = () => {
 
     const columnoptions = Array.from({length: 10}, (_, i) => i + 1).map(String)
     const rowoptions = Array.from({length: 5}, (_, i) => i + 1).map(String)
+
+    useEffect(()=>{
+        const fetchProjects = new Promise(async (res,rej)=>{
+                await axios.get(`/api/project/other-http/${params._id}/undefined`)
+                .then((response)=> {
+                    const data = response.data;
+                    let temptitles = []
+                    for(let i = 0; i < data.length ; i++){
+                        temptitles.push({
+                            label : data[i].title,
+                            id : data[i]._id
+                        })
+                    }
+                    setAllProjects(temptitles)
+                    res()
+                })
+                .catch((error)=>{ 
+                    rej()
+                })
+            })
+
+        promisetoast(fetchProjects,
+        "Fetching projects...",
+        "Projects fetched",
+        "Failed to fetch projects, please refresh or check your internet" )
+    },[]) 
+
+    const handleCreate = async (labels,comps,title,subtitle,table,date,time,chosentest,chosenunit,chosenchart,chosenproject,conclusion)=>{
+        const AwaitResultCreate = new Promise (async (res , rej)=>{
+            await axios.put(`/api/project/other-http/${params._id}/${chosenid}`,
+            {
+                labels,comps,title,subtitle,table,date,time,chosentest,chosenunit,chosenchart,chosenproject,conclusion
+            }).then(()=>{
+                res()
+                router.push(`/dashboard/home`)
+            }).catch(()=>{
+                rej()
+            })
+        })
+
+        promisetoast(
+            AwaitResultCreate,
+            "Creating result...",
+            "Result created successfully",
+            "Couldn't create result"
+            )
+    }
 
     // FUNCTIONS
     function AddColumn(num){
@@ -98,7 +151,7 @@ const page = () => {
     }
 
     function DisableAutoComplete(){
-        if(rowno <= 0 || columnno <= 0 || chosentest.length <= 0 || chosenunit.length <= 0 || title.length <= 0 || subtitle.length <= 0 || conclusion.length <= 0){
+        if(rowno <= 0 || columnno <= 0 || chosentest.length <= 0 || chosenunit.length <= 0 || title.length <= 0 || subtitle.length <= 0 || conclusion.length <= 0 || allprojects.length <= 0 || chosenchart.length <= 0){
             failuretoast('Fill all fields before saving')
         }else{
             setDisabled(true)
@@ -123,6 +176,16 @@ const page = () => {
         return strTime;
     }
 
+    function SaveDateAndTime(){
+        setDate(`${getDate.getDate()}-${getDate.getMonth()+1}-${getDate.getFullYear()}`) ; 
+        setTime(formatAMPM(getDate))
+    }
+
+    useEffect(()=>{
+        if(title.length > 0 && subtitle.length > 0){
+            handleCreate(labels,comps,title,subtitle,table,date,time,chosentest,chosenunit,chosenchart,chosenproject.label,conclusion)
+        }
+    },[date,time])
 
   return (
     <div className='w-full h-full p-6'>
@@ -276,7 +339,33 @@ const page = () => {
                                 }}
                                 renderInput={(params) => <TextField {...params} key={params} label="Chart Type" />}
                                 />
-                        </div>
+
+                                <Autocomplete
+                                value={chosenproject}
+                                onChange={(event,value)=>{
+                                    if(value){
+                                        setChosenProject(value)
+                                        setChosenId(value.id)
+                                    }else{
+                                        setChosenProject('')
+                                    }
+                                    console.log(chosenid)
+                                }}
+                                disabled = {disabled}
+                                disablePortal
+                                id="combo-box-demo"
+                                options={allprojects}
+                                sx={{ width: 300 }}
+                                renderOption={(props, option) => {
+                                    return (
+                                    <li {...props} key={option.label}>
+                                        {option.label}
+                                    </li>
+                                    )
+                                }}
+                                renderInput={(params) => <TextField {...params} key={params} label="Project" />}
+                                />
+                            </div>
 
                             {/* CONCLUSION */}
                             <div className="w-full flex flex-col my-3">
@@ -292,7 +381,7 @@ const page = () => {
                                 <span className="text-gray-400">{`${concref.current ? 300-(concref.current.value).trim().length : 300} character(s) left*`}</span>
                             </div>
 
-                            <NormalBtn text= "Save Settings" action={DisableAutoComplete} addclass='mx-2'/>
+                            <NormalBtn text= "Save Settings" action={()=>DisableAutoComplete()} addclass='mx-2'/>
 
                             {
                                 show?
@@ -367,17 +456,19 @@ const page = () => {
                     {/* THE CHARTs */}
                     {
                         (chosenchart == 'Bar Chart') ? 
-                        <BarChart title = {title} subtitle = {subtitle} display={true} labels={labels} comps={comps} table={table} />
+                        <BarChart title = {title} subtitle = {subtitle} display={true} labels={labels} comps={comps} table={table} size={{height : 400 , width : 600}}/>
                         : 
-                        <LineChart title = {title} subtitle = {subtitle} display={true} labels={labels} comps={comps} table={table} />
+                        <LineChart title = {title} subtitle = {subtitle} display={true} labels={labels} comps={comps} table={table} size={{height : 400 , width : 600}}/>
                     }
                 </div>
             </div>
             <div className='flex mx-auto mt-8 mb-16'>
                 <SaveBtn text= "Save Result" action={()=>{
-                    setDate(`${getDate.getDay()}-${getDate.getMonth()+1}-${getDate.getFullYear()}`) ; 
-                    setTime(formatAMPM(getDate))
-                    // FUNCTION TO PUSH ALL DATA TO THE DATABASE
+                    if(comps.length > 0 && table.length > 0){
+                        SaveDateAndTime()
+                    }else{
+                        failuretoast("Please fill in tables?")
+                    }
 
                 }} addclass='mx-2'/>
                 <CanDelBtn text= "Cancel" action={()=>{

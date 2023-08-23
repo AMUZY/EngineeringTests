@@ -3,22 +3,24 @@ import React, { useState,useEffect,useRef } from "react"
 import {v4 as uuidv4} from 'uuid';
 import BarChart from "@components/BarChart";
 import LineChart from "@components/LineChart";
-import { useSearchParams } from 'next/navigation'
 import axios from "axios";
 import Autocomplete from "@mui/material/Autocomplete";
 import TextField from "@mui/material/TextField";
 import { testTypes,chartTypes } from "@components/TestTypes";
 import { NoDuplicate } from "@components/NoDuplicate";
 import { failuretoast } from "@toasts/Toasts";
-import { ToastContainer } from "react-toastify";
+import { ToastContainer } from 'react-toastify';
 import { inputstyle,labelstyle,inputcont } from "@components/TestTypes";
 import Image from "next/image"
 import { SaveBtn,NormalBtn,CanDelBtn } from '@components/Button'
+import { useRouter } from "next/navigation";
+import { promisetoast } from "@toasts/Toasts";
 
-const page = () => {
-    const searchParams = useSearchParams()
-    const id = searchParams.get('id')
+const page = ({params}) => {
+    const router = useRouter()
 
+    const [result,setResult] = useState()
+    const [id,setId] = useState()
      // ALL INFORMATION BY THE USER
     const [columns,setColumns] = useState([])
     const [rows,setRows] = useState([])
@@ -26,6 +28,7 @@ const page = () => {
     const [chosentest,setChosenTest] = useState('')
     const [chosenunit,setChosenUnit] = useState('')
     const [chosenchart,setChosenChart] = useState('')
+    const [chosenproject,setChosenProject] = useState("")
     const [title,setTitle] = useState("")
     const [subtitle,setSubTitle] = useState("")
     const [conclusion,setConclusion] = useState("")
@@ -55,65 +58,107 @@ const page = () => {
     const [compsindex,setCompsIndex] = useState([])
     const [tableindex,setTabelIndex] = useState([])
     
+    // 
+    const [projects,setProjects] = useState([])
 
     useEffect(()=>{
-        const GetData = async ()=>
-        await axios.get('/api/demo')
+        const fetchProjects = new Promise(async (res,rej)=>{
+        await axios.get(`/api/project/other-http/${params._id}/${params.projectid}`)
         .then((response)=>{
             let data = response.data;
-            setIsTable(true)
-            setCharts(data)
-            setBackUpCharts(data)
-            setColumns(data[id].labels)
-            setRows(data[id].comps)
-            setTable(data[id].table)
-            setShow(true)
+            setChosenProject(data.title)
+            data.results.forEach(result => {
+                if(params.resultid === result.id){
+                    setResult(result)
+                    setIsTable(true)
+                    setCharts(data.results)
+                    setBackUpCharts(data.results)
+                    setColumns(result.labels)
+                    setRows(result.comps)
+                    setTable(result.table)
+                    setId(result.id)
+                    setShow(true)
+                }
+            });
+            res()
         }).catch((error)=>{
-            console.log(error.response.data)
+            rej()
         })
-        GetData()
+    })
+        
+    promisetoast(fetchProjects,
+        "Fetching result info...",
+        "Result info fetched",
+        "Failed to fetch result info, please refresh or check your internet" )
 
     },[])
 
     useEffect(()=>{
-        if(charts){
-            titleref.current.value = charts[id].title;
-            setTitle(charts[id].title)
-            subtitleref.current.value = charts[id].subtitle;
-            setSubTitle(charts[id].subtitle)
-            concref.current.value = charts[id].conclusion;
-            setConclusion(charts[id].conclusion)
-            setChosenTest(charts[id].testtype)
-            for(let i = 0;i < testTypes.length ; i++){
-                if(charts[id].testtype == testTypes[i].label){
+        if(result){
+            titleref.current.value = result.title;
+            setTitle(result.title)
+            subtitleref.current.value = result.subtitle;
+            setSubTitle(result.subtitle)
+            concref.current.value = result.conclusion;
+            setConclusion(result.conclusion)
+            setChosenTest(result.chosentest)
+            for(let i = 0 ; i < testTypes.length ; i++){
+                if(result.chosentest == testTypes[i].label){
                     setTestobj(testTypes[i])
                 }
             }
-            setChosenChart(charts[id].charttype)
-            setChosenUnit(charts[id].unit)
+            setChosenChart(result.chosenchart)
+            setChosenUnit(result.chosenunit)
         }
-    },[charts])
+    },[result])
 
+    const handleEdit = async (labels,comps,title,subtitle,table,date,time,chosentest,chosenunit,chosenchart,chosenproject,conclusion)=>{
+        const AwaitResultCreate = new Promise (async (res , rej)=>{
+            await axios.put(`/api/project/other-http/${params._id}/${params.projectid}`,
+            {
+                id,labels,comps,title,subtitle,table,date,time,chosentest,chosenunit,chosenchart,chosenproject,conclusion
+            }).then(()=>{
+                res()
+                router.push(`/dashboard/home`)
+            }).catch(()=>{
+                rej()
+            })
+        })
+
+        promisetoast(
+            AwaitResultCreate,
+            "editing result...",
+            "Result edited successfully",
+            "Couldn't edit result"
+            )
+    }
+
+    useEffect(()=>{
+        if(disabled === true){
+            // FUNCTION TO PUSH ALL DATA TO THE DATABASE
+            handleEdit(columns,rows,title,subtitle,table,date,time,chosentest,chosenunit,chosenchart,chosenproject,conclusion)
+        }
+    },[date,time])
     
     const GetIndexes = ()=>{
         let templabelarray = [];
         let tempcompsarray = [];
         let temptable = [];
-        backupcharts[id].labels.map((label)=>{
+        result.labels.map((label)=>{
             let tempobj = {
-                index : backupcharts[id].labels.indexOf(label),
+                index : result.labels.indexOf(label),
                 value : label
             }
             templabelarray.push(tempobj)
         })
-        backupcharts[id].comps.map((comp)=>{
+        result.comps.map((comp)=>{
             let tempobj = {
-                index : backupcharts[id].comps.indexOf(comp),
+                index : result.comps.indexOf(comp),
                 value : comp
             }
             tempcompsarray.push(tempobj)
         })
-        backupcharts[id].table.map((row)=>{
+        result.table.map((row)=>{
             let temparray = [];
             row.map((item)=>{
                 let tempobj = {
@@ -149,6 +194,10 @@ const page = () => {
         }
     }
    
+    function SaveDateAndTime(){
+        setDate(`${getDate.getDate()}-${getDate.getMonth()+1}-${getDate.getFullYear()}`) ; 
+        setTime(formatAMPM(getDate))
+    }
 
     function UpdateColumn(oldval, newval){
         let temparray = columns
@@ -208,6 +257,7 @@ const page = () => {
 
   return (
     <>
+    <ToastContainer />
     {show && 
     <div>
         <div className='w-full h-full p-6'>
@@ -233,7 +283,6 @@ const page = () => {
                         <div className='flex flex-col h-full overflow-y-scroll'>
                             {/* INPUT TAGS */}
                             <main className="relative flex flex-col justify-evenly p-3">
-                            <ToastContainer />
                             {/* INPUTS */}
                             <div className="flex flex-row flex-wrap w-full justify-between">
                                 <div className={inputcont}>
@@ -362,6 +411,26 @@ const page = () => {
                                     }}
                                     renderInput={(params) => <TextField {...params} key={params} label="Chart Type" />}
                                     />
+                                    
+                                <Autocomplete
+                                value={chosenproject}
+                                onChange={(event,value)=>{
+
+                                }}
+                                disabled = {true}
+                                disablePortal
+                                id="combo-box-demo"
+                                options={[]}
+                                sx={{ width: 300 }}
+                                renderOption={(props, option) => {
+                                    return (
+                                    <li {...props} key={option.label}>
+                                        {option.label}
+                                    </li>
+                                    )
+                                }}
+                                renderInput={(params) => <TextField {...params} key={params} label="Project" />}
+                                />
                             </div>
                                 {/* CONCLUSION */}
                                 <div className="w-full flex flex-col my-3">
@@ -383,19 +452,19 @@ const page = () => {
                                 <div className="table mt-4 mx-auto">
                                     <div className="entire_column">
                                         <div className="column_cell"></div>
-                                        {charts[id].labels.map((column)=>{
+                                        {result.labels.map((column)=>{
                                             return <input key={uuidv4()} onBlur={(e)=>{
                                                 if(CheckIfSettingSaved()){
                                                     let tempstr =  e.target.value
                                                     UpdateColumn(column, tempstr)
                                                 }
-                                            }} className="column_cell" placeholder={charts[id].labels[charts[id].labels.indexOf(column)]}/>
+                                            }} className="column_cell" placeholder={result.labels[result.labels.indexOf(column)]}/>
                                         })}
                                     </div>
                                     <div className="rows2">
                                         <div className="flex flex-col">
                                             {
-                                                charts[id].comps.map((comp)=>{
+                                                result.comps.map((comp)=>{
                                                     return (
                                                         <input key={uuidv4()} className="row_cell" onBlur={(e)=>{
                                                             if(CheckIfSettingSaved()){
@@ -409,20 +478,20 @@ const page = () => {
                                         </div>
                                         <div className="flex flex-col">
                                             {
-                                                charts[id].table.map((row)=>{
+                                                result.table.map((row)=>{
                                                     return <div key={uuidv4()} className="entire_row">
                                                         {row.map((item)=>{
                                                             return <input key={uuidv4()} className="row_input" onBlur={(e)=>{
                                                                 if(CheckIfSettingSaved()){
                                                                     let tempstr = e.target.value
-                                                                    if(NoDuplicate(tempstr,charts[id].table,item) == tempstr){
+                                                                    if(NoDuplicate(tempstr,result.table,item) == tempstr){
                                                                         UpdateCell(item, NoDuplicate(tempstr,table,item))
                                                                     }else{
                                                                         failuretoast('Value already exists in a cell')
                                                                         e.target.value = ''
                                                                     }
                                                                 }
-                                                            }} placeholder={charts[id].table[charts[id].table.indexOf(row)][row.indexOf(item)]}/>
+                                                            }} placeholder={result.table[result.table.indexOf(row)][row.indexOf(item)]}/>
                                                         })} 
                                                     </div> 
                                                 })
@@ -439,18 +508,17 @@ const page = () => {
                             {/* THE CHARTs */}
                             {
                                 (chosenchart == 'Bar Chart') ? 
-                                <BarChart title={charts[id].title} subtitle = {charts[id].subtitle} display={true} edit={true} labels={charts[id].labels} comps={charts[id].comps} table={charts[id].table} />
+                                <BarChart title={result.title} subtitle = {result.subtitle} display={true} edit={true} labels={result.labels} comps={result.comps} table={result.table} size={{height : 50, width : 100}}/>
                                 : 
-                                <LineChart title={charts[id].title} subtitle = {charts[id].subtitle} display={true} edit={true} labels={charts[id].labels} comps={charts[id].comps} table={charts[id].table} />
+                                <LineChart title={result.title} subtitle = {result.subtitle} display={true} edit={true} labels={result.labels} comps={result.comps} table={result.table} size={{height : 50, width : 100}}/>
                             }
                         </div>
                     </div>
                     <div className='flex mx-auto mt-8 mb-16'>
                         <SaveBtn text= "Save Result" action={()=>{
-                            setDate(`${getDate.getDay()}-${getDate.getMonth()+1}-${getDate.getFullYear()}`) ; 
-                            setTime(formatAMPM(getDate))
-                            // FUNCTION TO PUSH ALL DATA TO THE DATABASE
-
+                            if(CheckIfSettingSaved()){
+                                SaveDateAndTime()
+                            }
                         }} addclass='mx-2'/>
                         <CanDelBtn text="Cancel" action={()=>{
                             window.history.back();

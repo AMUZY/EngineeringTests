@@ -1,9 +1,10 @@
 'use client'
-import React , { useReducer,useState } from 'react'
+import React , { useReducer,useState,useEffect } from 'react'
 import Image from "next/image"
 import axios from 'axios';
 import { ToastContainer } from 'react-toastify';
-import { normaltoast, successtoast } from '@toasts/Toasts';
+import { signIn,getProviders } from 'next-auth/react';
+import { normaltoast, promisetoast, successtoast } from '@toasts/Toasts';
 import 'react-toastify/dist/ReactToastify.css';
 import { loginUser } from '@helpers/helper';
 
@@ -35,8 +36,20 @@ const inputclass = 'input bg-transparent w-full md:w-auto tbase text-white focus
 const login = () => {
   const [submiterror, setSubmitError] = useState();
   const [user,dispatch] = useReducer(reducer, {email, password})
+  const [loading, setLoading] = useState(false);
+  const [providers, setProviders] = useState(null);
   const [iseyeopen,setIsEyeOpen] = useState(false);
   const [ptype,setPType] = useState('password')
+
+  useEffect(() => {
+    const setAllProviders = async () => {
+      const response = await getProviders();
+
+      setProviders(response);
+    };
+
+    setAllProviders();
+  }, []);
 
   const hide =(state,newstate)=>{
     if(state == 'password'){
@@ -50,29 +63,41 @@ const login = () => {
   
 const handleSubmit = async (email,password)=>{
   if(email && password){
-    await axios.get(`/api/user-http/${email}/${password}`)
-    .then((response)=>{
-        successtoast(response.data)
-        normaltoast("Preparing your dashboard...");
-        // Go to dashboard
-        const loginRes = async () => {
-        const login = await loginUser({
-          email: email,
-          password: password,
-        }).catch((error)=>{throw new Error(error)} );
-  
-        if (login && !login.ok) {
-          setSubmitError(login.error || "");
-        } else {
-          router.push("/");
-        }
-      };
-      loginRes();
-    }).catch((error)=>{
-        if(error.response){
-          normaltoast(error.response.data)
-        }
+    setLoading(true)
+
+    const AwaitUserLogin = new Promise(async (res, rej)=> {
+      await axios.get(`/api/user-http/${email}/${password}`)
+      .then((response)=>{
+          successtoast(response.data)
+          // Go to dashboard
+          const loginRes = async () => {
+          const login = await loginUser({
+            email: email,
+            password: password,
+          }).catch((error)=>{throw new Error(error)} );
+    
+          if (login && !login.ok) {
+            setSubmitError(login.error || "");
+          } else {
+            router.push("/");
+          }
+        };
+        loginRes();
+        res()
+        setLoading(false);
+      }).catch((error)=>{
+          if(error.response){
+            normaltoast(error.response.data)
+          }
+          rej()
+          setLoading(false);
+      })
     })
+
+    promisetoast(AwaitUserLogin,
+    "Loggin in...",
+    "Logged In successfully, preparing your dashboard...",
+    "Failed to login")
 
   }
  
@@ -115,7 +140,13 @@ const handleSubmit = async (email,password)=>{
               <p onClick={()=>{}} className={`nohighlight cursor-pointer my-3 tbase text-white text-center mx-3 hover:text-[#FF6700] md:w-max`}>
                   Forget password?
               </p>
-              <button onClick={handleSubmit} className='my-3 mx-3 fill w-full md:w-max'>
+              <button 
+                disabled={loading}
+                onClick={()=>handleSubmit(user.email,user.password)} className={`my-3 mx-auto fill w-full md:w-max  ${
+                loading
+                  ? "border-gray-500 bg-gray-500 text-gray-400 hover:bg-gray-500 hover:text-gray-400 cursor-not-allowed"
+                  : "cursor-pointer"
+                }`}>
                 Login
               </button>
               <ToastContainer />
@@ -124,8 +155,16 @@ const handleSubmit = async (email,password)=>{
 
           <h3 className='tbase text-white text-center'> or </h3>
           <div className='py-2 mt-1 w-full flex flex-col items-center'>
-            <button onClick={()=>{}} className='my-2 mx-auto'><Image style={{width : "auto"}} src='/assets/svgs/googlebtn.svg' width={345} height={54} alt='sing in with google' /></button>
-            <button onClick={()=>{}} className='my-2 mx-auto'><Image style={{width : "auto"}} src='/assets/svgs/linkedinbtn.svg' width={345} height={54} alt='sing in with linkedin' /></button>
+            <button onClick={()=>{
+                signIn(providers.google.id, {
+                callbackUrl: `/dashboard/home`,
+              });
+            }} className='my-2 mx-auto'><Image style={{width : "auto"}} src='/assets/svgs/googlebtn.svg' width={345} height={54} alt='sing in with google' /></button>
+            <button onClick={()=>{
+                signIn(providers.likedin.id, {
+                callbackUrl: `/dashboard/home`,
+              });
+            }} className='my-2 mx-auto'><Image style={{width : "auto"}} src='/assets/svgs/linkedinbtn.svg' width={345} height={54} alt='sing in with linkedin' /></button>
           </div>
         </div>
       </div>

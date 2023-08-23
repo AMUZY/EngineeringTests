@@ -1,7 +1,14 @@
 import React from "react";
 import "@styles/globals.scss";
 import Head from "next/head";
+import { Inter } from "next/font/google";
+import 'react-toastify/dist/ReactToastify.css';
+import '@fontsource/roboto/300.css';
+import '@fontsource/roboto/400.css';
+import '@fontsource/roboto/500.css';
+import '@fontsource/roboto/700.css';
 
+const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
   title: "EngineeringTests",
@@ -11,7 +18,7 @@ export const metadata = {
 
 const rootlayout = ({ children }) => {
   return (
-    <html className="w-full h-full">
+    <html lang="en" className="w-full h-full">
       <Head>
         <title>
             EngineeringTests - Create, store and manage your engineering test results
@@ -54,9 +61,7 @@ const rootlayout = ({ children }) => {
         </title>
       </head>
       <body className="w-full h-full">
-        <main className="w-full h-full"> 
           {children}
-        </main>
       </body>
     </html>
   );

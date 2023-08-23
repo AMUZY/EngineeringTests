@@ -8,9 +8,8 @@ import { normaltoast } from "@toasts/Toasts";
 import { NormalBtn } from './Button';
 
 
-const BarChart = ({title,subtitle,display,edit,labels, comps, table}) => {
+const BarChart = ({title,subtitle,display,edit,labels, comps, table, size}) => {
   const [chartstate,setChartState] = useState(false)
-  const [size,setSize] = useState({ height : 400 , width : 600})
 
   const UpdateData =()=>{
     let temparray = [];
@@ -115,9 +114,11 @@ const BarChart = ({title,subtitle,display,edit,labels, comps, table}) => {
       {/* BUTTON TO UPDATE */}
       {
         display && 
-        <NormalBtn text={chartstate ? 'Update' : 'Display Chart'} action={UpdateChart} addclass='my-5 text-center w-full'/>
+        <>
+          <NormalBtn text={chartstate ? 'Update Chart' : 'Display Chart'} action={UpdateChart} addclass='my-5 text-center w-full'/>
+          <ToastContainer />
+        </>
       }
-      <ToastContainer />
     </div>
   )
 }

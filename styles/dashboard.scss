@@ -18,6 +18,27 @@ $darkorange: #FF6700;
     caret-color: white;
 }
 
+
+  /*------ Style 2 ------*/
+  .style2 {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background-color: transparent;
+    width: 40px;
+    height: 40px;
+    border: none;
+    cursor: pointer;
+  }
+  .style2::-webkit-color-swatch {
+    border-radius: 50%;
+    border: 7px solid #000000;
+  }
+  .style2::-moz-color-swatch {
+    border-radius: 50%;
+    border: 7px solid #000000;
+  }
+
 .resultinfo{
     border-top: 1px solid $darkorange;
 }

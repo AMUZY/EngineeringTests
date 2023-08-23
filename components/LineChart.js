@@ -115,7 +115,7 @@ const LineChart = ({title,subtitle,display,edit,labels, comps, table}) => {
       {/* BUTTON TO UPDATE */}
       {
         display && 
-        <NormalBtn text={chartstate ? 'Update' : 'Display Chart'} action={UpdateChart} addclass='my-5 text-center w-full'/>
+        <NormalBtn text={chartstate ? 'Update Chart' : 'Display Chart'} action={UpdateChart} addclass='my-5 text-center w-full'/>
       }
       <ToastContainer />
     </div>

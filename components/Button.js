@@ -34,15 +34,13 @@ export const NoFillBtn = ({href,text,addclass})=>{
 }
 
 // Save Button
-export const SaveBtn = ({text,action,addclass})=>{
+export const SaveBtn = ({text,action,disabled,addclass})=>{
     return (
-        <button className={"save "+ addclass} onMouseEnter={()=>{
+        <button disabled={disabled} className={"save "+ addclass} onMouseEnter={()=>{
             SwitchIcon('save',undefined,'/assets/svgs/mark_green.svg')
         }} onMouseLeave={()=>{
             SwitchIcon('save','/assets/svgs/mark.svg',undefined)
-        }}onClick={()=>{
-            action()
-        }}>
+        }}onClick={action}>
             <Image id="save" className="mr-2" width={20} height={14} src={"/assets/svgs/mark.svg"} alt="save button"/>
             {text}
         </button>
@@ -56,10 +54,9 @@ export const CanDelBtn = ({text,action,addclass})=>{
             SwitchIcon('cancel',undefined,'/assets/svgs/ex_red.svg')
         }}onMouseLeave={()=>{
             SwitchIcon('cancel','/assets/svgs/ex.svg',undefined)
-        }} onClick={()=>{
-            action()
-        }}>
-            <Image id="cancel" className="mr-1" width={24} height={22} src={"/assets/svgs/ex.svg"} alt="cancel button"/>
+        }} onClick={action}>
+            <Image id="cancel" className="mr-1" width={24} height={22} src={"/assets/svgs/ex.svg"} alt="cancel button"
+        />
             {text}
         </button>
     )
@@ -68,9 +65,7 @@ export const CanDelBtn = ({text,action,addclass})=>{
 // Normal Button
 export const NormalBtn = ({text,action,addclass})=>{
     return (
-        <button className={"normal "+ addclass}  onClick={()=>{
-            action()
-        }}>
+        <button className={"normal "+ addclass}  onClick={action}>
             {text}
         </button>
     )

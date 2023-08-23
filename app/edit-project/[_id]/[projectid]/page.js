@@ -1,20 +1,20 @@
 'use client'
-import React, { useState,useReducer, useRef, useEffect } from "react"
+import React, { useState,useEffect,useRef } from "react"
 import {v4 as uuidv4} from 'uuid';
-import { ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-import { successtoast,failuretoast, promisetoast } from "@toasts/Toasts";
 import BarChart from "@components/BarChart";
 import LineChart from "@components/LineChart";
-import { testTypes,chartTypes } from "@components/TestTypes";
+import axios from "axios";
 import Autocomplete from "@mui/material/Autocomplete";
 import TextField from "@mui/material/TextField";
+import { testTypes,chartTypes } from "@components/TestTypes";
 import { NoDuplicate } from "@components/NoDuplicate";
+import { failuretoast } from "@toasts/Toasts";
+import { ToastContainer } from 'react-toastify';
+import { inputstyle,labelstyle,inputcont } from "@components/TestTypes";
 import Image from "next/image"
-import { inputcont,inputstyle,labelstyle } from "@components/TestTypes";
 import { SaveBtn,NormalBtn,CanDelBtn } from '@components/Button'
-import axios from "axios";
 import { useRouter } from "next/navigation";
+import { promisetoast } from "@toasts/Toasts";
 
 const page = ({params}) => {
     const router = useRouter()
@@ -26,11 +26,31 @@ const page = ({params}) => {
     const [date,setDate] = useState()
     const [time,setTime] = useState()
 
-    const handleCreate = async (title,desc,date,time)=>{
+    useEffect(()=>{
+        const GetProject = new Promise(async (res,rej)=>{
+            await axios.get(`/api/project/other-http/${params._id}/${params.projectid}`)
+            .then((response)=>{
+                const data = response.data
+                setTitle(data.title)
+                setDesc(data.desc)
+                res()
+            }).catch(()=>{
+                rej()
+            })
+        })
+
+        promisetoast(GetProject,
+            "Fetching projec info",
+            "Project info fetched",
+            "Failed to fetch project info, please refresh or check your internet")
+    },[])
+
+    const handleEdit = async (title,desc,date,time)=>{
         setLoading(true)
 
-        const AwaitProjectCreate = async()=>{
-            await axios.post(`/api/project/create/${params._id}`,{
+        const AwaitProjectEdit = new Promise(async(res ,rej)=>{
+            await axios.put(`/api/project/other-http/${params._id}/${params.projectid}`,{
+                editproject : true,
                 title,
                 desc,
                 date,
@@ -40,17 +60,19 @@ const page = ({params}) => {
                 setTimeout(()=>{
                     router.push('/dashboard/myprojects')
                 }, 2000)
+                res()
             }).catch((error)=>{
                 console.log(error.response.data)
                 setLoading(false)
+                rej()
             })
-        }
+        })
 
         promisetoast(
-            AwaitProjectCreate(),
-            "Creating Project...",
-            "Project created successfully",
-            "Couldn't create project"
+            AwaitProjectEdit,
+            "Editing Project...",
+            "Project edited successfully",
+            "Couldn't edit project"
         )
     }
 
@@ -72,7 +94,7 @@ const page = ({params}) => {
 
     useEffect(()=>{
         if(title.length > 0 && desc.length > 0){
-            handleCreate(title,desc,date,time)
+            handleEdit(title,desc,date,time)
         }
     },[date,time])
 
@@ -95,7 +117,7 @@ const page = ({params}) => {
                             alt="engineeringtests logo transparent"
                             />
                         </button>
-                        <p className="tsubtitle black"> Create New Project </p>
+                        <p className="tsubtitle black"> Edit Project </p>
                     </div>
                 {/* INPUTS */}
                 <div className="w-full h-full flex flex-col">

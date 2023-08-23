@@ -61,7 +61,7 @@ const ProfileNav = () => {
   };
   return (
     (session && 
-      <div className="flex h-full flex-col justify-between my-3 mx-3">
+      <div onMouseLeave={()=>{setProfilebtn(false)}} className="flex h-full flex-col justify-between my-3 mx-3">
         <div className="w-full h-max">
           <div className="mb-3">
             <div className="mb-3 w-full flex flex-row items-center justify-between">
@@ -131,14 +131,15 @@ const ProfileNav = () => {
           </div>
           <p className="tbase"> Opened results will show below </p>
         </div>
+        
         <div className="flex flex-col w-full h-max">
           <FillBLueBtn
-            href={`/api/project/create/${session.user._id}`}
+            href={`/create-project/${session?.user._id || session?.user.id}`}
             text={"+ Project"}
             addclass={"mb-5 w-full text-center h-max"}
           />
           <FillBtn
-            href={"/create-result"}
+            href={`/create-result/${session?.user._id || session?.user.id}`}
             text={"+ Result"}
             addclass={"mb-10 w-full text-center h-max"}
           />

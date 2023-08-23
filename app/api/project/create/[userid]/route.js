@@ -5,10 +5,14 @@ import { NextResponse } from "next/server";
 
 export const POST = async (req, {params})=>{
     try {
-        await connectToDB().catch((error)=> {throw new Error(error)})
+        await connectToDB().then((info)=>{
+            if(info.status === (500 || 301)){
+                throw new Error("Redundant or disconnect")
+            }
+        }).catch((error)=>{throw new Error(error)})
         const userid = params.userid;
         const info = await req.json()
-
+        
         await Project.create({
             userid : userid,
             title : info.title,
@@ -24,5 +28,7 @@ export const POST = async (req, {params})=>{
         return new NextResponse("Couldn't create project" , { status : 500 })
     }
 }
+
+
 
 

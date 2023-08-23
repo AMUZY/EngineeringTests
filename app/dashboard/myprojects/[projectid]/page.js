@@ -1,49 +1,51 @@
 'use client'
 import React from 'react'
 import RightPane from '@components/RightPane'
+import axios from 'axios'
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { useEffect,useState } from 'react'
-import axios from 'axios'
-import { promisetoast } from '@toasts/Toasts';
 import { useSession } from 'next-auth/react';
+import { useState,useEffect } from 'react';
+import { promisetoast } from '@toasts/Toasts';
 
-const Dashboard = () => {
-  const [projects,setProjects] = useState([])
+
+const page = ({params}) => {
+  const [project,setProject] = useState()
   const {data : session} = useSession()
   const [sess,setSess] = useState()
-  // DO NOT DELETE SESS
 
   useEffect(()=>{
     if((session?.user._id && !sess) || (session?.user.id && !sess)){
       const fetchProjects = new Promise(async (res,rej)=>{
-        await axios.get(`/api/project/other-http/${session?.user._id || session?.user.id}/undefined`)
+        await axios.get(`/api/project/other-http/${session?.user._id || session?.user.id}/${params.projectid}`)
         .then((response)=> {
             const data = response.data
-            setProjects(data)
+            setProject(data)
             res()
         })
-        .catch((error)=>{ console.log(error) })
-        rej()
+        .catch((error)=>{ 
+          rej()
+        })
     })
     
     promisetoast(fetchProjects,
-    "Fetching results...",
-    "Results fetched",
-    "Failed to fetch results, please refresh or check your internet" )
+    "Getting project info",
+    "Project info fetched",
+    "Failed to fetch project info, please refresh or check your internet" )
 
     setSess(session)
     }
     
   },[session])
-  
+
+
+
   return (
     <>
-      <ToastContainer /> 
-      <RightPane pagename = "All Results" homepageProjects={projects}/>
+      <ToastContainer />
+      <RightPane pagename="My Projects" projectPageInfo={project}/>
     </>
   )
 }
 
-export default Dashboard
-
+export default page

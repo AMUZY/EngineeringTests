@@ -3,11 +3,15 @@ import { connectToDB } from "@app/utils/database";
 import { NextResponse } from "next/server";
 import User from "@models/user";
 
-
 const saltRounds = 10;
 
 const handler = async (req , res )=>{
-    connectToDB().catch((error)=> res.json(error))
+    await connectToDB().then((info)=>{
+        if(info.status === (500 || 301)){
+            throw new Error("Redundant or disconnect")
+        }
+    }).catch((error)=>{throw new Error(error)})
+
     // CODE FOR A POST METHOD
     if(req.method === "POST"){
         if(!req.body){
@@ -41,7 +45,6 @@ const handler = async (req , res )=>{
     }else{
         return new NextResponse("Method Not Allowed" , { status : 405 })
     }
-    // CODE FOR A GET METHOD
 }
 
 export { handler as POST , handler as GET }

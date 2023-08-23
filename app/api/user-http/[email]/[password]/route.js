@@ -6,7 +6,11 @@ import { NextResponse } from 'next/server';
 
 export const GET = async (req, {params})=>{
     try {
-        await connectToDB().catch(()=> {throw new Error(error)}) 
+        await connectToDB().then((info)=>{
+            if(info.status === (500 || 301)){
+                throw new Error("Redundant or disconnect")
+            }
+        }).catch((error)=>{throw new Error(error)})
         
         const LogUser = {
             email : params.email,
@@ -33,6 +37,30 @@ export const GET = async (req, {params})=>{
 
     } catch (error) {
         return new NextResponse("Wrong Email or Password" , { status : 500 })
+    }
+}
+
+export const PUT = async(req, {params})=>{
+    try {
+        await connectToDB().then((info)=>{
+            if(info.status === (500 || 301)){
+                throw new Error("Redundant or disconnect")
+            }
+        }).catch((error)=>{throw new Error(error)})
+    } catch (error) {
+        
+    }
+}
+
+export const DELETE = async(req, {params})=>{
+    try {
+        await connectToDB().then((info)=>{
+            if(info.status === (500 || 301)){
+                throw new Error("Redundant or disconnect")
+            }
+        }).catch((error)=>{throw new Error(error)})
+    } catch (error) {
+        
     }
 }
 

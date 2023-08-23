@@ -8,12 +8,12 @@ const ProjectInfo = ({project}) => {
   
   return (
     <div onClick={()=>{
-      router.push(`dashboard/myprojects/${project.id}`)
-    }} className='cursor-pointer w-full resultinfo flex flex-row items-center py-6 justify-between'>
-            <p className='block flex-shrink tbase black whitespace-nowrap overflow-ellipsis'>{'My Second Project in Year 5'}</p>
+      router.push(`/dashboard/myprojects/${project._id}`)
+    }} className='cursor-pointer w-full resultinfo flex flex-row items-center py-6 px-2 justify-between hover:bg-gray-100'>
+            <p className='block flex-shrink tbase black whitespace-nowrap overflow-ellipsis'>{project.title}</p>
         <div className='flex flex-row justify-evenly'>
-            <p className='tbase mx-6 black'>{'22-6-2023'}</p>
-            <p className='tbase ml-10 mr-8 black'>{'07:45'}</p>
+            <p className='tbase mx-6 black'>{project.date}</p>
+            <p className='tbase ml-10 mr-8 black'>{project.time}</p>
         </div>
     </div>
   )
