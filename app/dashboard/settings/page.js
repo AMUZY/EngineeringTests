@@ -68,7 +68,7 @@ const settings = () => {
 
   const UpdatePassword =()=>{
     if(user.password === user.confirmpassword){
-
+      
     }
   }
   
@@ -89,7 +89,7 @@ const settings = () => {
       </div>
     </div>
     {
-      session?.user.password && 
+      session?.user?.password && 
       <div className='flex flex-col my-2'>
         <h2 className='tbasebold black my-3'> Change Password :</h2>
         <div style={{backgroundColor : localstore ? localstore.getItem("backgroundColor") : 'currentcolor'}} className='mx-auto rounded-3xl px-6 py-3 my-3 bluegradient flex flex-col'>
