@@ -58,6 +58,20 @@ $sbold : 'Inter-SemiBold';
   @return $result;
 }
 
+// FOR INPUT PLACEHOLDERS
+::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: white;
+  opacity: 1; /* Firefox */
+}
+
+:-ms-input-placeholder { /* Internet Explorer 10-11 */
+  color: white;
+}
+
+::-ms-input-placeholder { /* Microsoft Edge */
+  color: white;
+}
+
 .nohighlight {
   user-select: none; // chrome and Opera
   -moz-user-select: none; // Firefox
@@ -157,20 +171,6 @@ $sbold : 'Inter-SemiBold';
   .tsubtitle{
     font-family: $bold;
     font-size: torem(24);
-  }
-}
-
-
-@media (hover: hover) {
-  .fill:hover {
-    border-color: #FF6700;
-    color: #FF6700;
-    background-color: transparent;
-  }
-  .nofill:hover {
-    border-color: #FF6700;
-    color: #FF6700;
-    background-color: transparent;
   }
 }
 

@@ -54,7 +54,10 @@ $sbold : 'Inter-SemiBold';
   }
 
   .bluefill {
-    border: 1px solid $darkblue;
+    // border: 1px solid $darkblue;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     border-radius: 999px;
     color: $white;
     @extend .tbase;
@@ -104,11 +107,11 @@ $sbold : 'Inter-SemiBold';
     color: #FF6700;
       background-color: transparent;
     }
-    .bluefill:hover{
-      border-color: rgba(36,52,112,0.8);
-      color: rgba(36,52,112,0.8);
-      background-color: transparent;
-    }
+    // .bluefill:hover{
+    //   border-color: rgba(36,52,112,0.8);
+    //   color: rgba(36,52,112,0.8);
+    //   background-color: transparent;
+    // }
     .nofill:hover {
       border-color: #FF6700;
       color: #FF6700;

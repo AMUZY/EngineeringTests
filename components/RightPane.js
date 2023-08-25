@@ -14,6 +14,8 @@ import { useSession } from "next-auth/react";
 import { ToastContainer } from "react-toastify";
 import { promisetoast } from "@toasts/Toasts";
 import axios from "axios";
+import html2canvas from "html2canvas";
+import jsPDF from "jspdf";
 
 const RightPane = ({ pagename, results, homepageProjects ,projects, resultinfo, projectinfo, projectPageInfo , settings}) => {
   const {data : session} = useSession()
@@ -25,43 +27,70 @@ const RightPane = ({ pagename, results, homepageProjects ,projects, resultinfo, 
   const [warning,setWarning] = useState('');
   const action = `Yes, I'm sure`;
 
+  // HTML LOADER
+  const [pdfloader,setPdfLoader] = useState(false)
+  const [imgloader,setImgLoader] = useState(false)
+  
+  const [searchval, setSearchVal] = useState("");
+
   // SEARCHED ITEMS TO USE FOR INDIVIDUAL PAGES
-  const [incomingItems,setIncomingItems] = useState([])
   const [searchedItems,setSearchedItems] = useState([])
   // END
 
+  // LOCAL STORAGE COLOR CHANGER
+  const [localstore,setLocalStore] = useState()
+  useEffect(()=>{
+    setLocalStore(localStorage)
+  },[])
+  
   // BELOW USEFFECT TO setIncomingItems ACCORDING TO PAGE IN USE
   useEffect(()=>{
     if(homepageProjects){
       let temparray = []
       for(let i = 0 ; i < homepageProjects.length ; i++){
-        for(let j = 0 ; i < homepageProjects[i].length ; j++){
-          temparray.push(homepageProjects[i].results[j])
-        }
+          temparray.push(homepageProjects[i])
       }
-      setIncomingItems(temparray)
+      setSearchedItems(temparray)
     }else if(projects){
       let temparray = []
       for(let i = 0; i < projects.length ; i++){
         temparray.push(projects[i])
       }
-      setIncomingItems(temparray)
+      setSearchedItems(temparray)
     }
   },[homepageProjects,projects])
   // 
 
-  console.log(incomingItems)
-
-
-  function UpdateList(item){
-    if(homepageProjects || projects){
-      const tempSearchedArray = incomingItems.filter((inItem)=>{
+  // FUNCTION THAT UPDATES THE LIST
+  function UpdateList(searchword){
+    if(homepageProjects){
+      console.log(homepageProjects)
+      const tempSearchedArray = homepageProjects.filter((inItem)=>{
+        for(let i = 0 ; i < homepageProjects.length ; i++){
+          if(inItem.results[i]){
+            return (
+              inItem.results[i].title.toLowerCase().includes(searchword.toLowerCase())
+            )
+          }
+        }
+      })
+      if(searchval.trim().length > 0){
+        setSearchedItems(tempSearchedArray)
+      }else{
+        setSearchedItems(homepageProjects)
+      }
+    }
+    if(projects){
+      const tempSearchedArray = projects.filter((inItem)=>{
         return (
-          inItem.title === item.title
+          inItem.title.toLowerCase().includes(searchword.toLowerCase())
         )
       })
-      setSearchedItems(tempSearchedArray)
-    }
+      if(searchval.trim().length > 0){
+        setSearchedItems(tempSearchedArray)
+      }else{
+        setSearchedItems(projects)
+      }
     }
   }
 
@@ -123,8 +152,38 @@ const RightPane = ({ pagename, results, homepageProjects ,projects, resultinfo, 
     }
   },[homepageProjects])
   
+  const downloadPDF = ()=>{
+    const capture = document.querySelector(".capture");
+    html2canvas(capture)
+    .then((canvas)=>{
+      setPdfLoader(false);
+      const imgData = canvas.toDataURL('img/png');
+      const doc = new jsPDF('l', 'em', 'dl');
+      const componentWidth = doc.internal.pageSize.getWidth();
+      const componentHeight = doc.internal.pageSize.getHeight();
+      doc.addImage(imgData, 'PNG', 0, 1 , componentWidth , componentHeight);
+      doc.save(`${resultinfo.title}.pdf`)
+    })
+    setPdfLoader(true)
+  }
 
-  const [searchval, setSearchVal] = useState("");
+  const downloadimage = ()=>{
+    const capture = document.querySelector(".capture");
+    html2canvas(capture)
+    .then(async (canvas)=>{
+      setImgLoader(false);
+      const imageURL = canvas.toDataURL('img/png');
+      const link = document.createElement('a')
+      link.href = imageURL
+      link.download = `${resultinfo.title}`
+      document.body.appendChild(link)
+      link.click()
+      document.body.removeChild(link)
+    })
+    setImgLoader(true);
+  }
+
+  
   return (
     <div className="w-full h-full flex flex-col p-1">
     <ToastContainer />
@@ -167,8 +226,8 @@ const RightPane = ({ pagename, results, homepageProjects ,projects, resultinfo, 
           </div>
         </div>
         {
-          (results || projects) && (
-            <div className="h-max ml-12 w-96 searchcont rounded-full flex items-center px-4 py-3">
+          (homepageProjects || projects) && (
+            <div style={{backgroundColor : localstore ? localstore.getItem("backgroundColor") : 'currentcolor'}} className="h-max ml-12 w-96 searchcont rounded-full colbox flex items-center px-4 py-3">
               <Image
                 className="mr-2"
                 width={24}
@@ -179,14 +238,12 @@ const RightPane = ({ pagename, results, homepageProjects ,projects, resultinfo, 
               {/* UNIVERSAL SEARCH BAR */}
               <input
                 onChange={(e) => {
-                  if(homepageProjects || projects){
-                    UpdateList(e.target.value)
-                  }
+                  UpdateList(e.target.value)
                   setSearchVal(e.target.value);
                 }}
                 className="bg-transparent dashboardsearch flex-grow tbase text-white"
                 type="text"
-                placeholder="Search..."
+                placeholder="Filter by title..."
                 value={searchval}
               />
             </div>
@@ -216,7 +273,7 @@ const RightPane = ({ pagename, results, homepageProjects ,projects, resultinfo, 
                 </div>
                 <div className="w-full flex-col">
                   {
-                    homepageProjects.map((project)=>{
+                    searchedItems.map((project)=>{
                       return (
                         project.results.map((result) => {
                           return <ResultInfo key={uuidv4()} result={result} projectid={project._id} resultid={result.id}/>;
@@ -251,7 +308,7 @@ const RightPane = ({ pagename, results, homepageProjects ,projects, resultinfo, 
               </div>
               <div className="w-full flex-col">
                 {projects &&
-                  projects.map((project) => {
+                  searchedItems.map((project) => {
                     return <ProjectInfo key={uuidv4()} project={project}/>;
                   })}
               </div>
@@ -359,7 +416,7 @@ const RightPane = ({ pagename, results, homepageProjects ,projects, resultinfo, 
               </div>
               {/* CHARTS AND DOWNLOAD BUTTON */}
               {resultinfo ?
-                <div className="flex-grow h-full">
+                <div className="flex-grow flex flex-col items-center mb-3">
                   {/* THE CHARTs */}
                   {
                     (resultinfo.chosenchart == 'Bar Chart') ? 
@@ -367,14 +424,26 @@ const RightPane = ({ pagename, results, homepageProjects ,projects, resultinfo, 
                     : 
                     <LineChart title = {resultinfo.title} subtitle = {resultinfo.subtitle} labels={resultinfo.labels} comps={resultinfo.comps} table={resultinfo.table} size={{height : 50 , width : 100}}/>
                   }
+                  {/* DOWNLOAD AS PDF OR IMAGE */}
+                  <div className="flex w-max mx-auto">
+                    {/* PDF */}
+                    <button disabled={pdfloader} onClick={()=>{
+                      downloadPDF()
+                    }}className="rounded-full mx-3 flex items-center justify-center border-black border-2 px-4 py-3"><Image className="mx-2" src={"/assets/svgs/download_line.svg"} width={24} height={24} alt="download button"/>{pdfloader ? `PDF downloading...` : `PDF`}</button>
+                       {/* Image */}
+                    <button disabled={imgloader} onClick={()=>{
+                      downloadimage()
+                    }}className="rounded-full mx-3 flex items-center justify-center border-black border-2 px-4 py-3"><Image className="mx-2" src={"/assets/svgs/download_line.svg"} width={24} height={24} alt="download button"/>{imgloader ? `Image downloading...` : `Image`}</button>
+                  </div>
                 </div>
                 :
                 <div>NO RESULT TO DISPLAY</div>
               }
+              
             </div>
-            {/* EDIT BUTTON */}
+            {/* EDIT AND DELETE BUTTON */}
             <div className="mx-auto flex">
-                <FillBLueBtn href={`/edit-result/${session?.user._id || session?.user.id}/${projectinfo._id}/${resultinfo.id}`} text={"EDIT RESULT"} addclass={"mx-4"}/>
+                <FillBLueBtn src={"/assets/svgs/edit_white.svg"} href={`/edit-result/${session?.user._id || session?.user.id}/${projectinfo._id}/${resultinfo.id}`} text={"EDIT RESULT"} addclass={"mx-4"}/>
                 <CanDelBtn action={()=>{
                   setWarningHead(`Delete Result`)
                   setWarning(`Are you sure you want to delete this result?`)

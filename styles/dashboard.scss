@@ -25,18 +25,16 @@ $darkorange: #FF6700;
     -moz-appearance: none;
     appearance: none;
     background-color: transparent;
-    width: 40px;
-    height: 40px;
+    width: 48px;
+    height: 48px;
     border: none;
     cursor: pointer;
   }
   .style2::-webkit-color-swatch {
-    border-radius: 50%;
-    border: 7px solid #000000;
+    border-radius: 9999px;
   }
   .style2::-moz-color-swatch {
-    border-radius: 50%;
-    border: 7px solid #000000;
+    border-radius: 9999px;
   }
 
 .resultinfo{

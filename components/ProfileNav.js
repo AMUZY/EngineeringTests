@@ -9,6 +9,10 @@ import { signOut,useSession } from "next-auth/react";
 
 const ProfileNav = () => {
   const {data : session , status} = useSession()
+  const [localstore,setLocalStore] = useState()
+  useEffect(()=>{
+    setLocalStore(localStorage)
+  },[])
 
   const router = useRouter();
   const [profilebtn, setProfilebtn] = useState(false);
@@ -38,10 +42,13 @@ const ProfileNav = () => {
   const navbtn = (item) => {
     return (
       <Link
+        style={{
+          backgroundColor : ((localstore&&path.includes(`/dashboard${item.path}`)) ? localstore.getItem("backgroundColor") : 'transparent')
+        }}
         key={uuidv4()}
         className={`${
           path.includes(`/dashboard${item.path}`)
-            ? "flex white my-1 tbase transition-all rounded-3xl p-3 bckblue"
+            ? "flex white my-1 tbase transition-all rounded-3xl p-3 bckblue colbox"
             : "flex black my-1 hover:scale-110 transition-all tbase rounded-3xl p-3 ml-3"
         }`}
         href={`/dashboard${item.path}`}
@@ -95,7 +102,7 @@ const ProfileNav = () => {
                 >
                   <span
                     onClick={() => {
-                      router.push("/myprofile");
+                      router.push(`/myprofile/${session?.user._id || session?.user.id}/${session?.user?.name?.replace(" ","") || session?.user?.username?.replace(" ","")}?image=${session?.user.image || "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRCRBp1ijNZtMdCAaEMx75aFpJcEpJzwZoVl4seDNi8YA&s"}`);
                       setProfilebtn(false);
                     }}
                     className={`tbase cursor-pointer black w-full p-3 h-max bg-white flex rounded-lg`}

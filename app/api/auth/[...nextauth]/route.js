@@ -5,7 +5,8 @@ import CredentialsProvider from "next-auth/providers/credentials";
 import { connectToDB } from "@app/utils/database";
 import User from "@models/user";
 import { compare } from "bcrypt";
-
+import my_jwk from '@jwk.json'
+import LinkedIn from "@LinkedInProvider.json"
 
 const handler = Nextauth({
   providers: [
@@ -16,6 +17,31 @@ const handler = Nextauth({
     LinkedInProvider({
       clientId: process.env.LINKEDIN_CLIENT_ID,
       clientSecret: process.env.LINKEDIN_CLIENT_SECRET,
+      // issuer: "https://www.linkedin.com",
+      authorization : {
+        url: "https://www.linkedin.com/oauth/v2/authorization",
+        params : {
+          scope : "openid profile email",
+      }},
+      token: {
+        url: "https://www.linkedin.com/oauth/v2/accessToken",
+        async request({
+              client,
+              params,
+              checks,
+              provider
+          }) {
+        const response = await client.callback(provider.callbackUrl, params, checks, {
+            exchangeBody: {
+                client_id: process.env.LINKEDIN_CLIENT_ID,
+                client_secret: process.env.LINKEDIN_CLIENT_SECRET,
+            }
+          });
+          return {
+              tokens: response
+          };
+        }
+      }
     }),
     CredentialsProvider({
       id: "credentials",
@@ -94,8 +120,13 @@ const handler = Nextauth({
                 image: profile.picture,
                 SigninType: "googleAuth",
               });
-            } else if (profile.iss === "") {
-
+            } else if (profile.iss === "https://www.linkedin.com") {
+              await User.create({
+                email: profile.email,
+                username: profile.name.replace(" ", ""),
+                image: profile.picture,
+                SigninType: "linkedinAuth",
+              });
             }
           }
 

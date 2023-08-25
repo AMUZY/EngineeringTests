@@ -8,6 +8,7 @@ const nextConfig = {
     images: {
       domains: ['lh3.googleusercontent.com','encrypted-tbn0.gstatic.com'],
     },
+    reactStrictMode : false,
     webpack(config) {
       config.experiments = {
         ...config.experiments,

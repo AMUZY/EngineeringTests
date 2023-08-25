@@ -36,7 +36,7 @@ export const GET = async (req, {params})=>{
         }
 
     } catch (error) {
-        return new NextResponse("Wrong Email or Password" , { status : 500 })
+        return new NextResponse("Error in connection" , { status : 500 })
     }
 }
 
@@ -52,16 +52,5 @@ export const PUT = async(req, {params})=>{
     }
 }
 
-export const DELETE = async(req, {params})=>{
-    try {
-        await connectToDB().then((info)=>{
-            if(info.status === (500 || 301)){
-                throw new Error("Redundant or disconnect")
-            }
-        }).catch((error)=>{throw new Error(error)})
-    } catch (error) {
-        
-    }
-}
 
 

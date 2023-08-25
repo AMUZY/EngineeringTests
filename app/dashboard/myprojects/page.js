@@ -37,7 +37,7 @@ const myprofile = () => {
       setSess(session)
     }
 
-  },[session])
+  },[])
 
   return (
       <>

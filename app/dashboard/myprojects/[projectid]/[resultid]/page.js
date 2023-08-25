@@ -38,7 +38,7 @@ const page = ({params}) => {
     setSess(session)
     }
     
-  },[session])
+  },[])
 
   return (
     <>

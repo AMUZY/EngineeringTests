@@ -44,7 +44,7 @@ export default function TwoBtnModal({warningheading,warning,action,modal,ShowMod
                         {warningheading}
                       </Dialog.Title>
                       <div className="mt-2">
-                        <p className="tsmall black">
+                        <p className="text-md black">
                           {warning}
                         </p>
                       </div>

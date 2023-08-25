@@ -1,7 +1,17 @@
 import Link from "next/link"
 import Image from "next/image"
-// FILL BUTTON
+// import { useEffect,useState } from "react"
 
+// const useNewHook = ()=>{
+//     const [localstore,setLocalStore] = useState()
+//     useEffect(()=>{
+//       setLocalStore(localStorage)
+//     },[])
+// }
+
+// export default useNewHook
+
+// FILL BUTTON
 const SwitchIcon = (id,nohoversrc,hoversrc,)=>{
     let icon = document.getElementById(`${id}`)
     icon.src = nohoversrc ? nohoversrc : hoversrc
@@ -16,9 +26,15 @@ export const FillBtn = ({href,text,addclass})=>{
     );
 }
 
-export const FillBLueBtn = ({href,text,addclass})=>{
+export const FillBLueBtn = ({src,href,text,addclass})=>{
     return (
-        <Link href={href} className={"bluefill "+ addclass} >
+        <Link style={{
+            backgroundColor : localStorage ? localStorage.getItem("backgroundColor") : 'currentcolor',
+            }} 
+            href={href} className={"bluefill colbox "+ addclass} >
+            {src &&
+                <Image className="mr-2" width={20} height={14} src={src} alt="icon"/>
+            }
             {text}
         </Link>
     );

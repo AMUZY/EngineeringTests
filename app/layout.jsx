@@ -1,6 +1,5 @@
 import React from "react";
 import "@styles/globals.scss";
-import Head from "next/head";
 import { Inter } from "next/font/google";
 import 'react-toastify/dist/ReactToastify.css';
 import '@fontsource/roboto/300.css';
@@ -19,16 +18,6 @@ export const metadata = {
 const rootlayout = ({ children }) => {
   return (
     <html lang="en" className="w-full h-full">
-      <Head>
-        <title>
-            EngineeringTests - Create, store and manage your engineering test results
-        </title>
-        <meta
-          name="description"
-          content="Create, store and manage your engineering test results , tensile, hardness , impact , flexural , FTIR tests e.t.c "
-          key="desc"
-        />
-      </Head>
       <head>
         <meta property="og:site_name" content="EngineeringTests" />
         <meta property="og:title" content="EngineeringTests" />

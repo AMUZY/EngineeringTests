@@ -102,8 +102,8 @@ const BarChart = ({title,subtitle,display,edit,labels, comps, table, size}) => {
   },[edit,labels, comps, table])
 
   return (
-    <div className='flex flex-col justify-center h-full w-full'>
-      <div className='w-full h-full flex justify-center items-center'>
+    <div className='flex flex-col justify-center w-full'>
+      <div className='capture w-full h-full flex justify-center items-center'>
         {
           chart? 
           chart :

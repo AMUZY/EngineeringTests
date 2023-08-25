@@ -133,9 +133,9 @@ const signup = () => {
       <div className="flex flex-row justify-start">
         <button
           className="p-2 w-max flex flex-row items-center hover:scale-125 transition-all"
-          onClick={() => {
-            window.history.back();
-          }}
+          onClick={() => 
+            router.push("/")
+          }
         >
           <Image
             src="/assets/svgs/backarrow.svg"
@@ -326,7 +326,7 @@ const signup = () => {
             {/* LINKEDIN SIGN IN BUTTON */}
             <button
               onClick={() => {
-                signIn(providers.likedin.id, {
+                signIn(providers.linkedin.id, {
                   callbackUrl: `/dashboard/home`,
                 });
               }}

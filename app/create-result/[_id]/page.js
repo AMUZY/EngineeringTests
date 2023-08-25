@@ -402,7 +402,7 @@ const page = ({params}) => {
                                                    let tempstr = e.target.value
                                                    labels[columns.indexOf(column)] = tempstr
                                                }
-                                           }} key={uuidv4()} onChange={()=>{}} className="column_cell" placeholder={`column ${columns.indexOf(column)+1}`} />
+                                           }} key={uuidv4()} onChange={()=>{}} className="column_cell" placeholder={`wt% ${columns.indexOf(column)+1}`} />
                                        })}
                                        </div> : <></>
                                     }
@@ -416,7 +416,7 @@ const page = ({params}) => {
                                                     let tempstr = e.target.value
                                                     comps[rows.indexOf(row)] = tempstr
                                                 }
-                                                }} className="row_cell" onChange={()=>{}} placeholder={`row ${rows.indexOf(row)+1}`} />
+                                                }} className="row_cell" onChange={()=>{}} placeholder={`reinf ${rows.indexOf(row)+1}`} />
                                             {row.map((item)=>{
                                                 return <input onBlur={(e)=>{
                                                     if(CheckIfSettingSaved()){

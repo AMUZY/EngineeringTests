@@ -1,10 +1,11 @@
 'use client'
-import React, { useState,useReducer } from 'react'
+import React, { useState,useReducer, useEffect } from 'react'
 import RightPane from '@components/RightPane'
 import { container,labelclass,inputclass } from '@app/signup/page';
 import Image from 'next/image';
 import { SaveBtn } from '@components/Button';
 import { useSession } from 'next-auth/react';
+import { CirclePicker } from 'react-color';
 
 let password = "";
 let confirmpassword = "";
@@ -33,18 +34,37 @@ const hide = (state, newstate) => {
   }
 };
 
+
 const settings = () => {
+
   const {data : session} = useSession()
   const [user, dispatch] = useReducer(reducer, {
     password,
     confirmpassword,
   });
-  const [color,setColor] = useState("")
+  const [localstore,setLocalStore] = useState()
+  const [color,setColor] = useState("#ffff")
   const [active,setActive] = useState(false)
   const [iseyeopen, setIsEyeOpen] = useState(false);
   const [iseye2open, setIsEye2Open] = useState(false);
   const [ptype, setPType] = useState("password");
   const [ptype2, setPType2] = useState("password");
+
+  useEffect(()=>{
+    setColor(localStorage.getItem("backgroundColor"))
+    setLocalStore(localStorage)
+  },[])
+
+  // BG COLOR CHANGER
+  const ChangeUiColor = (color)=>{
+    setColor(color)
+    // STORE IN LOCAL STORAGE
+    localStorage.setItem('backgroundColor', color)
+    const elements = document.querySelectorAll(".colbox")
+    elements.forEach(element => {
+      element.style.backgroundColor = color
+    });
+  }
 
   const UpdatePassword =()=>{
     if(user.password === user.confirmpassword){
@@ -60,13 +80,11 @@ const settings = () => {
       <div className='mx-auto rounded-2xl px-6 py-3 my-3 bg-gray-300 flex'>
         <div className='flex items-center'>
           <h2 className='mx-3 tbase'>Default :</h2>
-          <input type='color' className='style2 rounded-full mx-2' onChange={(e)=>{}} />
+          <div style={{width : 40 , height : 40}} className='cursor-pointer bckblue rounded-full' onClick={()=>ChangeUiColor("rgba(36,52,112,0.8)")}></div>
         </div>
         <div className='flex items-center'>
           <h2 className='mx-3 tbase'>Custom : </h2>
-          <div className='cursor-pointer rounded-full bg-gradient-to-tr from-gray-500 via-pink-400 via-purple-500 via-green-200 via-yellow-100 to-red-500 w-10 h-10'>
-            {/* <input type='color' className='style2 rounded-full mx-2' onChange={(e)=>{setColor(e.target.value)}} value={"#FF6700"}/> */}
-          </div>
+          <input type='color' className='style2' value={color} onChange={(e)=>ChangeUiColor(e.target.value)}/>
         </div>
       </div>
     </div>
@@ -74,7 +92,7 @@ const settings = () => {
       session?.user.password && 
       <div className='flex flex-col my-2'>
         <h2 className='tbasebold black my-3'> Change Password :</h2>
-        <div className='mx-auto rounded-3xl px-6 py-3 my-3 bluegradient flex flex-col'>
+        <div style={{backgroundColor : localstore ? localstore.getItem("backgroundColor") : 'currentcolor'}} className='mx-auto rounded-3xl px-6 py-3 my-3 bluegradient flex flex-col'>
               <div className={container}>
                 <label className={labelclass} htmlFor="password">
                   {" "}

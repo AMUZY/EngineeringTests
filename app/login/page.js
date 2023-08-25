@@ -6,6 +6,7 @@ import { ToastContainer } from 'react-toastify';
 import { signIn,getProviders } from 'next-auth/react';
 import { normaltoast, promisetoast, successtoast } from '@toasts/Toasts';
 import 'react-toastify/dist/ReactToastify.css';
+import { useRouter } from 'next/navigation';
 import { loginUser } from '@helpers/helper';
 
 
@@ -34,6 +35,7 @@ const labelclass = 'nohighlight bg-transparent tbase text-white mb-2 mr-4 md:mb-
 const inputclass = 'input bg-transparent w-full md:w-auto tbase text-white focus:outline-none flex-grow py-1 px-2 lg:py-3 lg:px-4';
 
 const login = () => {
+  const router = useRouter()
   const [submiterror, setSubmitError] = useState();
   const [user,dispatch] = useReducer(reducer, {email, password})
   const [loading, setLoading] = useState(false);
@@ -68,7 +70,6 @@ const handleSubmit = async (email,password)=>{
     const AwaitUserLogin = new Promise(async (res, rej)=> {
       await axios.get(`/api/user-http/${email}/${password}`)
       .then((response)=>{
-          successtoast(response.data)
           // Go to dashboard
           const loginRes = async () => {
           const login = await loginUser({
@@ -86,16 +87,13 @@ const handleSubmit = async (email,password)=>{
         res()
         setLoading(false);
       }).catch((error)=>{
-          if(error.response){
-            normaltoast(error.response.data)
-          }
           rej()
           setLoading(false);
       })
     })
 
     promisetoast(AwaitUserLogin,
-    "Loggin in...",
+    "Logging in...",
     "Logged In successfully, preparing your dashboard...",
     "Failed to login")
 
@@ -106,7 +104,7 @@ const handleSubmit = async (email,password)=>{
   return (
     <section className="min-h-[100svh] section bluegradient flex flex-col">
       <div className='flex flex-row justify-start'>
-      <button className='p-2 w-max flex flex-row items-center hover:scale-125 transition-all' onClick={()=>{window.history.back()}}> 
+      <button className='p-2 w-max flex flex-row items-center hover:scale-125 transition-all' onClick={()=> router.push("/") }> 
           <Image style={{width : "auto"}} src='/assets/svgs/backarrow.svg' width={40} height={42} alt='engineeringtests logo transparent' /> 
           <h3 className='hidden tbase text-white lg:inline'>Go back </h3>
       </button>
@@ -161,7 +159,7 @@ const handleSubmit = async (email,password)=>{
               });
             }} className='my-2 mx-auto'><Image style={{width : "auto"}} src='/assets/svgs/googlebtn.svg' width={345} height={54} alt='sing in with google' /></button>
             <button onClick={()=>{
-                signIn(providers.likedin.id, {
+                signIn(providers.linkedin.id, {
                 callbackUrl: `/dashboard/home`,
               });
             }} className='my-2 mx-auto'><Image style={{width : "auto"}} src='/assets/svgs/linkedinbtn.svg' width={345} height={54} alt='sing in with linkedin' /></button>

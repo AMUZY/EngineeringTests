@@ -35,7 +35,7 @@ const Dashboard = () => {
     setSess(session)
     }
     
-  },[session])
+  },[])
   
   return (
     <>
