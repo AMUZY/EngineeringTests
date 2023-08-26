@@ -32,7 +32,7 @@ const ProfileNav = () => {
     },
     {
       name: "Settings",
-      path: "/settings",
+      path: `/settings/${session?.user.email}`,
       white: "/assets/svgs/settings_white.svg",
       black: "/assets/svgs/settings_black.svg",
     },
@@ -66,6 +66,7 @@ const ProfileNav = () => {
       </Link>
     );
   };
+
   return (
     (session && 
       <div onMouseLeave={()=>{setProfilebtn(false)}} className="flex h-full flex-col justify-between my-3 mx-3">
@@ -102,7 +103,7 @@ const ProfileNav = () => {
                 >
                   <span
                     onClick={() => {
-                      router.push(`/myprofile/${session?.user._id || session?.user.id}/${session?.user?.name?.replace(" ","") || session?.user?.username?.replace(" ","")}?image=${session?.user.image || "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRCRBp1ijNZtMdCAaEMx75aFpJcEpJzwZoVl4seDNi8YA&s"}`);
+                      router.push(`/myprofile`);
                       setProfilebtn(false);
                     }}
                     className={`tbase cursor-pointer black w-full p-3 h-max bg-white flex rounded-lg`}

@@ -1,8 +1,9 @@
-import { compare } from 'bcrypt'
+import { compare,hash } from 'bcrypt'
 import { connectToDB } from "@app/utils/database";
 import User from '@models/user';
 import { NextResponse } from 'next/server';
 
+const saltRounds = 10;
 
 export const GET = async (req, {params})=>{
     try {
@@ -46,9 +47,29 @@ export const PUT = async(req, {params})=>{
             if(info.status === (500 || 301)){
                 throw new Error("Redundant or disconnect")
             }
-        }).catch((error)=>{throw new Error(error)})
+        }).catch((error)=>{throw new Error(error)});
+
+        const info = await req.json();
+        const hashed = await hash(info.password , saltRounds)
+
+        const user = await User.findOne({
+            email : params.email
+        })
+        const tempuser = {
+            _id : user._id,
+            email : user.email,
+            username : user.username,
+            SigninType : user.SigninType,
+            password : hashed,
+            __v : user.__v
+        }
+        await User.findOneAndReplace({
+            email : params.email
+        },tempuser)
+
+        return new NextResponse("Password change successful" , { status : 200 })
     } catch (error) {
-        
+        return new NextResponse("password update failed" , { status : 500 })
     }
 }
 

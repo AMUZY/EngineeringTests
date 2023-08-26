@@ -1,18 +1,32 @@
 'use client'
 import React, { useState } from "react";
 import ProfileNav from "@components/ProfileNav";
-import { SessionProvider } from "next-auth/react";
 import { useEffect } from "react";
+import { useRouter } from "next/navigation";
+import { getSession } from "next-auth/react";
 
 export default function layout ({ children }) {
+  const [authstate,setAuthState] = useState(false)
+  const router = useRouter()
+  function CheckAuth(){
+    const session = getSession()
+    session.then((status)=>{
+      if(!status){
+        router.push("/unauthenticated")
+      }else{
+        setAuthState(true)
+      }
+    }).catch(()=>{})
+  }
+  CheckAuth()
+
   const [localstore,setLocalStore] = useState()
   useEffect(()=>{
     setLocalStore(localStorage)
   },[])
   
   return (
-    localstore &&
-    <SessionProvider >
+    (authstate && localstore) &&
       <div className="w-full h-full p-6">
         <div className="w-full boxcontainer h-full flex flex-row rounded-3xl overflow-visible">
           <div className="mr-3 w-[20%] h-full dashbox rounded-3xl p-3">
@@ -23,7 +37,6 @@ export default function layout ({ children }) {
           </div>
         </div>
       </div>
-    </SessionProvider>
   );
 };
 

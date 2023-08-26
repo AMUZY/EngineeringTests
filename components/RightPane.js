@@ -158,10 +158,10 @@ const RightPane = ({ pagename, results, homepageProjects ,projects, resultinfo, 
     .then((canvas)=>{
       setPdfLoader(false);
       const imgData = canvas.toDataURL('img/png');
-      const doc = new jsPDF('l', 'em', 'dl');
+      const doc = new jsPDF('l', 'em', 'junior-legal');
       const componentWidth = doc.internal.pageSize.getWidth();
       const componentHeight = doc.internal.pageSize.getHeight();
-      doc.addImage(imgData, 'PNG', 0, 1 , componentWidth , componentHeight);
+      doc.addImage(imgData, 'PNG', 1, 1 , componentWidth , componentHeight);
       doc.save(`${resultinfo.title}.pdf`)
     })
     setPdfLoader(true)
@@ -243,7 +243,7 @@ const RightPane = ({ pagename, results, homepageProjects ,projects, resultinfo, 
                 }}
                 className="bg-transparent dashboardsearch flex-grow tbase text-white"
                 type="text"
-                placeholder="Filter by title..."
+                placeholder="Filter by title"
                 value={searchval}
               />
             </div>
@@ -429,11 +429,11 @@ const RightPane = ({ pagename, results, homepageProjects ,projects, resultinfo, 
                     {/* PDF */}
                     <button disabled={pdfloader} onClick={()=>{
                       downloadPDF()
-                    }}className="rounded-full mx-3 flex items-center justify-center border-black border-2 px-4 py-3"><Image className="mx-2" src={"/assets/svgs/download_line.svg"} width={24} height={24} alt="download button"/>{pdfloader ? `PDF downloading...` : `PDF`}</button>
+                    }}className="rounded-full mx-3 flex items-center justify-center border-black border-2 px-4 py-3"><Image className="mx-2" src={"/assets/svgs/download_line.svg"} width={24} height={24} alt="download button"/>{pdfloader ? `downloading...` : `PDF`}</button>
                        {/* Image */}
                     <button disabled={imgloader} onClick={()=>{
                       downloadimage()
-                    }}className="rounded-full mx-3 flex items-center justify-center border-black border-2 px-4 py-3"><Image className="mx-2" src={"/assets/svgs/download_line.svg"} width={24} height={24} alt="download button"/>{imgloader ? `Image downloading...` : `Image`}</button>
+                    }}className="rounded-full mx-3 flex items-center justify-center border-black border-2 px-4 py-3"><Image className="mx-2" src={"/assets/svgs/download_line.svg"} width={24} height={24} alt="download button"/>{imgloader ? `downloading...` : `Image`}</button>
                   </div>
                 </div>
                 :

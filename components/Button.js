@@ -1,17 +1,7 @@
 import Link from "next/link"
 import Image from "next/image"
-// import { useEffect,useState } from "react"
 
-// const useNewHook = ()=>{
-//     const [localstore,setLocalStore] = useState()
-//     useEffect(()=>{
-//       setLocalStore(localStorage)
-//     },[])
-// }
 
-// export default useNewHook
-
-// FILL BUTTON
 const SwitchIcon = (id,nohoversrc,hoversrc,)=>{
     let icon = document.getElementById(`${id}`)
     icon.src = nohoversrc ? nohoversrc : hoversrc

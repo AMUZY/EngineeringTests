@@ -87,6 +87,7 @@ const handleSubmit = async (email,password)=>{
         res()
         setLoading(false);
       }).catch((error)=>{
+          normaltoast(error.response.data)
           rej()
           setLoading(false);
       })
@@ -135,8 +136,10 @@ const handleSubmit = async (email,password)=>{
               </div>
             </div>
             <div className='flex flex-col items-center md:flex-row mx-auto w-max '>
-              <p onClick={()=>{}} className={`nohighlight cursor-pointer my-3 tbase text-white text-center mx-3 hover:text-[#FF6700] md:w-max`}>
-                  Forget password?
+              <p onClick={()=>{
+                normaltoast("Oops! Reset password functionality not set")
+              }} className={`nohighlight cursor-pointer my-3 tbase text-white text-center mx-3 hover:text-[#FF6700] md:w-max`}>
+                  Forgot password?
               </p>
               <button 
                 disabled={loading}

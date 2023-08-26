@@ -103,10 +103,26 @@ const BarChart = ({title,subtitle,display,edit,labels, comps, table, size}) => {
 
   return (
     <div className='flex flex-col justify-center w-full'>
-      <div className='capture w-full h-full flex justify-center items-center'>
+      <div className='capture w-full h-full flex justify-center items-center pb-4'>
         {
           chart? 
-          chart :
+          <div className='w-full h-full'>
+            {chart}
+            <div className='flex flex-col h-full pb-2'>
+              <div className='flex flex-row'>
+                <h2 className='mx-2 tbasebold'> Weight Percentages : </h2>
+                {labels.map((label)=>{
+                  return <h2 className='mx-1 tbase'>{label},</h2>
+                })}
+              </div>
+              <div className='flex flex-row'>
+                <h2 className='mx-2 tbasebold'> Reinforcements : </h2> 
+                {comps.map((reinf)=>{
+                    return <h2 className='mx-1 tbase'>{reinf},</h2>
+                  })}
+              </div>
+            </div>
+          </div> :
           <> NO CHART TO DISPLAY </>
         }
       </div>

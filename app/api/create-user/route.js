@@ -47,5 +47,5 @@ const handler = async (req , res )=>{
     }
 }
 
-export { handler as POST , handler as GET }
+export { handler as POST }
 

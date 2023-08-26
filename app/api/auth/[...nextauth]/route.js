@@ -5,8 +5,6 @@ import CredentialsProvider from "next-auth/providers/credentials";
 import { connectToDB } from "@app/utils/database";
 import User from "@models/user";
 import { compare } from "bcrypt";
-import my_jwk from '@jwk.json'
-import LinkedIn from "@LinkedInProvider.json"
 
 const handler = Nextauth({
   providers: [
@@ -17,12 +15,23 @@ const handler = Nextauth({
     LinkedInProvider({
       clientId: process.env.LINKEDIN_CLIENT_ID,
       clientSecret: process.env.LINKEDIN_CLIENT_SECRET,
-      // issuer: "https://www.linkedin.com",
+      issuer: "https://www.linkedin.com",
+      jwks_endpoint : "https://www.linkedin.com/oauth/openid/jwks",
       authorization : {
         url: "https://www.linkedin.com/oauth/v2/authorization",
         params : {
           scope : "openid profile email",
       }},
+      async profile(profile) {
+        return {
+            id: profile.sub,
+            name: profile.name,
+            firstname: profile.given_name,
+            lastname: profile.family_name,
+            email: profile.email,
+            image: profile.picture,
+        }
+      },
       token: {
         url: "https://www.linkedin.com/oauth/v2/accessToken",
         async request({

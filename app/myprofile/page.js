@@ -8,8 +8,10 @@ import axios from 'axios'
 import { useSearchParams } from 'next/navigation'
 import { ToastContainer } from "react-toastify";
 import { signOut } from 'next-auth/react'
+import { useSession } from 'next-auth/react'
 
 const page = ({params}) => {
+  const {data:session} = useSession()
   const searchParams = useSearchParams()
   const warningheading = `DELETE ACCOUNT`
   const warning = `Are you sure you want to delete your account? This will erase all projects and containing results`
@@ -41,6 +43,8 @@ const page = ({params}) => {
     setModal(false)
   }
 
+  console.log(searchParams.get("image"))
+
   return (
     <div className='w-full h-full p-6'>
       <ToastContainer />
@@ -48,8 +52,8 @@ const page = ({params}) => {
       <div className='flex-grow h-full dashbox rounded-3xl p-3'>
           <div className='w-full h-full flex flex-col justify-between items-center'>
             <div className='flex flex-col items-center'>
-              <Image className="rounded-full" src={searchParams.get("image")} width={80} height={80} alt='profile'/>
-              <h1 className='ttitle black my-3'>{params.name}</h1>
+              <Image className="rounded-full" src={session?.user.image} width={80} height={80} alt='profile'/>
+              <h1 className='ttitle black my-3'>{session?.user.name || session?.user.username}</h1>
             </div>
             <CanDelBtn text={"DELETE MY ACCOUNT"} addclass={'mb-16'} action={()=>{
               ShowModal()

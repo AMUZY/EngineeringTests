@@ -3,7 +3,7 @@ import React, { useState, useEffect, useRef } from "react"
 import {v4 as uuidv4} from 'uuid';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { failuretoast, promisetoast } from "@toasts/Toasts";
+import { failuretoast, normaltoast, promisetoast } from "@toasts/Toasts";
 import BarChart from "@components/BarChart";
 import LineChart from "@components/LineChart";
 import { testTypes,chartTypes } from "@components/TestTypes";
@@ -69,7 +69,9 @@ const page = ({params}) => {
                     res()
                 })
                 .catch((error)=>{ 
+                    normaltoast("Or Create a project first")
                     rej()
+                    window.history.back()
                 })
             })
 
@@ -188,6 +190,7 @@ const page = ({params}) => {
     },[date,time])
 
   return (
+    allprojects &&
     <div className='w-full h-full p-6'>
         <div className='flex-grow h-full dashbox overflow-y-scroll rounded-3xl p-3 flex flex-col justify-between'>
             <div className='flex flex-row h-full w-full'>

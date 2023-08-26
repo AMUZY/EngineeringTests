@@ -6,6 +6,8 @@ import Image from 'next/image';
 import { SaveBtn } from '@components/Button';
 import { useSession } from 'next-auth/react';
 import { CirclePicker } from 'react-color';
+import { promisetoast } from '@toasts/Toasts';
+import axios from 'axios';
 
 let password = "";
 let confirmpassword = "";
@@ -35,8 +37,8 @@ const hide = (state, newstate) => {
 };
 
 
-const settings = () => {
-
+const settings = ({params}) => {
+  const [updating,setUpdating] = useState(false)
   const {data : session} = useSession()
   const [user, dispatch] = useReducer(reducer, {
     password,
@@ -68,7 +70,25 @@ const settings = () => {
 
   const UpdatePassword =()=>{
     if(user.password === user.confirmpassword){
-      
+      setUpdating(true)
+      const AwaitChange = new Promise(async (res,rej)=>{
+        await axios.put(`/api/user-http/${params.email}/password`, {
+          password : user.confirmpassword
+        }).then(()=>{
+          setUpdating(false)
+          res()
+        }).catch(()=>{
+          setUpdating(false)
+          rej()
+        })
+      })
+
+      promisetoast(AwaitChange,
+        "Updating password...",
+        "Your password is successfully updated",
+        "Failed to update password"
+        )
+
     }
   }
   
@@ -170,7 +190,7 @@ const settings = () => {
                 </div>
               </div>
               <div className='w-full'>
-                <SaveBtn addclass={"mx-auto my-3"} text={"Update"} action={()=>{
+                <SaveBtn disabled={updating} addclass={"mx-auto my-3"} text={"Update"} action={()=>{
                   UpdatePassword()
                 }}/>
               </div>
