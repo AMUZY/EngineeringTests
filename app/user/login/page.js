@@ -158,12 +158,12 @@ const handleSubmit = async (email,password)=>{
           <div className='py-2 mt-1 w-full flex flex-col items-center'>
             <button onClick={()=>{
                 signIn(providers.google.id, {
-                callbackUrl: `user/dashboard/home`,
+                callbackUrl: `/user/dashboard/home`,
               });
             }} className='my-2 mx-auto'><Image style={{width : "auto"}} src='/assets/svgs/googlebtn.svg' width={345} height={54} alt='sing in with google' /></button>
             <button onClick={()=>{
                 signIn(providers.linkedin.id, {
-                callbackUrl: `user/dashboard/home`,
+                callbackUrl: `/user/dashboard/home`,
               });
             }} className='my-2 mx-auto'><Image style={{width : "auto"}} src='/assets/svgs/linkedinbtn.svg' width={345} height={54} alt='sing in with linkedin' /></button>
           </div>
