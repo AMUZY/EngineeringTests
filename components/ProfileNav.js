@@ -103,7 +103,7 @@ const ProfileNav = () => {
                 >
                   <span
                     onClick={() => {
-                      router.push(`/user/myprofile`);
+                      router.push(`/user/myprofile/${session?.user?._id || session?.user?.id}`);
                       setProfilebtn(false);
                     }}
                     className={`tbase cursor-pointer black w-full p-3 h-max bg-white flex rounded-lg`}

@@ -4,6 +4,7 @@ import { connectToDB } from "@app/utils/database";
 import { NextResponse } from 'next/server';
 
 export const DELETE = async(req, {params})=>{
+    console.log(params.userid)
     try {
         await connectToDB().then((info)=>{
             if(info.status === (500 || 301)){
