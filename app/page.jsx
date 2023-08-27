@@ -52,9 +52,9 @@ const Home = () => {
               </p>
             </div>
             <div className="flex flex-row flex-wrap md:justify-between md:items-center w-max">
-              <FillBtn href={"/signup"} text="Create an account" />
+              <FillBtn href={"/user/signup"} text="Create an account" />
               <h1 className="tbase white mx-4 my-2 md:mx-8"> or </h1>
-              <NoFillBtn href={"/login"} text="Sign In" />
+              <NoFillBtn href={"/user/login"} text="Sign In" />
             </div>
           </div>
           {/* IMAGES */}
@@ -108,7 +108,7 @@ const Home = () => {
             />
           </div>
           <div className="mt-10 lg:mt-20 flex justify-center items-center">
-            <FillBtn href={"/signup"} text="Get started" />
+            <FillBtn href={"/user/signup"} text="Get started" />
           </div>
         </section>
 

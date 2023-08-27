@@ -43,22 +43,22 @@ const ProfileNav = () => {
     return (
       <Link
         style={{
-          backgroundColor : ((localstore&&path.includes(`/dashboard${item.path}`)) ? localstore.getItem("backgroundColor") : 'transparent')
+          backgroundColor : ((localstore&&path.includes(`/user/dashboard${item.path}`)) ? localstore.getItem("backgroundColor") : 'transparent')
         }}
         key={uuidv4()}
         className={`${
-          path.includes(`/dashboard${item.path}`)
+          path.includes(`/user/dashboard${item.path}`)
             ? "flex white my-1 tbase transition-all rounded-3xl p-3 bckblue colbox"
             : "flex black my-1 hover:scale-110 transition-all tbase rounded-3xl p-3 ml-3"
         }`}
-        href={`/dashboard${item.path}`}
+        href={`/user/dashboard${item.path}`}
       >
         <Image
           className="mr-2"
           width={24}
           height={24}
           src={
-            path.includes(`/dashboard${item.path}`) ? item.white : item.black
+            path.includes(`/user/dashboard${item.path}`) ? item.white : item.black
           }
           alt={`navigation button "${item.name}"`}
         />
@@ -103,7 +103,7 @@ const ProfileNav = () => {
                 >
                   <span
                     onClick={() => {
-                      router.push(`/myprofile`);
+                      router.push(`/user/myprofile`);
                       setProfilebtn(false);
                     }}
                     className={`tbase cursor-pointer black w-full p-3 h-max bg-white flex rounded-lg`}
@@ -142,12 +142,12 @@ const ProfileNav = () => {
         
         <div className="flex flex-col w-full h-max">
           <FillBLueBtn
-            href={`/create-project/${session?.user._id || session?.user.id}`}
+            href={`/user/create-project/${session?.user._id || session?.user.id}`}
             text={"+ Project"}
             addclass={"mb-5 w-full text-center h-max"}
           />
           <FillBtn
-            href={`/create-result/${session?.user._id || session?.user.id}`}
+            href={`/user/create-result/${session?.user._id || session?.user.id}`}
             text={"+ Result"}
             addclass={"mb-10 w-full text-center h-max"}
           />

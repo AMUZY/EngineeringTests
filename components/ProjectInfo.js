@@ -8,7 +8,7 @@ const ProjectInfo = ({project}) => {
   
   return (
     <div onClick={()=>{
-      router.push(`/dashboard/myprojects/${project._id}`)
+      router.push(`/user/dashboard/myprojects/${project._id}`)
     }} className='cursor-pointer w-full resultinfo flex flex-row items-center py-6 px-2 justify-between hover:bg-gray-100'>
             <p className='block flex-shrink tbase black whitespace-nowrap overflow-ellipsis'>{project.title}</p>
         <div className='flex flex-row justify-evenly'>

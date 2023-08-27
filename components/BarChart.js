@@ -108,7 +108,7 @@ const BarChart = ({title,subtitle,display,edit,labels, comps, table, size}) => {
           chart? 
           <div className='w-full h-full'>
             {chart}
-            <div className='flex flex-col h-full pb-2'>
+            <div className='flex flex-col pb-4'>
               <div className='flex flex-row'>
                 <h2 className='mx-2 tbasebold'> Weight Percentages : </h2>
                 {labels.map((label)=>{

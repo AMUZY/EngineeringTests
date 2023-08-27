@@ -110,7 +110,7 @@ const RightPane = ({ pagename, results, homepageProjects ,projects, resultinfo, 
       }
       ).then(()=>{
           res()
-          router.push(`/dashboard/home`)
+          router.push(`/user/dashboard/home`)
       }).catch(()=>{
           rej()
       })
@@ -129,7 +129,7 @@ const RightPane = ({ pagename, results, homepageProjects ,projects, resultinfo, 
       await axios.delete(`/api/project/other-http/${session?.user._id || session?.user.id}/${projectPageInfo._id}`)
       .then(()=>{
         res()
-        router.push('/dashboard/home')
+        router.push('/user/dashboard/home')
       }).catch(()=>{
         rej()
       })
@@ -207,19 +207,19 @@ const RightPane = ({ pagename, results, homepageProjects ,projects, resultinfo, 
           <div className="flex items-center">
             {
               pagename && (
-                <p className="tsubtitle black">{pagename}</p>
+                <a className="tsubtitle black">{pagename}</a>
               )
             }
             {
               (projectPageInfo) && (
-                <p className="tbase black mx-1 text-gray-500 overflow-ellipsis">{` > ${projectPageInfo.title}`}</p>
+                <a href={`/user/dashboard/myprojects/${projectPageInfo._id}`} className="tbase black mx-1 text-gray-500 overflow-ellipsis">{` > ${projectPageInfo.title}`}</a>
               )
             }
             {
               resultinfo && (
                 <>
-                  <p className="tbase black mx-1 text-gray-500 overflow-ellipsis">{` > ${projectinfo.title} >`}</p>
-                  <p className="tbase mx-1 text-gray-500 overflow-ellipsis">{`${resultinfo.title}`}</p>
+                  <a href={`/user/dashboard/myprojects/${projectinfo._id}`} className="tbase black mx-1 text-gray-500 overflow-ellipsis">{` > ${projectinfo.title} >`}</a>
+                  <a href={`/user/dashboard/myprojects/${projectinfo._id}/${resultinfo.id}`} className="tbase mx-1 text-gray-500 overflow-ellipsis">{`${resultinfo.title}`}</a>
                 </>
               )
             }
@@ -346,7 +346,7 @@ const RightPane = ({ pagename, results, homepageProjects ,projects, resultinfo, 
               {/* EDIT AND DELETE PROJECT BUTTON */}
               <div className="my-5 w-full flex-grow flex flex-col justify-between items-center">
                   <button className="my-2" onClick={()=>{
-                    router.push(`/edit-project/${session?.user._id || session?.user.id}/${projectPageInfo._id}`)
+                    router.push(`/user/edit-project/${session?.user._id || session?.user.id}/${projectPageInfo._id}`)
                   }}><Image src={"/assets/svgs/edit.svg"} width={24} height={24} alt="edit button"/></button>
                   <CanDelBtn text={"DELETE PROJECT"} addclass={"mx-auto my-2"} action={()=>{
                     setWarningHead(`Delete Project`)
@@ -361,7 +361,7 @@ const RightPane = ({ pagename, results, homepageProjects ,projects, resultinfo, 
                   {
                     projectPageInfo.results.map((result)=>{
                       return (
-                        <Link key={uuidv4()} href={`/dashboard/myprojects/${projectPageInfo._id}/${result.id}`} className="flex flex-col py-6 px-8 mb-3 bg-white h-max rounded-2xl w-full hover:scale-95 transition-all"> 
+                        <Link key={uuidv4()} href={`/user/dashboard/myprojects/${projectPageInfo._id}/${result.id}`} className="flex flex-col py-6 px-8 mb-3 bg-white h-max rounded-2xl w-full hover:scale-95 transition-all"> 
                         
                           {
                             (result.chosenchart == 'Bar Chart') ? 
@@ -443,7 +443,7 @@ const RightPane = ({ pagename, results, homepageProjects ,projects, resultinfo, 
             </div>
             {/* EDIT AND DELETE BUTTON */}
             <div className="mx-auto flex">
-                <FillBLueBtn src={"/assets/svgs/edit_white.svg"} href={`/edit-result/${session?.user._id || session?.user.id}/${projectinfo._id}/${resultinfo.id}`} text={"EDIT RESULT"} addclass={"mx-4"}/>
+                <FillBLueBtn src={"/assets/svgs/edit_white.svg"} href={`/user/edit-result/${session?.user._id || session?.user.id}/${projectinfo._id}/${resultinfo.id}`} text={"EDIT RESULT"} addclass={"mx-4"}/>
                 <CanDelBtn action={()=>{
                   setWarningHead(`Delete Result`)
                   setWarning(`Are you sure you want to delete this result?`)

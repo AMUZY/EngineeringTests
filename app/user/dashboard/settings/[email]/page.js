@@ -1,7 +1,7 @@
 'use client'
 import React, { useState,useReducer, useEffect } from 'react'
 import RightPane from '@components/RightPane'
-import { container,labelclass,inputclass } from '@app/signup/page';
+import { container,labelclass,inputclass } from '@app/user/signup/page';
 import Image from 'next/image';
 import { SaveBtn } from '@components/Button';
 import { useSession } from 'next-auth/react';
