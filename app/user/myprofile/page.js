@@ -52,7 +52,7 @@ const page = ({params}) => {
       <div className='flex-grow h-full dashbox rounded-3xl p-3'>
           <div className='w-full h-full flex flex-col justify-between items-center'>
             <div className='flex flex-col items-center'>
-              <Image className="rounded-full" src={session?.user.image} width={80} height={80} alt='profile'/>
+              <Image className="rounded-full" src={session?.user.image || "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRCRBp1ijNZtMdCAaEMx75aFpJcEpJzwZoVl4seDNi8YA&s" } width={80} height={80} alt='profile'/>
               <h1 className='ttitle black my-3'>{session?.user.name || session?.user.username}</h1>
             </div>
             <CanDelBtn text={"DELETE MY ACCOUNT"} addclass={'mb-16'} action={()=>{
