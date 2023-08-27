@@ -311,7 +311,7 @@ const signup = () => {
             <button
               onClick={() => {
                 signIn(providers.google.id, {
-                  callbackUrl: `/dashboard/home`,
+                  callbackUrl: `/user/dashboard/home`,
                 });
               }}
               className="my-2 mx-auto"
@@ -327,7 +327,7 @@ const signup = () => {
             <button
               onClick={() => {
                 signIn(providers.linkedin.id, {
-                  callbackUrl: `/dashboard/home`,
+                  callbackUrl: `/user/dashboard/home`,
                 });
               }}
               className="my-2 mx-auto"
