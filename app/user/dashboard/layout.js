@@ -6,13 +6,29 @@ import { useRouter } from "next/navigation";
 import { getSession } from "next-auth/react";
 
 export default function layout ({ children }) {
+  const [authstate,setAuthState] = useState(false)
+  const router = useRouter()
+  
   const [localstore,setLocalStore] = useState()
   useEffect(()=>{
     setLocalStore(localStorage)
   },[])
   
+  function CheckAuth(){
+    const session = getSession()
+    session.then((status)=>{
+      if(!status){
+        router.push("/unauthenticated")
+      }else{
+        setAuthState(true)
+      }
+    }).catch(()=>{})
+  }
+  CheckAuth()
+  
+  
   return (
-    localstore &&
+    (authstate && localstore) &&
       <div className="w-full h-full p-6">
         <div className="w-full boxcontainer h-full flex flex-row rounded-3xl overflow-visible">
           <div className="mr-3 w-[20%] dashbox rounded-3xl p-3">
