@@ -8,7 +8,7 @@ import { normaltoast } from "@toasts/Toasts";
 import { NormalBtn } from './Button';
 
 
-const LineChart = ({title,subtitle,display,edit,labels, comps, table}) => {
+const LineChart = ({shuffle,title,subtitle,display,edit,labels, comps, table}) => {
   const [chartstate,setChartState] = useState(false)
   const [size,setSize] = useState({ height : 400 , width : 600})
 
@@ -109,24 +109,28 @@ const LineChart = ({title,subtitle,display,edit,labels, comps, table}) => {
         chart? 
         <div className='w-full h-full'>
           {chart}
-          <div className='flex flex-col pb-4'>
-            <div className='flex flex-row'>
-              <h2 className='mx-2 tbasebold'> Weight Percentages : </h2>
-              {labels.map((label)=>{
-                return <h2 className='mx-1 tbase'>{label},</h2>
-              })}
-            </div>
-            <div className='flex flex-row'>
-              <h2 className='mx-2 tbasebold'> Reinforcements : </h2> 
-              {comps.map((reinf)=>{
-                  return <h2 className='mx-1 tbase'>{reinf},</h2>
+          {
+            shuffle &&
+            <div className='flex flex-col pb-2'>
+              <div className='flex flex-row flex-wrap my-1'>
+                <h2 className='mx-2 tbasebold'> Weight Percentages : </h2>
+                {labels.map((label)=>{
+                  return <h2 className='mx-1 tbase'>{label},</h2>
                 })}
+              </div>
+              <div className='flex flex-row flex-wrap my-1'>
+                <h2 className='mx-2 tbasebold'> Reinforcements : </h2> 
+                {comps.map((reinf)=>{
+                    return <h2 className='mx-1 tbase'>{reinf},</h2>
+                  })}
+              </div>
             </div>
-          </div>
+          }
         </div> :
         <> NO CHART TO DISPLAY </>
       }
     </div>
+    {shuffle && <button className= "mb-4 mx-auto text-red-600 hover:text-gray-600" onClick={()=>UpdateChart()}>Reshuffle colors</button>}
 
     {/* BUTTON TO UPDATE */}
     {

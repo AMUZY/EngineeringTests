@@ -182,10 +182,9 @@ const RightPane = ({ pagename, results, homepageProjects ,projects, resultinfo, 
     })
     setImgLoader(true);
   }
-
-  
+    
   return (
-    <div className="w-full h-full flex flex-col p-1">
+    <div className="w-full flex-grow flex flex-col p-1">
     <ToastContainer />
     {modal ? <TwoBtnModal warningheading ={warningheading} warning={warning} action={action} modal={modal} ShowModal={ShowModal} CloseModal={CloseModal} MainAction={warningheading === 'Delete Result' ? DelResult : DelProject}/> : null}
       <div className="flex items-center justify-between h-[10%] mb-2 rounded-2xl bg-white p-2">
@@ -260,15 +259,15 @@ const RightPane = ({ pagename, results, homepageProjects ,projects, resultinfo, 
               resultsshow && 
               <div className="w-full h-full">
                 <div className="w-full flex flex-row items-center py-6 px-2 justify-between">
-                  <p className="tbasebold black">Test Title </p>
-                  <div className="flex flex-row justify-between">
-                    <p className="tbasebold w-28 flex items-center text-center mx-4 black">Test Type</p>
+                    <p className="tbasebold black">Test Title </p>
+                  <div className="flex flex-row xl:w-[700px] justify-between">
+                    <p className="tbasebold w-28 text-left mx-4 black">Test Type</p>
                     <span className="w-[1px] bg-gray-400"></span>
-                    <p className="tbasebold w-28 flex items-center text-center mx-4 black">Project Name</p>
+                    <p className="tbasebold w-28 text-left mx-4 black">Project Name</p>
                     <span className="w-[1px] bg-gray-400"></span>
-                    <p className="tbasebold w-28 flex items-center text-center mx-4 black">Date Created</p>
+                    <p className="tbasebold w-28 text-left mx-4 black">Date Created</p>
                     <span className="w-[1px] bg-gray-400"></span>
-                    <p className="tbasebold w-28 flex items-center text-center mx-4 black">Time Created</p>
+                    <p className="tbasebold w-28 text-left mx-4 black">Time Created</p>
                   </div>
                 </div>
                 <div className="w-full flex-col">
@@ -299,11 +298,11 @@ const RightPane = ({ pagename, results, homepageProjects ,projects, resultinfo, 
           {projects.length > 0 &&
             <div className="w-full h-full">
               <div className="w-full flex flex-row items-center py-6 px-2 justify-between">
-                <p className="tbasebold black">Project Title </p>
-                <div className="flex flex-row justify-between">
-                  <p className="tbasebold w-28 flex items-center text-center mx-2 black">Date Created</p>
+                  <p className="tbasebold black">Project Title </p>
+                <div className="flex flex-row justify-between xl:w-[350px]">
+                  <p className="tbasebold w-28 flex items-center text-center mx-4 black">Date Created</p>
                   <span className="w-[1px] bg-gray-400"></span>
-                  <p className="tbasebold w-28 flex items-center text-center mx-2 black">Time Created</p>
+                  <p className="tbasebold w-28 flex items-center text-center mx-4 black">Time Created</p>
                 </div>
               </div>
               <div className="w-full flex-col">
@@ -326,7 +325,7 @@ const RightPane = ({ pagename, results, homepageProjects ,projects, resultinfo, 
       {/* FROM /DASHBOARD/MYPROJECTS/PROJECTID */}
         {projectPageInfo && (
           <div className="w-full max-h-full flex flex-row flex-grow rounded-2xl">
-            <div className="w-[50%] p-4 max-h-full rounded-2xl flex flex-col bg-white">
+            <div className="w-[50%] p-4 rounded-2xl flex flex-col bg-white">
               <div className="mb-3">
                 <h2 className="tbasebold mb-4">Project Title :</h2>  
                 <p className="my-2 rounded-2xl p-3 bg-gray-200">{projectPageInfo.title}</p>
@@ -357,7 +356,7 @@ const RightPane = ({ pagename, results, homepageProjects ,projects, resultinfo, 
             </div>
             <div className="ml-4 flex-grow max-h-full">
               {projectPageInfo.results.length > 0 &&
-                <div className="pr-4 w-full h-full overflow-y-scroll">
+                <div className={`${projectPageInfo.results.length > 1 ? "pr-4 " : " "}w-full h-full overflow-y-scroll`}>
                   {
                     projectPageInfo.results.map((result)=>{
                       return (
@@ -420,9 +419,9 @@ const RightPane = ({ pagename, results, homepageProjects ,projects, resultinfo, 
                   {/* THE CHARTs */}
                   {
                     (resultinfo.chosenchart == 'Bar Chart') ? 
-                    <BarChart title = {resultinfo.title} subtitle = {resultinfo.subtitle} labels={resultinfo.labels} comps={resultinfo.comps} table={resultinfo.table} size={{height : 50 , width : 100}}/>
+                    <BarChart shuffle={true} title = {resultinfo.title} subtitle = {resultinfo.subtitle} labels={resultinfo.labels} comps={resultinfo.comps} table={resultinfo.table} size={{height : 50 , width : 100}}/>
                     : 
-                    <LineChart title = {resultinfo.title} subtitle = {resultinfo.subtitle} labels={resultinfo.labels} comps={resultinfo.comps} table={resultinfo.table} size={{height : 50 , width : 100}}/>
+                    <LineChart shuffle={true} title = {resultinfo.title} subtitle = {resultinfo.subtitle} labels={resultinfo.labels} comps={resultinfo.comps} table={resultinfo.table} size={{height : 50 , width : 100}}/>
                   }
                   {/* DOWNLOAD AS PDF OR IMAGE */}
                   <div className="flex w-max mx-auto">
@@ -442,7 +441,7 @@ const RightPane = ({ pagename, results, homepageProjects ,projects, resultinfo, 
               
             </div>
             {/* EDIT AND DELETE BUTTON */}
-            <div className="mx-auto flex">
+            <div className="mx-auto mb-2 flex">
                 <FillBLueBtn src={"/assets/svgs/edit_white.svg"} href={`/user/edit-result/${session?.user._id || session?.user.id}/${projectinfo._id}/${resultinfo.id}`} text={"EDIT RESULT"} addclass={"mx-4"}/>
                 <CanDelBtn action={()=>{
                   setWarningHead(`Delete Result`)
@@ -463,6 +462,8 @@ const RightPane = ({ pagename, results, homepageProjects ,projects, resultinfo, 
       </div>
     </div>
   );
+
 };
+
 
 export default RightPane;

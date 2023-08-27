@@ -88,7 +88,7 @@ const page = ({params}) => {
                 labels,comps,title,subtitle,table,date,time,chosentest,chosenunit,chosenchart,chosenproject,conclusion
             }).then(()=>{
                 res()
-                router.push(`/dashboard/home`)
+                router.push(`/user/dashboard/home`)
             }).catch(()=>{
                 rej()
             })

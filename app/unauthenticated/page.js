@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation'
 const Unauthenticated = () => {
     const router = useRouter()
     setTimeout(()=>{
-        router.push("/login")
+        router.push("/user/login")
     }, 2000)
 
   return (

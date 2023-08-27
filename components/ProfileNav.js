@@ -137,7 +137,7 @@ const ProfileNav = () => {
               return navbtn(item);
             })}
           </div>
-          <p className="tbase"> Opened results will show below </p>
+          {/* <p className="tbase"> Opened results will show below </p> */}
         </div>
         
         <div className="flex flex-col w-full h-max">

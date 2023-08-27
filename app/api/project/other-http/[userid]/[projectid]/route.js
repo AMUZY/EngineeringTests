@@ -3,6 +3,12 @@ import { connectToDB } from "@app/utils/database";
 import { NextResponse } from "next/server";
 import {v4 as uuidv4} from 'uuid'
 
+const used = process.memoryUsage();
+for (let key in used) {
+  console.log(`${key} ${Math.round(used[key] / 1024 / 1024 * 100) / 100} MB`);
+}
+
+
 export const PUT = async(req, {params})=>{
     try {
         await connectToDB().then((info)=>{
