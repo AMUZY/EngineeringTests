@@ -6,18 +6,18 @@ import 'react-toastify/dist/ReactToastify.css';
 import { useEffect,useState } from 'react'
 import axios from 'axios'
 import { promisetoast } from '@toasts/Toasts';
-import { getSession } from 'next-auth/react'
+import { getSession,useSession } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
 
 
 const Dashboard = () => {
+  const [authstate,setAuthState] = useState(false)
+  const router = useRouter()
   const [projects,setProjects] = useState([])
   const {data : session} = useSession()
   const [sess,setSess] = useState()
   // DO NOT DELETE SESS
   
-  const [authstate,setAuthState] = useState(false)
-  const router = useRouter()
   function CheckAuth(){
     const session = getSession()
     session.then((status)=>{
@@ -29,8 +29,6 @@ const Dashboard = () => {
     }).catch(()=>{})
   }
   CheckAuth()
-
-
 
   useEffect(()=>{
     if((session?.user._id && !sess) || (session?.user.id && !sess)){
