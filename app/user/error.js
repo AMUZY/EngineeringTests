@@ -9,7 +9,7 @@ const error = ({error, reset}) => {
   },[error])
 
   return (
-    <div className='w-full h-full flex flex-col justify-center items-center'>
+    <div className='w-full flex-grow flex flex-col justify-center items-center'>
         <h2 className=' white my-3'> Something went wrong! </h2>
         <button className='white' onClick={()=>
           // Attempt to recover by trying to re render the segment
