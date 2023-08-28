@@ -1,77 +1,86 @@
-import { compare,hash } from 'bcrypt'
+import { compare, hash } from "bcrypt";
 import { connectToDB } from "@app/utils/database";
-import User from '@models/user';
-import { NextResponse } from 'next/server';
+import User from "@models/user";
+import { NextResponse } from "next/server";
 
 const saltRounds = 10;
 
-export const GET = async (req, {params})=>{
-    try {
-        await connectToDB().then((info)=>{
-            if(info.status === (500 || 301)){
-                throw new Error("Redundant or disconnect")
-            }
-        }).catch((error)=>{throw new Error(error)})
-        
-        const LogUser = {
-            email : params.email,
-            password : params.password
+export const GET = async (req, { params }) => {
+  try {
+    await connectToDB()
+      .then((info) => {
+        if (info.status === (500 || 301)) {
+          throw new Error("Redundant or disconnect");
         }
+      })
+      .catch((error) => {
+        throw new Error(error);
+      });
 
-        const UserExists = await User.findOne({
-            email : LogUser.email
-        })
+    const LogUser = {
+      email: params.email,
+      password: params.password,
+    };
 
-        if(!UserExists){
-            return new NextResponse("Wrong Email or Password")
-        }
+    const UserExists = await User.findOne({
+      email: LogUser.email,
+    });
 
-        const result = await compare(LogUser.password , UserExists.password).catch((error)=>{
-            throw new Error(error)
-        })
-
-        if(result){
-            return new NextResponse("Logged In Successfully" , { status : 200 })
-        }else{
-            return new NextResponse("Password Mismatch" , { status : 404 })
-        }
-
-    } catch (error) {
-        return new NextResponse("Error in connection" , { status : 500 })
+    if (!UserExists) {
+      throw new Error("Wrong Email or Password");
     }
-}
 
-export const PUT = async(req, {params})=>{
-    try {
-        await connectToDB().then((info)=>{
-            if(info.status === (500 || 301)){
-                throw new Error("Redundant or disconnect")
-            }
-        }).catch((error)=>{throw new Error(error)});
+    const result = await compare(LogUser.password, UserExists.password).catch(
+      (error) => {
+        throw new Error(error);
+      }
+    );
 
-        const info = await req.json();
-        const hashed = await hash(info.password , saltRounds)
-
-        const user = await User.findOne({
-            email : params.email
-        })
-        const tempuser = {
-            _id : user._id,
-            email : user.email,
-            username : user.username,
-            SigninType : user.SigninType,
-            password : hashed,
-            __v : user.__v
-        }
-        await User.findOneAndReplace({
-            email : params.email
-        },tempuser)
-
-        return new NextResponse("Password change successful" , { status : 200 })
-    } catch (error) {
-        return new NextResponse("password update failed" , { status : 500 })
+    if (result) {
+      throw new Error("Logged In Successfully");
+    } else {
+      throw new Error("Password Mismatch");
     }
-}
+  } catch (error) {
+    return new NextResponse(error, { status: 500 });
+  }
+};
 
+export const PUT = async (req, { params }) => {
+  try {
+    await connectToDB()
+      .then((info) => {
+        if (info.status === (500 || 301)) {
+          throw new Error("Redundant or disconnect");
+        }
+      })
+      .catch((error) => {
+        throw new Error(error);
+      });
 
+    const info = await req.json();
+    const hashed = await hash(info.password, saltRounds);
 
+    const user = await User.findOne({
+      email: params.email,
+    });
+    const tempuser = {
+      _id: user._id,
+      email: user.email,
+      username: user.username,
+      SigninType: user.SigninType,
+      password: hashed,
+      __v: user.__v,
+    };
+    await User.findOneAndReplace(
+      {
+        email: params.email,
+      },
+      tempuser
+    );
+
+    return new NextResponse("Password change successful", { status: 200 });
+  } catch (error) {
+    return new NextResponse("password update failed", { status: 500 });
+  }
+};
