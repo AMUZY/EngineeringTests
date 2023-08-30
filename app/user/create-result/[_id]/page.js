@@ -244,7 +244,7 @@ const page = ({ params }) => {
   }, [date, time]);
 
   return (
-    <div className="w-full h-full p-6">
+    <div className="w-full h-full p-2 lg:p-6">
       <ToastContainer />{" "}
       {allprojects.length > 0 ? (
         <div className="flex-grow dashbox overflow-y-scroll rounded-3xl p-3 flex flex-col justify-between">

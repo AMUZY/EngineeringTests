@@ -203,7 +203,7 @@ const RightPane = ({
 
   return (
     <div className="w-full flex-grow flex flex-col p-1">
-      <ToastContainer className="hidden lg:block" />
+      <ToastContainer />
       {modal ? (
         <TwoBtnModal
           warningheading={warningheading}
@@ -453,7 +453,7 @@ const RightPane = ({
                             labels={result.labels}
                             comps={result.comps}
                             table={result.table}
-                            size={{ height: 50, width: 100 }}
+                            size={{ height: 200, width: 400 }}
                           />
                         ) : (
                           <LineChart
@@ -462,7 +462,7 @@ const RightPane = ({
                             labels={result.labels}
                             comps={result.comps}
                             table={result.table}
-                            size={{ height: 50, width: 100 }}
+                            size={{ height: 200, width: 400 }}
                           />
                         )}
                         <div className="w-full">

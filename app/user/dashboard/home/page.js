@@ -47,7 +47,6 @@ const Dashboard = () => {
 
   return (
     <>
-      <ToastContainer className="hidden lg:block" />
       <RightPane pagename="All Results" homepageProjects={projects} />
     </>
   );

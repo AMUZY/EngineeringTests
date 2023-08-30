@@ -311,7 +311,7 @@ const page = ({ params }) => {
       <ToastContainer />
       {show && (
         <div>
-          <div className="w-full h-full p-6">
+          <div className="w-full h-full p-2 lg:p-6">
             <div className="flex-grow h-full dashbox overflow-y-scroll rounded-3xl p-3 flex flex-col justify-between">
               <div className="flex flex-col lg:flex-row h-full w-full">
                 <div className="flex flex-col w-full lg:w-1/2 lg:p-3">

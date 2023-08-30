@@ -45,7 +45,6 @@ const page = ({ params }) => {
 
   return (
     <>
-      <ToastContainer className="hidden lg:block" />
       <RightPane pagename="My Projects" projectPageInfo={project} />
     </>
   );

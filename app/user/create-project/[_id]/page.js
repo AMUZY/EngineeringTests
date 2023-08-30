@@ -81,7 +81,7 @@ const page = ({ params }) => {
   }, [date, time]);
 
   return (
-    <div className="w-full h-full p-6">
+    <div className="w-full h-full p-2 lg:p-6">
       <ToastContainer />
       <div className="flex-grow h-full dashbox overflow-y-scroll rounded-3xl p-3 flex flex-col justify-between">
         <div className="flex flex-col h-full w-full lg:p-6 ">
