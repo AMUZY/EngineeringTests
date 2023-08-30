@@ -430,12 +430,12 @@ const RightPane = ({
                 />
               </div>
             </div>
-            <div className="lg:ml-4 lg:order-2 flex-grow max-h-full">
+            <div className="lg:ml-4 w-full lg:order-2 lg:w-[50%] flex-grow max-h-full">
               {projectPageInfo.results.length > 0 && (
                 <div
                   className={`${
                     projectPageInfo.results.length > 1
-                      ? "overflow-y-scroll pr-4 "
+                      ? "flex flex-row overflow-x-scroll h-full lg:flex-col lg:overflow-y-scroll pr-0 lg:pr-2 "
                       : " "
                   }w-full h-full`}
                 >
@@ -444,7 +444,7 @@ const RightPane = ({
                       <Link
                         key={uuidv4()}
                         href={`/user/dashboard/myprojects/${projectPageInfo._id}/${result.id}`}
-                        className="flex flex-col py-6 px-8 mb-2 xl:mb-3 bg-white h-max rounded-2xl w-full hover:scale-95 transition-all"
+                        className="flex flex-col py-6 px-8 mx-1 lg:mx-0 mb-2 xl:mb-3 bg-white h-96 lg:h-max rounded-2xl w-96 lg:w-full hover:scale-95 transition-all"
                       >
                         {result.chosenchart == "Bar Chart" ? (
                           <BarChart

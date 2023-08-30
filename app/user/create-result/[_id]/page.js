@@ -12,6 +12,7 @@ import TextField from "@mui/material/TextField";
 import { NoDuplicate } from "@components/NoDuplicate";
 import { inputstyle, labelstyle, inputcont } from "@components/TestTypes";
 import Image from "next/image";
+import { AutoFull, AutoWidth } from "@components/TestTypes";
 import { SaveBtn, NormalBtn, CanDelBtn } from "@components/Button";
 import axios from "axios";
 import { useRouter } from "next/navigation";
@@ -246,9 +247,9 @@ const page = ({ params }) => {
     <div className="w-full h-full p-6">
       <ToastContainer />{" "}
       {allprojects.length > 0 ? (
-        <div className="flex-grow h-full dashbox overflow-y-scroll rounded-3xl p-3 flex flex-col justify-between">
-          <div className="flex flex-row h-full w-full">
-            <div className="flex flex-col w-1/2 p-3">
+        <div className="flex-grow dashbox overflow-y-scroll rounded-3xl p-3 flex flex-col justify-between">
+          <div className="flex flex-col lg:flex-row h-full w-full">
+            <div className="flex flex-col w-full lg:w-1/2 lg:p-3">
               <div className="flex items-center">
                 <button
                   className="p-2 w-max flex flex-row items-center hover:scale-125 transition-all"
@@ -310,11 +311,12 @@ const page = ({ params }) => {
                       onChange={(event, value) => {
                         AddColumn(value);
                       }}
+                      fullWidth={AutoFull.state}
                       disabled={disabled}
                       disablePortal
                       id="combo-box-demo"
                       options={columnoptions}
-                      sx={{ width: 300 }}
+                      sx={AutoWidth}
                       renderOption={(props, option) => {
                         return (
                           <li {...props} key={option}>
@@ -335,11 +337,12 @@ const page = ({ params }) => {
                       onChange={(event, value) => {
                         AddRow(value);
                       }}
+                      fullWidth={AutoFull.state}
                       disabled={disabled}
                       disablePortal
                       id="combo-box-demo"
                       options={rowoptions}
-                      sx={{ width: 300 }}
+                      sx={AutoWidth}
                       renderOption={(props, option) => {
                         return (
                           <li {...props} key={option}>
@@ -368,11 +371,12 @@ const page = ({ params }) => {
                           setChosenTest("");
                         }
                       }}
+                      fullWidth={AutoFull.state}
                       disabled={disabled}
                       disablePortal
                       id="combo-box-demo"
                       options={testTypes}
-                      sx={{ width: 300 }}
+                      sx={AutoWidth}
                       renderOption={(props, option) => {
                         return (
                           <li {...props} key={option.id}>
@@ -393,11 +397,12 @@ const page = ({ params }) => {
                           setChosenUnit("");
                         }
                       }}
+                      fullWidth={AutoFull.state}
                       disabled={disabled}
                       disablePortal
                       id="combo-box-demo"
                       options={testobj ? testobj.units : []}
-                      sx={{ width: 300 }}
+                      sx={AutoWidth}
                       renderOption={(props, option) => {
                         return (
                           <li {...props} key={option}>
@@ -420,11 +425,12 @@ const page = ({ params }) => {
                           setChosenChart("");
                         }
                       }}
+                      fullWidth={AutoFull.state}
                       disabled={disabled}
                       disablePortal
                       id="combo-box-demo"
                       options={chartTypes}
-                      sx={{ width: 300 }}
+                      sx={AutoWidth}
                       renderOption={(props, option) => {
                         return (
                           <li {...props} key={option}>
@@ -452,11 +458,12 @@ const page = ({ params }) => {
                         }
                         console.log(chosenid);
                       }}
+                      fullWidth={AutoFull.state}
                       disabled={disabled}
                       disablePortal
                       id="combo-box-demo"
                       options={allprojects}
-                      sx={{ width: 300 }}
+                      sx={AutoWidth}
                       renderOption={(props, option) => {
                         return (
                           <li {...props} key={option.label}>
@@ -517,102 +524,107 @@ const page = ({ params }) => {
                       } row(s)`}{" "}
                     </p>
                   ) : null}
-
-                  {/* TABLE */}
-                  <div className="table mt-4 mx-auto">
-                    <div>
-                      {columns.length > 0 ? (
-                        <div className="entire_column">
-                          <div className="column_cell"></div>
-                          {columns.map((column) => {
-                            return (
-                              <input
-                                onBlur={(e) => {
-                                  if (CheckIfSettingSaved()) {
-                                    let tempstr = e.target.value;
-                                    labels[columns.indexOf(column)] = tempstr;
-                                  }
-                                }}
-                                key={uuidv4()}
-                                onChange={() => {}}
-                                className="column_cell"
-                                placeholder={`wt% ${
-                                  columns.indexOf(column) + 1
-                                }`}
-                              />
-                            );
-                          })}
-                        </div>
-                      ) : (
-                        <></>
-                      )}
-                    </div>
-                    <div className="rows">
-                      {rows.map((row) => {
-                        let temprowarray = new Array(row.length);
-                        return (
-                          <div key={uuidv4()} className="entire_row">
-                            <input
-                              onBlur={(e) => {
-                                if (CheckIfSettingSaved()) {
-                                  let tempstr = e.target.value;
-                                  comps[rows.indexOf(row)] = tempstr;
-                                }
-                              }}
-                              className="row_cell"
-                              onChange={() => {}}
-                              placeholder={`reinf ${rows.indexOf(row) + 1}`}
-                            />
-                            {row.map((item) => {
+                  {/* MAIN TABLE OVERFLOW DIV */}
+                  <div className="overflow-y-scroll w-full">
+                    {/* TABLE */}
+                    <div className="table mt-4 mx-auto">
+                      <div>
+                        {columns.length > 0 ? (
+                          <div className="entire_column">
+                            <div className="column_cell"></div>
+                            {columns.map((column) => {
                               return (
                                 <input
                                   onBlur={(e) => {
                                     if (CheckIfSettingSaved()) {
-                                      let tempstr = Number(e.target.value);
-                                      if (table[0]) {
-                                        if (
-                                          temprowarray[row.indexOf(item)] !=
-                                          tempstr
-                                        ) {
-                                          if (
-                                            typeof NoDuplicate(
-                                              tempstr,
-                                              table
-                                            ) == "number"
-                                          ) {
-                                            temprowarray[row.indexOf(item)] =
-                                              NoDuplicate(tempstr, table);
-                                            table[rows.indexOf(row)] =
-                                              temprowarray;
-                                          } else {
-                                            failuretoast(
-                                              "Value already exists in a cell"
-                                            );
-                                            e.target.value = 0;
-                                            temprowarray[row.indexOf(item)] = 0;
-                                            table[rows.indexOf(row)] =
-                                              temprowarray;
-                                          }
-                                        }
-                                      } else {
-                                        temprowarray[row.indexOf(item)] =
-                                          tempstr;
-                                        table[rows.indexOf(row)] = temprowarray;
-                                      }
+                                      let tempstr = e.target.value;
+                                      labels[columns.indexOf(column)] = tempstr;
                                     }
                                   }}
                                   key={uuidv4()}
-                                  className="row_input"
                                   onChange={() => {}}
-                                  placeholder={`col ${
-                                    row.indexOf(item) + 1
-                                  }, row ${rows.indexOf(row) + 1}`}
+                                  className="column_cell"
+                                  placeholder={`wt% ${
+                                    columns.indexOf(column) + 1
+                                  }`}
                                 />
                               );
                             })}
                           </div>
-                        );
-                      })}
+                        ) : (
+                          <></>
+                        )}
+                      </div>
+                      <div className="rows">
+                        {rows.map((row) => {
+                          let temprowarray = new Array(row.length);
+                          return (
+                            <div key={uuidv4()} className="entire_row">
+                              <input
+                                onBlur={(e) => {
+                                  if (CheckIfSettingSaved()) {
+                                    let tempstr = e.target.value;
+                                    comps[rows.indexOf(row)] = tempstr;
+                                  }
+                                }}
+                                className="row_cell"
+                                onChange={() => {}}
+                                placeholder={`reinf ${rows.indexOf(row) + 1}`}
+                              />
+                              {row.map((item) => {
+                                return (
+                                  <input
+                                    onBlur={(e) => {
+                                      if (CheckIfSettingSaved()) {
+                                        let tempstr = Number(e.target.value);
+                                        if (table[0]) {
+                                          if (
+                                            temprowarray[row.indexOf(item)] !=
+                                            tempstr
+                                          ) {
+                                            if (
+                                              typeof NoDuplicate(
+                                                tempstr,
+                                                table
+                                              ) == "number"
+                                            ) {
+                                              temprowarray[row.indexOf(item)] =
+                                                NoDuplicate(tempstr, table);
+                                              table[rows.indexOf(row)] =
+                                                temprowarray;
+                                            } else {
+                                              failuretoast(
+                                                "Value already exists in a cell"
+                                              );
+                                              e.target.value = 0;
+                                              temprowarray[
+                                                row.indexOf(item)
+                                              ] = 0;
+                                              table[rows.indexOf(row)] =
+                                                temprowarray;
+                                            }
+                                          }
+                                        } else {
+                                          temprowarray[row.indexOf(item)] =
+                                            tempstr;
+                                          table[rows.indexOf(row)] =
+                                            temprowarray;
+                                        }
+                                      }
+                                    }}
+                                    key={uuidv4()}
+                                    className="row_input"
+                                    onChange={() => {}}
+                                    placeholder={`col ${
+                                      row.indexOf(item) + 1
+                                    }, row ${rows.indexOf(row) + 1}`}
+                                  />
+                                );
+                              })}
+                            </div>
+                          );
+                        })}
+                      </div>
                     </div>
                   </div>
 
@@ -621,7 +633,7 @@ const page = ({ params }) => {
                 </main>
               </div>
             </div>
-            <div className="flex flex-col w-1/2 p-3 h-full overflow-y-scroll justify-between">
+            <div className="flex flex-col w-full lg:w-1/2 lg:p-3 overflow-y-scroll justify-between">
               <p className="tbase black"> Preview :</p>
               {/* THE CHARTs */}
               {chosenchart == "Bar Chart" ? (

@@ -587,7 +587,7 @@ const page = ({ params }) => {
                         action={DisableAutoComplete}
                         addclass="mx-2"
                       />
-                      <div>
+                      <div className="overflow-y-scroll w-full">
                         {/* TABLE */}
                         <div className="table mt-4 mx-auto">
                           <div className="entire_column">

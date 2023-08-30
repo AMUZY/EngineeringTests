@@ -1,161 +1,173 @@
 .success-progress-bar {
-    --toastify-color-progress-light: #4cd964;
+  --toastify-color-progress-light: #4cd964;
 }
 
 .failure-progress-bar {
-    --toastify-color-progress-light: #ff2d55;
+  --toastify-color-progress-light: #ff2d55;
 }
 
-caption{
-    color: rgba(83,52,213,1);
-    font-size: calc(24*0.06)*1rem;
-    font-weight: bold;
-    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-    margin: 2px;
+caption {
+  color: rgba(83, 52, 213, 1);
+  font-size: calc(24 * 0.06) * 1rem;
+  font-weight: bold;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+  margin: 2px;
 }
-table{
-    border-radius: 10px;
-}thead{
-    td{
-        background-color: rgba(83,52,213,1);
-    }th{
-        background-color: rgba(83,52,213,1);
+
+table {
+  border-radius: 10px;
+}
+thead {
+  td {
+    background-color: rgba(83, 52, 213, 1);
+  }
+  th {
+    background-color: rgba(83, 52, 213, 1);
+  }
+}
+tbody {
+  border: 1px solid white;
+  th {
+    background-color: rgba(83, 52, 213, 1);
+  }
+  td {
+    background-color: rgba(83, 52, 213, 0.8);
+    input {
+      background-color: transparent;
+      width: 100%;
+      border: none;
+      text-align: center;
     }
-}tbody{
-    border: 1px solid white;
-    th{
-        background-color: rgba(83,52,213,1);
+    input:focus {
+      outline-color: none;
+      outline-style: none;
+      outline-offset: none;
     }
-    td{
-        background-color: rgba(83,52,213,.8);
-        input{
-            background-color: transparent;
-            width: 100%;
-            border: none;
-            text-align: center;
-        }
-        input:focus {
-            outline-color: none;
-            outline-style: none;
-            outline-offset: none;
-        }
-    }
-}th,td{
+  }
+}
+th,
+td {
+  text-align: center;
+  min-width: 100px;
+  color: white;
+  margin: 2px;
+  border: 1px solid white;
+  padding: 0.8rem;
+}
+tr {
+  button {
+    padding: auto;
+    border: none;
     text-align: center;
-    min-width: 100px;
-    color: white;
-    margin: 2px;
-    border: 1px solid white;
-    padding: .8rem;
-}
-tr{
-    button{
-        padding: auto;
-        border: none;
-        text-align: center;
-        font-size: large;
-    }
+    font-size: large;
+  }
 }
 
 .colrow {
-    h2{
-        text-align: center;
-        width: 100%;
-    }
-    button{
-        min-width: 150px;
-        text-align: center;
-    }
+  h2 {
+    text-align: center;
+    width: 100%;
+  }
+  button {
+    min-width: 150px;
+    text-align: center;
+  }
 }
 
-$tablewidth : 'max-content';
-$cellheight : 50px;
-$cellwidth : 150px;
+$tablewidth: "max-content";
+$cellheight: 40px;
+$cellwidth: 90px;
 
-.entire_column{
+@media only screen and (min-width: "768px") {
+  $tablewidth: "max-content";
+  $cellheight: 50px;
+  $cellwidth: 120px;
+}
+
+.entire_column {
+  display: flex;
+  flex-flow: row nowrap;
+  width: $tablewidth;
+  background-color: transparent;
+  .column_cell {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: black;
+    font-size: larger;
+    font-weight: 700;
+    height: $cellheight;
+    width: $cellwidth;
+    background-color: rgba(207, 207, 207, 0.5);
+    border: 1px solid black;
+    text-align: center;
+  }
+}
+.rows {
+  width: $tablewidth;
+  display: flex;
+  flex-flow: column nowrap;
+  .entire_row {
     display: flex;
     flex-flow: row nowrap;
-    width: $tablewidth;
     background-color: transparent;
-    .column_cell{
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        color: black;
-        font-size: larger;
-        font-weight: 700;
-        height: $cellheight;
-        width: $cellwidth;
-        background-color: rgba(207,207,207,.5);
-        border: 1px solid black;
-        text-align: center;
+    .row_cell {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: black;
+      font-size: larger;
+      font-weight: 700;
+      height: $cellheight;
+      width: $cellwidth;
+      background-color: rgba(207, 207, 207, 0.5);
+      border: 1px solid black;
+      text-align: center;
     }
+    .row_input {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: black;
+      height: $cellheight;
+      width: $cellwidth;
+      background-color: transparent;
+      border: 1px solid black;
+      text-align: center;
+    }
+  }
 }
-.rows{
-    width: $tablewidth;
+.rows2 {
+  width: $tablewidth;
+  display: flex;
+  flex-flow: row nowrap;
+  .row_cell {
     display: flex;
-    flex-flow: column nowrap;
-    .entire_row{
-        display: flex;
-        flex-flow: row nowrap;
-        background-color: transparent;
-        .row_cell{
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: black;
-            font-size: larger;
-            font-weight: 700;
-            height: $cellheight;
-            width: $cellwidth;
-            background-color: rgba(207,207,207,.5);
-            border: 1px solid black;
-            text-align: center;
-        }
-        .row_input{
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            color: black;
-            height: $cellheight;
-            width: $cellwidth;
-            background-color: transparent;
-            border: 1px solid black;
-            text-align: center;
-        }
-    }
-}
-.rows2{
-    width: $tablewidth;
+    align-items: center;
+    justify-content: center;
+    color: black;
+    font-size: larger;
+    font-weight: 700;
+    height: $cellheight;
+    width: $cellwidth;
+    background-color: rgba(207, 207, 207, 0.5);
+    border: 1px solid black;
+    text-align: center;
+  }
+  .entire_row {
     display: flex;
     flex-flow: row nowrap;
-    .row_cell{
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        color: black;
-        font-size: larger;
-        font-weight: 700;
-        height: $cellheight;
-        width: $cellwidth;
-        background-color: rgba(207,207,207,.5);
-        border: 1px solid black;
-        text-align: center;
+    background-color: transparent;
+    .row_input {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: black;
+      height: $cellheight;
+      width: $cellwidth;
+      background-color: transparent;
+      border: 1px solid black;
+      text-align: center;
     }
-    .entire_row{
-        display: flex;
-        flex-flow: row nowrap;
-        background-color: transparent;
-        .row_input{
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            color: black;
-            height: $cellheight;
-            width: $cellwidth;
-            background-color: transparent;
-            border: 1px solid black;
-            text-align: center;
-        }
-    }
+  }
 }
