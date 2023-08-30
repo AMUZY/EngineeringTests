@@ -5,7 +5,7 @@ import Loader from "@components/Loader";
 const loading = () => {
   return (
     <div className="w-full flex-grow flex justify-center items-center">
-      <Loader />
+      <Loader main={true} />
     </div>
   );
 };

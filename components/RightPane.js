@@ -203,7 +203,7 @@ const RightPane = ({
 
   return (
     <div className="w-full flex-grow flex flex-col p-1">
-      <ToastContainer />
+      <ToastContainer className="hidden lg:block" />
       {modal ? (
         <TwoBtnModal
           warningheading={warningheading}
