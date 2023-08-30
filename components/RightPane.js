@@ -293,7 +293,7 @@ const RightPane = ({
           <div className="w-full flex flex-col py-2 px-4 flex-grow rounded-2xl bg-white">
             {resultsshow && (
               <div className="w-full h-full">
-                <div className="w-full flex flex-row items-center py-2 xl:py-6 px-2 justify-between">
+                <div className="w-full flex flex-row items-center py-4 xl:py-6 px-2 justify-between">
                   <p className="tbasebold black mr-2 xl:mr-0">Test Title </p>
                   <div className="flex flex-row sm:w-[500px] md:w-[550px] xl:w-[700px] justify-between">
                     <span className="xl:hidden w-[1px] bg-gray-400"></span>
@@ -304,12 +304,12 @@ const RightPane = ({
                     <p className="tbasebold xl:w-28 text-left mx-2 md:mx-4 black">
                       Project Name
                     </p>
-                    <span className="w-[1px] bg-gray-400"></span>
-                    <p className="tbasebold xl:w-28 text-left mx-2 md:mx-4 black">
+                    <span className="hidden lg:block w-[1px] bg-gray-400"></span>
+                    <p className="hidden lg:block tbasebold xl:w-28 text-left mx-2 md:mx-4 black">
                       Date Created
                     </p>
-                    <span className="w-[1px] bg-gray-400"></span>
-                    <p className="tbasebold xl:w-28 text-left mx-2 md:mx-4 black">
+                    <span className="hidden lg:block w-[1px] bg-gray-400"></span>
+                    <p className="hidden lg:block tbasebold xl:w-28 text-left mx-2 md:mx-4 black">
                       Time Created
                     </p>
                   </div>
@@ -345,7 +345,7 @@ const RightPane = ({
               <div className="w-full h-full">
                 <div className="w-full flex flex-row items-center py-2 xl:py-6 px-2 justify-between">
                   <p className="tbasebold black mr-4 xl:mr-0">Project Title </p>
-                  <div className="flex flex-row justify-between w-80 sm:w-[200px] md:w-[250px] xl:w-[350px]">
+                  <div className="flex flex-row justify-between w-76 sm:w-[180px] md:w-[250px] xl:w-[350px]">
                     <span className="xl:hidden w-[1px] bg-gray-400"></span>
                     <p className="tbasebold xl:w-28 flex items-center text-center mx-4 black">
                       Date Created

@@ -11,7 +11,7 @@ const ResultInfo = ({ result, projectid, resultid }) => {
       onClick={() => {
         router.push(`/user/dashboard/myprojects/${projectid}/${resultid}`);
       }}
-      className="cursor-pointer w-full resultinfo flex flex-row items-center py-2 xl:py-6 px-2 justify-between hover:bg-gray-100"
+      className="cursor-pointer w-full resultinfo flex flex-row items-center py-4 xl:py-6 px-2 justify-between hover:bg-gray-100"
     >
       <p className="block flex-shrink tbase black overflow-hidden whitespace-nowrap overflow-ellipsis">
         {result.title}
@@ -23,10 +23,10 @@ const ResultInfo = ({ result, projectid, resultid }) => {
         <p className="text-left mx-2 md:mx-4 xl:w-28 tbase black overflow-hidden whitespace-nowrap overflow-ellipsis">
           {result.chosenproject}
         </p>
-        <p className="text-left mx-2 md:mx-4 xl:w-28 tbase black">
+        <p className="hidden lg:block text-left mx-2 md:mx-4 xl:w-28 tbase black">
           {result.date}
         </p>
-        <p className="text-left mx-2 md:mx-4 xl:w-28 tbase black">
+        <p className="hidden lg:block text-left mx-2 md:mx-4 xl:w-28 tbase black">
           {result.time}
         </p>
       </div>

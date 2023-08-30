@@ -15,7 +15,7 @@ const ProjectInfo = ({ project }) => {
       <p className="block  mr-4 xl:mr-0 flex-shrink tbase black overflow-ellipsis">
         {project.title}
       </p>
-      <div className="flex flex-row items-center justify-between w-80 sm:w-[200px] md:w-[250px] xl:w-[350px]">
+      <div className="flex flex-row items-center justify-between w-76 sm:w-[180px] md:w-[250px] xl:w-[350px]">
         <p className="text-left xl:w-28 tbase mx-4 black">{project.date}</p>
         <p className="text-left xl:w-28 tbase mx-4 black">{project.time}</p>
       </div>
