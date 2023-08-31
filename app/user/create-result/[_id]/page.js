@@ -245,7 +245,7 @@ const page = ({ params }) => {
 
   return (
     <div className="w-full h-full p-2 lg:p-6">
-      <ToastContainer />{" "}
+      <ToastContainer />
       {allprojects.length > 0 ? (
         <div className="flex-grow dashbox overflow-y-scroll rounded-3xl p-3 flex flex-col justify-between">
           <div className="flex flex-col lg:flex-row h-full w-full">
@@ -328,7 +328,7 @@ const page = ({ params }) => {
                         <TextField
                           {...params}
                           key={params}
-                          label="No of Columns"
+                          label="No of weight percentages"
                         />
                       )}
                     />
@@ -354,7 +354,7 @@ const page = ({ params }) => {
                         <TextField
                           {...params}
                           key={params}
-                          label="No of Rows"
+                          label="No of Reinforcements"
                         />
                       )}
                     />
@@ -542,7 +542,7 @@ const page = ({ params }) => {
                                     }
                                   }}
                                   key={uuidv4()}
-                                  onChange={() => {}}
+                                  value={labels[columns.indexOf(column)]}
                                   className="column_cell"
                                   placeholder={`wt% ${
                                     columns.indexOf(column) + 1
@@ -568,7 +568,7 @@ const page = ({ params }) => {
                                   }
                                 }}
                                 className="row_cell"
-                                onChange={() => {}}
+                                value={comps[rows.indexOf(row)]}
                                 placeholder={`reinf ${rows.indexOf(row) + 1}`}
                               />
                               {row.map((item) => {
@@ -614,7 +614,12 @@ const page = ({ params }) => {
                                     }}
                                     key={uuidv4()}
                                     className="row_input"
-                                    onChange={() => {}}
+                                    value={
+                                      table[rows.indexOf(row)] &&
+                                      table[rows.indexOf(row)][
+                                        row.indexOf(item)
+                                      ]
+                                    }
                                     placeholder={`col ${
                                       row.indexOf(item) + 1
                                     }, row ${rows.indexOf(row) + 1}`}
@@ -661,7 +666,7 @@ const page = ({ params }) => {
           </div>
           <div className="flex mx-auto mt-8 mb-16">
             <SaveBtn
-              text="Save Result"
+              text="Done"
               action={() => {
                 if (comps.length > 0 && table.length > 0) {
                   SaveDateAndTime();

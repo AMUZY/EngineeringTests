@@ -144,7 +144,7 @@ const page = ({ params }) => {
         </div>
         <div className="flex mx-auto mt-4 mb-16">
           <SaveBtn
-            text="Save Project"
+            text="Done"
             action={() => {
               if (title.length > 0 && desc.length > 0) {
                 SaveDateAndTime();

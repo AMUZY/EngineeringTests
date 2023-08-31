@@ -399,7 +399,7 @@ const page = ({ params }) => {
                             <TextField
                               {...params}
                               key={params}
-                              label="No of Columns"
+                              label="No of weight percentages"
                             />
                           )}
                         />
@@ -425,7 +425,7 @@ const page = ({ params }) => {
                             <TextField
                               {...params}
                               key={params}
-                              label="No of Rows"
+                              label="No of Reinforcements"
                             />
                           )}
                         />

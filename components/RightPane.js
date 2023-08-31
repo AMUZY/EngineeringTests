@@ -444,7 +444,7 @@ const RightPane = ({
                       <Link
                         key={uuidv4()}
                         href={`/user/dashboard/myprojects/${projectPageInfo._id}/${result.id}`}
-                        className="flex flex-col py-6 px-8 mx-1 lg:mx-0 mb-2 xl:mb-3 bg-white h-96 lg:h-max rounded-2xl w-96 lg:w-full hover:scale-95 transition-all"
+                        className="flex flex-col py-6 px-8 mx-1 lg:mx-0 mb-2 xl:mb-3 bg-white h-max lg:h-max rounded-2xl w-96 lg:w-full hover:scale-95 transition-all"
                       >
                         {result.chosenchart == "Bar Chart" ? (
                           <BarChart
