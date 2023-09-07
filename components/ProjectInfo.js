@@ -10,14 +10,14 @@ const ProjectInfo = ({ project }) => {
       onClick={() => {
         router.push(`/user/dashboard/myprojects/${project._id}`);
       }}
-      className="cursor-pointer w-full resultinfo flex flex-row items-center py-2 xl:py-6 px-2 justify-between hover:bg-gray-100"
+      className="cursor-pointer w-full resultinfo flex flex-row items-center py-2 xl:py-6 px-2 justify-between hover:bg-gray-100 dark:hover:bg-gray-400"
     >
-      <p className="block  mr-4 xl:mr-0 flex-shrink tbase black overflow-ellipsis">
+      <p className="block  mr-4 xl:mr-0 flex-shrink tbase t_col  overflow-ellipsis">
         {project.title}
       </p>
       <div className="flex flex-row items-center justify-between w-76 sm:w-[180px] md:w-[250px] xl:w-[350px]">
-        <p className="text-left xl:w-28 tbase mx-4 black">{project.date}</p>
-        <p className="text-left xl:w-28 tbase mx-4 black">{project.time}</p>
+        <p className="text-left xl:w-28 tbase t_col mx-4 ">{project.date}</p>
+        <p className="text-left xl:w-28 tbase t_col mx-4 ">{project.time}</p>
       </div>
     </div>
   );

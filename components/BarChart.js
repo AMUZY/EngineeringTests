@@ -76,6 +76,7 @@ const BarChart = ({
               title: {
                 display: true,
                 text: title ? title : "Title shows here",
+                color: "black",
                 font: {
                   size: 18,
                   family: "'Helvetica Neue', 'Helvetica', 'Arial', sans-serif",
@@ -85,6 +86,7 @@ const BarChart = ({
               subtitle: {
                 display: true,
                 text: subtitle ? subtitle : "SubTitle shows here",
+                color: "black",
                 position: "left",
                 font: {
                   size: 16,
@@ -94,6 +96,7 @@ const BarChart = ({
               },
               legend: {
                 labels: {
+                  color: "black",
                   font: {
                     size: 14,
                     family:
@@ -115,7 +118,7 @@ const BarChart = ({
 
   return (
     <div className="flex flex-col justify-center w-full">
-      <div className="capture w-full h-full flex justify-center items-center pb-4">
+      <div className="bg-white rounded-2xl capture w-full h-full flex justify-center items-center pb-4">
         {chart ? (
           <div className="w-full h-full">
             {chart}

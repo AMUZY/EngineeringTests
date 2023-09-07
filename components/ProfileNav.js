@@ -3,6 +3,7 @@ import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
+import { SVGS } from "@components/SVGs";
 import { v4 as uuidv4 } from "uuid";
 import { FillBLueBtn, FillBtn } from "./Button";
 import { signOut, useSession } from "next-auth/react";
@@ -21,20 +22,20 @@ const ProfileNav = () => {
     {
       name: "Home",
       path: "/home",
-      white: "/assets/svgs/home_white.svg",
-      black: "/assets/svgs/home_black.svg",
+      white: SVGS.home_white,
+      black: SVGS.home_black,
     },
     {
       name: "My Projects",
       path: "/myprojects",
-      white: "/assets/svgs/file_white.svg",
-      black: "/assets/svgs/file_black.svg",
+      white: SVGS.file_white,
+      black: SVGS.file_black,
     },
     {
       name: "Settings",
       path: `/settings/${session?.user.email}`,
-      white: "/assets/svgs/settings_white.svg",
-      black: "/assets/svgs/settings_black.svg",
+      white: SVGS.settings_white,
+      black: SVGS.settings_black,
     },
   ];
 
@@ -55,22 +56,12 @@ const ProfileNav = () => {
         }`}
         href={`/user/dashboard${item.path}`}
       >
-        <Image
-          className="mr-0 lg:mr-2"
-          width={24}
-          height={24}
-          src={
-            path.includes(`/user/dashboard${item.path}`)
-              ? item.white
-              : item.black
-          }
-          alt={`navigation button "${item.name}"`}
-        />
+        {path.includes(`/user/dashboard${item.path}`) ? item.white : item.black}
         <h2
           className={`${
             path.includes(`/user/dashboard${item.path}`)
-              ? "white tbase hidden lg:inline-block"
-              : "black tbase hidden lg:inline-block"
+              ? "active_nav hidden lg:inline-block"
+              : "unactive_nav hidden lg:inline-block"
           }`}
         >
           {item.name}
@@ -116,12 +107,7 @@ const ProfileNav = () => {
                   profilebtn ? setProfilebtn(false) : setProfilebtn(true);
                 }}
               >
-                <Image
-                  width={64}
-                  height={23}
-                  src="/assets/svgs/threedots.svg"
-                  alt="profile display button"
-                />
+                {SVGS.threedots}
                 <div
                   className={`absolute top-8 -right-px lg:right-0 w-max lg:w-52 h-max shadow-xl bg-white flex-col rounded-lg ${
                     profilebtn ? "flex" : "hidden"

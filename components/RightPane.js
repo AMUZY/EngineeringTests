@@ -16,6 +16,7 @@ import { promisetoast } from "@toasts/Toasts";
 import axios from "axios";
 import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
+import { SVGS } from "./SVGs";
 
 const RightPane = ({
   pagename,
@@ -217,7 +218,7 @@ const RightPane = ({
           }
         />
       ) : null}
-      <div className="flex items-center justify-between h-16 md:h-[10%] mb-0 md:mb-2 rounded-2xl bg-white p-2">
+      <div className="white_bg flex items-center justify-between h-16 md:h-[10%] mb-0 md:mb-2 rounded-2xl  p-2">
         <div className="flex flex-row items-center">
           <button
             className="p-2 w-max flex flex-row items-center hover:scale-125 transition-all"
@@ -225,31 +226,26 @@ const RightPane = ({
               window.history.back();
             }}
           >
-            <Image
-              src="/assets/svgs/backarrow_black.svg"
-              width={40}
-              height={42}
-              alt="engineeringtests logo transparent"
-            />
+            {SVGS.backarrow_black}
           </button>
           {/* PAGE TITLE AND CHILDREN TITLES */}
           <div className="hidden md:flex items-center">
-            {pagename && <a className="tsubtitle black">{pagename}</a>}
+            {pagename && <a className="tsubtitle t_col">{pagename}</a>}
             {projectPageInfo && (
               <a
                 href={`/user/dashboard/myprojects/${projectPageInfo._id}`}
-                className="tbase black mx-1 text-gray-500 overflow-ellipsis"
+                className="tbase t_col black mx-1 text-gray-500 overflow-ellipsis"
               >{` > ${projectPageInfo.title}`}</a>
             )}
             {resultinfo && (
               <>
                 <a
                   href={`/user/dashboard/myprojects/${projectinfo._id}`}
-                  className="tbase black mx-1 text-gray-500 overflow-ellipsis"
+                  className="tbase t_col black mx-1 text-gray-500 overflow-ellipsis"
                 >{` > ${projectinfo.title} >`}</a>
                 <a
                   href={`/user/dashboard/myprojects/${projectinfo._id}/${resultinfo.id}`}
-                  className="tbase mx-1 text-gray-500 overflow-ellipsis"
+                  className="tbase t_col mx-1 text-gray-500 overflow-ellipsis"
                 >{`${resultinfo.title}`}</a>
               </>
             )}
@@ -277,7 +273,7 @@ const RightPane = ({
                 UpdateList(e.target.value);
                 setSearchVal(e.target.value);
               }}
-              className="bg-transparent dashboardsearch flex-grow tbase text-white"
+              className="bg-transparent dashboardsearch flex-grow tbase t_col text-white"
               type="text"
               placeholder="Filter by title"
               value={searchval}
@@ -287,29 +283,31 @@ const RightPane = ({
       </div>
 
       {/* LOWER SECTION */}
-      <div className="w-full flex mt-2 h-[90%] flex-grow rounded-2xl">
+      <div className="white_bg w-full flex mt-2 h-[90%] flex-grow rounded-2xl">
         {/* FROM /DASHBOARD/HOME */}
         {homepageProjects && (
-          <div className="w-full flex flex-col py-2 px-4 flex-grow rounded-2xl bg-white">
+          <div className="w-full flex flex-col p-4 flex-grow rounded-2xl ">
             {resultsshow && (
               <div className="w-full h-full">
                 <div className="w-full flex flex-row items-center py-4 xl:py-6 px-2 justify-between">
-                  <p className="tbasebold black mr-2 xl:mr-0">Test Title </p>
+                  <p className="tbase t_col bold black mr-2 xl:mr-0">
+                    Test Title{" "}
+                  </p>
                   <div className="flex flex-row sm:w-[500px] md:w-[550px] xl:w-[700px] justify-between">
                     <span className="xl:hidden w-[1px] bg-gray-400"></span>
-                    <p className="tbasebold xl:w-28 text-left mx-2 md:mx-4 black">
+                    <p className="tbase t_col bold xl:w-28 text-left mx-2 md:mx-4 black">
                       Test Type
                     </p>
                     <span className="w-[1px] bg-gray-400"></span>
-                    <p className="tbasebold xl:w-28 text-left mx-2 md:mx-4 black">
+                    <p className="tbase t_col bold xl:w-28 text-left mx-2 md:mx-4 black">
                       Project Name
                     </p>
                     <span className="hidden lg:block w-[1px] bg-gray-400"></span>
-                    <p className="hidden lg:block tbasebold xl:w-28 text-left mx-2 md:mx-4 black">
+                    <p className="hidden lg:block tbase t_col bold xl:w-28 text-left mx-2 md:mx-4 black">
                       Date Created
                     </p>
                     <span className="hidden lg:block w-[1px] bg-gray-400"></span>
-                    <p className="hidden lg:block tbasebold xl:w-28 text-left mx-2 md:mx-4 black">
+                    <p className="hidden lg:block tbase t_col bold xl:w-28 text-left mx-2 md:mx-4 black">
                       Time Created
                     </p>
                   </div>
@@ -331,7 +329,7 @@ const RightPane = ({
               </div>
             )}
             {!resultsshow && (
-              <div className="w-full h-full flex justify-center items-center">
+              <div className="w-full tbase t_col h-full flex justify-center items-center">
                 YOU HAVE NO RESULTS CREATED YET
               </div>
             )}
@@ -340,18 +338,20 @@ const RightPane = ({
 
         {/* FROM /DASHBOARD/MYPROJECTS */}
         {projects && (
-          <div className="w-full flex flex-col py-2 px-4 flex-grow rounded-2xl bg-white">
+          <div className="w-full flex flex-col py-2 px-4 flex-grow rounded-2xl ">
             {projects.length > 0 && (
               <div className="w-full h-full">
                 <div className="w-full flex flex-row items-center py-2 xl:py-6 px-2 justify-between">
-                  <p className="tbasebold black mr-4 xl:mr-0">Project Title </p>
+                  <p className="tbase t_col bold black mr-4 xl:mr-0">
+                    Project Title{" "}
+                  </p>
                   <div className="flex flex-row justify-between w-76 sm:w-[180px] md:w-[250px] xl:w-[350px]">
                     <span className="xl:hidden w-[1px] bg-gray-400"></span>
-                    <p className="tbasebold xl:w-28 flex items-center text-center mx-4 black">
+                    <p className="tbase t_col bold xl:w-28 flex items-center text-center mx-4 black">
                       Date Created
                     </p>
                     <span className="w-[1px] bg-gray-400"></span>
-                    <p className="tbasebold xl:w-28 flex items-center text-center mx-4 black">
+                    <p className="tbase t_col bold xl:w-28 flex items-center text-center mx-4 black">
                       Time Created
                     </p>
                   </div>
@@ -365,7 +365,7 @@ const RightPane = ({
               </div>
             )}
             {projects.length === 0 && (
-              <div className="w-full h-full flex justify-center items-center">
+              <div className="w-full tbase t_col h-full flex justify-center items-center">
                 YOU HAVE NO PROJECTS CREATED YET
               </div>
             )}
@@ -375,27 +375,27 @@ const RightPane = ({
         {/* FROM /DASHBOARD/MYPROJECTS/PROJECTID */}
         {projectPageInfo && (
           <div className="w-full xl:max-h-full flex flex-col lg:flex-row flex-grow rounded-2xl">
-            <div className="order-2 w-full lg:w-[50%] p-4 rounded-2xl flex flex-col bg-white">
+            <div className="order-2 w-full lg:w-[50%] p-4 rounded-2xl flex flex-col ">
               <div className="mb-3">
-                <h2 className="tbasebold mb-4">Project Title :</h2>
+                <h2 className="tbase t_col bold mb-4">Project Title :</h2>
                 <p className="my-2 rounded-2xl p-3 bg-gray-200">
                   {projectPageInfo.title}
                 </p>
               </div>
               <div className="mb-3">
-                <h2 className="tbasebold mb-4">Project Description :</h2>
+                <h2 className="tbase t_col bold mb-4">Project Description :</h2>
                 <p className="my-2 rounded-2xl p-3 bg-gray-200">
                   {projectPageInfo.desc}
                 </p>
               </div>
               <div className="mb-3">
-                <h2 className="tbasebold mb-4">Date of creation :</h2>
+                <h2 className="tbase t_col bold mb-4">Date of creation :</h2>
                 <p className="my-2 rounded-2xl p-3 bg-gray-200">
                   {projectPageInfo.date}
                 </p>
               </div>
               <div className="mb-3">
-                <h2 className="tbasebold mb-4">Time created :</h2>
+                <h2 className="tbase t_col bold mb-4">Time created :</h2>
                 <p className="my-2 rounded-2xl p-3 bg-gray-200">
                   {projectPageInfo.time}
                 </p>
@@ -444,7 +444,7 @@ const RightPane = ({
                       <Link
                         key={uuidv4()}
                         href={`/user/dashboard/myprojects/${projectPageInfo._id}/${result.id}`}
-                        className="flex flex-col py-6 px-8 mx-1 lg:mx-0 mb-2 xl:mb-3 bg-white h-max lg:h-max rounded-2xl w-96 lg:w-full hover:scale-95 transition-all"
+                        className="flex flex-col py-6 px-8 mx-1 lg:mx-0 mb-2 xl:mb-3  h-max lg:h-max rounded-2xl w-96 lg:w-full hover:scale-95 transition-all"
                       >
                         {result.chosenchart == "Bar Chart" ? (
                           <BarChart
@@ -466,8 +466,8 @@ const RightPane = ({
                           />
                         )}
                         <div className="w-full">
-                          <h2 className="tbasebold">{result.title}</h2>
-                          <h2 className="tbasebold dorange">
+                          <h2 className="tbase t_col bold">{result.title}</h2>
+                          <h2 className="tbase t_col bold dorange">
                             {result.chosentest + " test result"}
                           </h2>
                         </div>
@@ -477,7 +477,7 @@ const RightPane = ({
                 </div>
               )}
               {projectPageInfo.results.length === 0 && (
-                <div className="h-full w-full flex items-center justify-center bg-white rounded-2xl">
+                <div className="h-full w-full flex items-center justify-center  rounded-2xl">
                   <h1>results under this project will show here</h1>
                 </div>
               )}
@@ -487,35 +487,37 @@ const RightPane = ({
 
         {/* FROM /DASHBOARD/MYPROJECTS/PROJECTID/RESULTID */}
         {projectinfo && resultinfo && (
-          <div className="w-full flex flex-col py-2 px-4 flex-grow rounded-2xl bg-white">
+          <div className="w-full flex flex-col py-2 px-4 flex-grow rounded-2xl ">
             <div className="flex flex-col lg:flex-row">
-              <div className="w-full order-2 lg:w-[50%] lg:p-4 max-h-full rounded-2xl flex flex-col bg-white">
+              <div className="w-full order-2 lg:w-[50%] lg:p-4 max-h-full rounded-2xl flex flex-col ">
                 <div className="mb-3">
-                  <h2 className="tbasebold mb-4">Title of result :</h2>
+                  <h2 className="tbase t_col bold mb-4">Title of result :</h2>
                   <p className="my-2 rounded-2xl p-3 bg-gray-200">
                     {resultinfo.title}
                   </p>
                 </div>
                 <div className="mb-3">
-                  <h2 className="tbasebold mb-4">Test Type :</h2>
+                  <h2 className="tbase t_col bold mb-4">Test Type :</h2>
                   <p className="my-2 rounded-2xl p-3 bg-gray-200">
                     {resultinfo.chosentest}
                   </p>
                 </div>
                 <div className="mb-3">
-                  <h2 className="tbasebold mb-4">Conclusion of result :</h2>
+                  <h2 className="tbase t_col bold mb-4">
+                    Conclusion of result :
+                  </h2>
                   <p className="my-2 rounded-2xl p-3 bg-gray-200">
                     {resultinfo.conclusion}
                   </p>
                 </div>
                 <div className="mb-3">
-                  <h2 className="tbasebold mb-4">Date of creation :</h2>
+                  <h2 className="tbase t_col bold mb-4">Date of creation :</h2>
                   <p className="my-2 rounded-2xl p-3 bg-gray-200">
                     {resultinfo.date}
                   </p>
                 </div>
                 <div className="mb-3">
-                  <h2 className="tbasebold mb-4">Time created :</h2>
+                  <h2 className="tbase t_col bold mb-4">Time created :</h2>
                   <p className="my-2 rounded-2xl p-3 bg-gray-200">
                     {resultinfo.time}
                   </p>
@@ -554,15 +556,9 @@ const RightPane = ({
                       onClick={() => {
                         downloadPDF();
                       }}
-                      className="rounded-full mx-3 flex items-center justify-center border-black border-2 px-4 py-3"
+                      className="rounded-full tbase t_col mx-3 flex items-center justify-center btnborder border-2 px-4 py-3"
                     >
-                      <Image
-                        className="mx-2"
-                        src={"/assets/svgs/download_line.svg"}
-                        width={24}
-                        height={24}
-                        alt="download button"
-                      />
+                      {SVGS.download_line}
                       {pdfloader ? `downloading...` : `PDF`}
                     </button>
                     {/* Image */}
@@ -571,15 +567,9 @@ const RightPane = ({
                       onClick={() => {
                         downloadimage();
                       }}
-                      className="rounded-full mx-3 flex items-center justify-center border-black border-2 px-4 py-3"
+                      className="rounded-full tbase t_col mx-3 flex items-center justify-center btnborder border-2 px-4 py-3"
                     >
-                      <Image
-                        className="mx-2"
-                        src={"/assets/svgs/download_line.svg"}
-                        width={24}
-                        height={24}
-                        alt="download button"
-                      />
+                      {SVGS.download_line}
                       {imgloader ? `downloading...` : `Image`}
                     </button>
                   </div>
