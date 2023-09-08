@@ -171,3 +171,20 @@ $cellwidth: 90px;
     }
   }
 }
+
+@media (prefers-color-scheme: dark) {
+  .rows {
+    .entire_row {
+      .row_input {
+        color: white;
+      }
+    }
+  }
+  .rows2 {
+    .entire_row {
+      .row_input {
+        color: white;
+      }
+    }
+  }
+}

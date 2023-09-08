@@ -209,10 +209,21 @@ $sbold: "Inter-SemiBold";
   .btnborder {
     border-color: $white;
   }
+  .inputs {
+    border-color: gray;
+    background-color: transparent;
+  }
+  .inputs:hover {
+    border-color: white;
+  }
 }
 
 .dark_mode {
   @include dark_mode();
+}
+@media (prefers-color-scheme: light) {
+  .dark_container {
+  }
 }
 
 @media (prefers-color-scheme: dark) {

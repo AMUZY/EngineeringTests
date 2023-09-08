@@ -8,7 +8,7 @@ export const testTypes = [
 export const inputcont = "flex flex-grow flex-col items-start my-3";
 export const labelstyle = "";
 export const inputstyle =
-  "px-2 py-3 text-lg w-full rounded-sm border-[1px] border-gray-300 hover:border-black focus:outline-[rgb(62,130,215)]";
+  "px-2 py-3 tbase w-full rounded-sm border-[1px] border-gray-300 hover:border-black focus:outline-[rgb(62,130,215)]";
 
 export const chartTypes = ["Bar Chart", "Line Chart"];
 

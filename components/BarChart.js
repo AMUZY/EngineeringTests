@@ -117,7 +117,7 @@ const BarChart = ({
   }, [edit, labels, comps, table]);
 
   return (
-    <div className="flex flex-col justify-center w-full">
+    <div className="flex flex-col justify-center w-full h-full">
       <div className="bg-white rounded-2xl capture w-full h-full flex justify-center items-center pb-4">
         {chart ? (
           <div className="w-full h-full">
@@ -140,12 +140,12 @@ const BarChart = ({
             )}
           </div>
         ) : (
-          <> NO CHART TO DISPLAY </>
+          <p className="text-black"> NO CHART TO DISPLAY </p>
         )}
       </div>
       {shuffle && (
         <button
-          className="mb-4 mx-auto text-red-600 hover:text-gray-600"
+          className="mt-2 mb-4 mx-auto text-red-600 hover:text-gray-600"
           onClick={() => UpdateChart()}
         >
           Reshuffle colors
@@ -158,7 +158,7 @@ const BarChart = ({
           <NormalBtn
             text={chartstate ? "Update Chart" : "Display Chart"}
             action={UpdateChart}
-            addclass="my-5 text-center w-full"
+            addclass="my-5 text-center w-full tbase t_col hover:text-[#ff6700]"
           />
           {/* <ToastContainer /> */}
         </>

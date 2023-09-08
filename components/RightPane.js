@@ -338,7 +338,7 @@ const RightPane = ({
 
         {/* FROM /DASHBOARD/MYPROJECTS */}
         {projects && (
-          <div className="w-full flex flex-col py-2 px-4 flex-grow rounded-2xl ">
+          <div className="w-full flex flex-col p-4 flex-grow rounded-2xl ">
             {projects.length > 0 && (
               <div className="w-full h-full">
                 <div className="w-full flex flex-row items-center py-2 xl:py-6 px-2 justify-between">
@@ -412,12 +412,7 @@ const RightPane = ({
                     );
                   }}
                 >
-                  <Image
-                    src={"/assets/svgs/edit.svg"}
-                    width={24}
-                    height={24}
-                    alt="edit button"
-                  />
+                  {SVGS.edit}
                 </button>
                 <CanDelBtn
                   text={"DELETE PROJECT"}
@@ -430,12 +425,12 @@ const RightPane = ({
                 />
               </div>
             </div>
-            <div className="lg:ml-4 w-full lg:order-2 lg:w-[50%] flex-grow max-h-full">
+            <div className="lg:ml-4 w-full lg:order-2 lg:w-[50%] flex-grow max-h-[55rem]">
               {projectPageInfo.results.length > 0 && (
                 <div
                   className={`${
                     projectPageInfo.results.length > 1
-                      ? "flex flex-row overflow-x-scroll h-full lg:flex-col lg:overflow-y-scroll pr-0 lg:pr-2 "
+                      ? "flex flex-row overflow-x-scroll lg:flex-col lg:overflow-y-scroll lg:overflow-x-auto pr-0 lg:pr-2 "
                       : " "
                   }w-full h-full`}
                 >
@@ -465,7 +460,7 @@ const RightPane = ({
                             size={{ height: 200, width: 400 }}
                           />
                         )}
-                        <div className="w-full">
+                        <div className="w-full mt-1">
                           <h2 className="tbase t_col bold">{result.title}</h2>
                           <h2 className="tbase t_col bold dorange">
                             {result.chosentest + " test result"}
@@ -487,7 +482,7 @@ const RightPane = ({
 
         {/* FROM /DASHBOARD/MYPROJECTS/PROJECTID/RESULTID */}
         {projectinfo && resultinfo && (
-          <div className="w-full flex flex-col py-2 px-4 flex-grow rounded-2xl ">
+          <div className="w-full flex flex-col p-4 flex-grow rounded-2xl ">
             <div className="flex flex-col lg:flex-row">
               <div className="w-full order-2 lg:w-[50%] lg:p-4 max-h-full rounded-2xl flex flex-col ">
                 <div className="mb-3">
@@ -525,7 +520,7 @@ const RightPane = ({
               </div>
               {/* CHARTS AND DOWNLOAD BUTTON */}
               {resultinfo ? (
-                <div className="lg:order-2 flex-grow flex flex-col items-center mb-12 lg:mb-3">
+                <div className="lg:order-2 flex-grow flex flex-col items-center mb-12 lg:mb-3 lg:ml-3">
                   {/* THE CHARTs */}
                   {resultinfo.chosenchart == "Bar Chart" ? (
                     <BarChart

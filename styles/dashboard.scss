@@ -1,67 +1,66 @@
-$darkblue : rgba(36,52,112,0.8);
-$darkorange: #FF6700;
+$darkblue: rgba(36, 52, 112, 0.8);
+$darkorange: #ff6700;
 
-.boxcontainer>:nth-child(2){
-    background-color: $darkblue;
+.boxcontainer > :nth-child(2) {
+  background-color: $darkblue;
 }
 .dashbox {
-    box-shadow: 2px 2px 15px 5px rgb(0, 0, 0, .25);
+  box-shadow: 2px 2px 15px 5px rgb(0, 0, 0, 0.25);
 }
 
-.searchcont{
-    background-color: $darkblue;
+.searchcont {
+  background-color: $darkblue;
 }
-.dashboardsearch:focus{
-    outline-style: none;
-    outline-color: none;
-    outline-width: none;
-    caret-color: white;
+.dashboardsearch:focus {
+  outline-style: none;
+  outline-color: none;
+  outline-width: none;
+  caret-color: white;
 }
 
+/*------ Style 2 ------*/
+.style2 {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background-color: transparent;
+  width: 48px;
+  height: 48px;
+  border: none;
+  cursor: pointer;
+}
+.style2::-webkit-color-swatch {
+  border-radius: 9999px;
+}
+.style2::-moz-color-swatch {
+  border-radius: 9999px;
+}
 
-  /*------ Style 2 ------*/
-  .style2 {
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
-    background-color: transparent;
-    width: 48px;
-    height: 48px;
-    border: none;
-    cursor: pointer;
-  }
-  .style2::-webkit-color-swatch {
-    border-radius: 9999px;
-  }
-  .style2::-moz-color-swatch {
-    border-radius: 9999px;
-  }
-
-.resultinfo{
-    border-top: 1px solid $darkorange;
+.resultinfo {
+  border-top: 1px solid $darkorange;
 }
 
 ::-webkit-scrollbar {
-    display : none;
-    }
+  display: none;
+}
 
-@media only screen and (min-width : 1200px) {
-    // SCROLL BAR STYLES
-    ::-webkit-scrollbar {
-        display: inline;
-        width: 10px;
-        }
+@media only screen and (min-width: 1200px) {
+  // SCROLL BAR STYLES
+  ::-webkit-scrollbar {
+    display: inline;
+    width: 10px;
+  }
 
-    ::-webkit-scrollbar-track {
+  ::-webkit-scrollbar-track {
     background: transparent;
-    }
-    
-    ::-webkit-scrollbar-thumb {
-    background: #FF6700;
-    border-radius: .8rem;
-    }
-    
-    ::-webkit-scrollbar-thumb:hover {
-    background: #FF6700;
-    }
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: #ff6700;
+    border-radius: 0.8rem;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: #ff6700;
+  }
 }

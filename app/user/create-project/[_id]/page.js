@@ -15,6 +15,7 @@ import { inputcont, inputstyle, labelstyle } from "@components/TestTypes";
 import { SaveBtn, NormalBtn, CanDelBtn } from "@components/Button";
 import axios from "axios";
 import { useRouter } from "next/navigation";
+import { SVGS } from "@components/SVGs";
 
 const page = ({ params }) => {
   const router = useRouter();
@@ -81,7 +82,7 @@ const page = ({ params }) => {
   }, [date, time]);
 
   return (
-    <div className="w-full h-full p-2 lg:p-6">
+    <div className="white_bg w-full h-full p-2 lg:p-6">
       <ToastContainer />
       <div className="flex-grow h-full dashbox overflow-y-scroll rounded-3xl p-3 flex flex-col justify-between">
         <div className="flex flex-col h-full w-full lg:p-6 ">
@@ -92,19 +93,14 @@ const page = ({ params }) => {
                 window.history.back();
               }}
             >
-              <Image
-                src="/assets/svgs/backarrow_black.svg"
-                width={40}
-                height={42}
-                alt="engineeringtests logo transparent"
-              />
+              {SVGS.backarrow_black}
             </button>
-            <p className="tsubtitle black"> Create New Project </p>
+            <p className="tsubtitle t_col "> Create New Project </p>
           </div>
           {/* INPUTS */}
           <div className="w-full h-full flex flex-col">
             <div className={inputcont + " w-full "}>
-              <label className={labelstyle} htmlFor="project">
+              <label className={labelstyle + " tbase t_col "} htmlFor="project">
                 {" "}
                 Project Title :{" "}
               </label>
@@ -112,7 +108,10 @@ const page = ({ params }) => {
                 required
                 type="text"
                 style={{ height: "max-content" }}
-                className={inputstyle + " my-3 w-full md:w-3/4 xl:w-1/2 "}
+                className={
+                  inputstyle +
+                  " my-3 w-full md:w-3/4 xl:w-1/2 tbase t_col inputs"
+                }
                 id="project"
                 placeholder="e.g My new project title"
                 onChange={(e) => {
@@ -122,7 +121,7 @@ const page = ({ params }) => {
               />
             </div>
             <div className={inputcont + " w-full h-full"}>
-              <label className={labelstyle} htmlFor="desc">
+              <label className={labelstyle + " tbase t_col "} htmlFor="desc">
                 {" "}
                 Project Description :
               </label>
@@ -130,7 +129,8 @@ const page = ({ params }) => {
                 required
                 type="text"
                 className={
-                  inputstyle + " my-3 w-full h-full md:w-3/4 xl:w-1/2 "
+                  inputstyle +
+                  " my-3 w-full h-full md:w-3/4 xl:w-1/2 tbase t_col inputs"
                 }
                 id="desc"
                 placeholder="e.g This describes this new project"

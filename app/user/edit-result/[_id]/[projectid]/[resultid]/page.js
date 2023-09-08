@@ -6,6 +6,8 @@ import LineChart from "@components/LineChart";
 import axios from "axios";
 import Autocomplete from "@mui/material/Autocomplete";
 import TextField from "@mui/material/TextField";
+import { ThemeProvider, createTheme } from "@mui/material/styles";
+import CssBaseline from "@mui/material/CssBaseline";
 import { testTypes, chartTypes } from "@components/TestTypes";
 import { NoDuplicate } from "@components/NoDuplicate";
 import { failuretoast } from "@toasts/Toasts";
@@ -16,6 +18,7 @@ import { AutoFull, AutoWidth } from "@components/TestTypes";
 import { SaveBtn, NormalBtn, CanDelBtn } from "@components/Button";
 import { useRouter } from "next/navigation";
 import { promisetoast } from "@toasts/Toasts";
+import { SVGS } from "@components/SVGs";
 
 const page = ({ params }) => {
   const router = useRouter();
@@ -306,12 +309,38 @@ const page = ({ params }) => {
     return strTime;
   }
 
+  const isDashboardDark = () => {
+    let mediaQueryObj = window.matchMedia("(prefers-color-scheme: dark)");
+    let isDarkMode = mediaQueryObj.matches;
+    const dashboard = document.getElementById("dashboard");
+    if (dashboard.classList.toString().includes("dark_mode")) {
+      return true;
+    } else if (
+      dashboard.classList.toString().includes("dark_container") &&
+      isDarkMode === true
+    ) {
+      return true;
+    } else if (
+      dashboard.classList.toString().includes("dark_container") &&
+      isDarkMode === false
+    ) {
+      return false;
+    }
+  };
+
+  const darkTheme = createTheme({
+    palette: {
+      mode: `${isDashboardDark() ? "dark" : "light"}`,
+    },
+  });
+
   return (
-    <>
+    <ThemeProvider theme={darkTheme}>
+      <CssBaseline />
       <ToastContainer />
       {show && (
         <div>
-          <div className="w-full h-full p-2 lg:p-6">
+          <div className="white_bg w-full h-full p-2 lg:p-6">
             <div className="flex-grow h-full dashbox overflow-y-scroll rounded-3xl p-3 flex flex-col justify-between">
               <div className="flex flex-col lg:flex-row h-full w-full">
                 <div className="flex flex-col w-full lg:w-1/2 lg:p-3">
@@ -322,21 +351,16 @@ const page = ({ params }) => {
                         window.history.back();
                       }}
                     >
-                      <Image
-                        src="/assets/svgs/backarrow_black.svg"
-                        width={40}
-                        height={42}
-                        alt="engineeringtests logo transparent"
-                      />
+                      {SVGS.backarrow_black}
                     </button>
-                    <p className="tsubtitle black"> Edit Result </p>
+                    <p className="tsubtitle t_col "> Edit Result </p>
                   </div>
                   <div className="flex flex-col h-full overflow-y-scroll">
                     {/* INPUT TAGS */}
                     <main className="relative flex flex-col justify-evenly p-3">
                       {/* INPUTS */}
                       <div className="flex flex-row flex-wrap w-full justify-between">
-                        <div className={inputcont}>
+                        <div className={inputcont + " lg:mr-2"}>
                           <label className={labelstyle} htmlFor="title">
                             {" "}
                             Title :{" "}
@@ -347,7 +371,7 @@ const page = ({ params }) => {
                             type="text"
                             ref={titleref}
                             className={
-                              inputstyle + " w-[300px] overflow-ellipsis"
+                              inputstyle + " w-[300px] overflow-ellipsis inputs"
                             }
                             id="title"
                             placeholder="e.g My new chart"
@@ -356,7 +380,7 @@ const page = ({ params }) => {
                             }}
                           />
                         </div>
-                        <div className={inputcont}>
+                        <div className={inputcont + " lg:ml-2"}>
                           <label className={labelstyle} htmlFor="">
                             {" "}
                             Subtitle :
@@ -367,7 +391,7 @@ const page = ({ params }) => {
                             type="text"
                             ref={subtitleref}
                             className={
-                              inputstyle + " w-[300px] overflow-ellipsis"
+                              inputstyle + " w-[300px] overflow-ellipsis inputs"
                             }
                             id=""
                             placeholder="e.g My new Flexural Test (MPa)"
@@ -561,7 +585,8 @@ const page = ({ params }) => {
                           type="text"
                           ref={concref}
                           className={
-                            inputstyle + " w-full text-left overflow-ellipsis"
+                            inputstyle +
+                            " w-full text-left overflow-ellipsis inputs"
                           }
                           id=""
                           placeholder="Conclusion of result"
@@ -584,8 +609,8 @@ const page = ({ params }) => {
 
                       <NormalBtn
                         text="Save Settings"
-                        action={DisableAutoComplete}
-                        addclass="mx-2"
+                        action={() => DisableAutoComplete()}
+                        addclass="mx-2 tbase t_col hover:text-[#ff6700]"
                       />
                       <div className="overflow-y-scroll w-full">
                         {/* TABLE */}
@@ -682,7 +707,7 @@ const page = ({ params }) => {
                   </div>
                 </div>
                 <div className="flex flex-col w-full lg:w-1/2 lg:p-3 h-full overflow-y-scroll justify-between">
-                  <p className="tbase black"> Preview :</p>
+                  <p className="tbase t_col "> Preview :</p>
                   {/* THE CHARTs */}
                   {chosenchart == "Bar Chart" ? (
                     <BarChart
@@ -731,7 +756,7 @@ const page = ({ params }) => {
           </div>
         </div>
       )}
-    </>
+    </ThemeProvider>
   );
 };
 

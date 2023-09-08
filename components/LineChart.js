@@ -76,6 +76,7 @@ const LineChart = ({
               title: {
                 display: true,
                 text: title ? title : "Title shows here",
+                color: "black",
                 font: {
                   size: 18,
                   family: "'Helvetica Neue', 'Helvetica', 'Arial', sans-serif",
@@ -85,6 +86,7 @@ const LineChart = ({
               subtitle: {
                 display: true,
                 text: subtitle ? subtitle : "SubTitle shows here",
+                color: "black",
                 position: "left",
                 font: {
                   size: 16,
@@ -94,6 +96,7 @@ const LineChart = ({
               },
               legend: {
                 labels: {
+                  color: "black",
                   font: {
                     size: 14,
                     family:
@@ -114,8 +117,8 @@ const LineChart = ({
   }, [edit, labels, comps, table]);
 
   return (
-    <div className="flex flex-col justify-center w-full">
-      <div className="capture w-full h-full flex justify-center items-center pb-4">
+    <div className="flex flex-col justify-center w-full h-full">
+      <div className="bg-white rounded-2xl capture w-full h-full flex justify-center items-center pb-4">
         {chart ? (
           <div className="w-full h-full">
             {chart}
@@ -137,12 +140,12 @@ const LineChart = ({
             )}
           </div>
         ) : (
-          <> NO CHART TO DISPLAY </>
+          <p className="text-black"> NO CHART TO DISPLAY </p>
         )}
       </div>
       {shuffle && (
         <button
-          className="mb-4 mx-auto text-red-600 hover:text-gray-600"
+          className="mt-2 mb-4 mx-auto text-red-600 hover:text-gray-600"
           onClick={() => UpdateChart()}
         >
           Reshuffle colors
@@ -155,7 +158,7 @@ const LineChart = ({
           <NormalBtn
             text={chartstate ? "Update Chart" : "Display Chart"}
             action={UpdateChart}
-            addclass="my-5 text-center w-full"
+            addclass="my-5 text-center w-full tbase t_col hover:text-[#ff6700]"
           />
           {/* <ToastContainer /> */}
         </>
