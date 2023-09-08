@@ -9,6 +9,7 @@ import { useSearchParams } from "next/navigation";
 import { ToastContainer } from "react-toastify";
 import { signOut } from "next-auth/react";
 import { useSession } from "next-auth/react";
+import { SVGS } from "@components/SVGs";
 
 const page = ({ params }) => {
   const { data: session } = useSession();
@@ -62,8 +63,19 @@ const page = ({ params }) => {
           MainAction={handleAccountDel}
         />
       ) : null}
-      <div className="flex-grow h-full dashbox rounded-3xl p-3">
-        <div className="w-full h-full flex flex-col justify-between items-center">
+      <div className="flex-grow flex flex-col h-full dashbox rounded-3xl p-3">
+        <div className="ml-3 flex items-center">
+          <button
+            className="p-2 w-max flex flex-row items-center hover:scale-125 transition-all"
+            onClick={() => {
+              window.history.back();
+            }}
+          >
+            {SVGS.backarrow_black}
+          </button>
+          <p className="ml-2 tsubtitle t_col"> My Profile </p>
+        </div>
+        <div className="w-full flex-grow flex flex-col justify-between items-center">
           <div className="flex flex-col items-center">
             <Image
               className="rounded-full"

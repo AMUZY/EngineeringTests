@@ -48,7 +48,7 @@ export default function layout({ children }) {
           <div
             onClick={() => showBlurBox()}
             id="blurbox"
-            className="absolute hidden z-1 top-0 left-0 w-full h-full opacity-90 bg-black"
+            className="absolute hidden z-[2] top-0 left-0 w-full h-full opacity-90 bg-black"
           ></div>
           <div
             style={{

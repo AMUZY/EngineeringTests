@@ -229,19 +229,25 @@ const RightPane = ({
             {SVGS.backarrow_black}
           </button>
           {/* PAGE TITLE AND CHILDREN TITLES */}
-          <div className="hidden md:flex items-center">
-            {pagename && <a className="tsubtitle t_col">{pagename}</a>}
+          <div className="flex items-center">
+            {pagename && (
+              <a className="hidden lg:block tsubtitle t_col">{`${pagename}`}</a>
+            )}
+            {/* FOR ONLY SETTINGS PAGE IN MOBILE VIEW */}
+            {pagename && pagename === "Settings" && (
+              <a className="lg:hidden tsubtitle t_col">{`${pagename}`}</a>
+            )}
             {projectPageInfo && (
               <a
                 href={`/user/dashboard/myprojects/${projectPageInfo._id}`}
                 className="tbase t_col black mx-1 text-gray-500 overflow-ellipsis"
-              >{` > ${projectPageInfo.title}`}</a>
+              >{`> ${projectPageInfo.title}`}</a>
             )}
             {resultinfo && (
               <>
                 <a
                   href={`/user/dashboard/myprojects/${projectinfo._id}`}
-                  className="tbase t_col black mx-1 text-gray-500 overflow-ellipsis"
+                  className="hidden lg:block tbase t_col black mx-1 text-gray-500 overflow-ellipsis"
                 >{` > ${projectinfo.title} >`}</a>
                 <a
                   href={`/user/dashboard/myprojects/${projectinfo._id}/${resultinfo.id}`}
@@ -290,24 +296,24 @@ const RightPane = ({
             {resultsshow && (
               <div className="w-full h-full">
                 <div className="w-full flex flex-row items-center py-4 xl:py-6 px-2 justify-between">
-                  <p className="tbase t_col bold black mr-2 xl:mr-0">
+                  <p className="tbasebold t_col black mr-2 xl:mr-0">
                     Test Title{" "}
                   </p>
                   <div className="flex flex-row sm:w-[500px] md:w-[550px] xl:w-[700px] justify-between">
                     <span className="xl:hidden w-[1px] bg-gray-400"></span>
-                    <p className="tbase t_col bold xl:w-28 text-left mx-2 md:mx-4 black">
+                    <p className="tbasebold t_col xl:w-28 text-left mx-2 md:mx-4 black">
                       Test Type
                     </p>
-                    <span className="w-[1px] bg-gray-400"></span>
-                    <p className="tbase t_col bold xl:w-28 text-left mx-2 md:mx-4 black">
+                    <span className="hidden lg:block w-[1px] bg-gray-400"></span>
+                    <p className="hidden lg:block tbasebold t_col bold xl:w-28 text-left mx-2 md:mx-4 black">
                       Project Name
                     </p>
                     <span className="hidden lg:block w-[1px] bg-gray-400"></span>
-                    <p className="hidden lg:block tbase t_col bold xl:w-28 text-left mx-2 md:mx-4 black">
+                    <p className="hidden lg:block tbasebold t_col bold xl:w-28 text-left mx-2 md:mx-4 black">
                       Date Created
                     </p>
                     <span className="hidden lg:block w-[1px] bg-gray-400"></span>
-                    <p className="hidden lg:block tbase t_col bold xl:w-28 text-left mx-2 md:mx-4 black">
+                    <p className="hidden lg:block tbasebold t_col bold xl:w-28 text-left mx-2 md:mx-4 black">
                       Time Created
                     </p>
                   </div>
@@ -342,16 +348,16 @@ const RightPane = ({
             {projects.length > 0 && (
               <div className="w-full h-full">
                 <div className="w-full flex flex-row items-center py-2 xl:py-6 px-2 justify-between">
-                  <p className="tbase t_col bold black mr-4 xl:mr-0">
+                  <p className="tbasebold t_col black mr-4 xl:mr-0">
                     Project Title{" "}
                   </p>
                   <div className="flex flex-row justify-between w-76 sm:w-[180px] md:w-[250px] xl:w-[350px]">
                     <span className="xl:hidden w-[1px] bg-gray-400"></span>
-                    <p className="tbase t_col bold xl:w-28 flex items-center text-center mx-4 black">
+                    <p className="tbasebold t_col xl:w-28 flex items-center text-center mx-4 black">
                       Date Created
                     </p>
-                    <span className="w-[1px] bg-gray-400"></span>
-                    <p className="tbase t_col bold xl:w-28 flex items-center text-center mx-4 black">
+                    <span className="hidden lg:block w-[1px] bg-gray-400"></span>
+                    <p className="hidden lg:block tbasebold t_col bold xl:w-28 flex items-center text-center mx-4 black">
                       Time Created
                     </p>
                   </div>
@@ -403,7 +409,7 @@ const RightPane = ({
               {/* EDIT AND DELETE PROJECT BUTTON */}
               <div className="my-5 w-full flex-grow flex flex-col justify-between items-center">
                 <button
-                  className="my-2"
+                  className="mt-2 mb-6"
                   onClick={() => {
                     router.push(
                       `/user/edit-project/${
@@ -472,8 +478,10 @@ const RightPane = ({
                 </div>
               )}
               {projectPageInfo.results.length === 0 && (
-                <div className="h-full w-full flex items-center justify-center  rounded-2xl">
-                  <h1>results under this project will show here</h1>
+                <div className="h-full w-full flex items-center justify-center rounded-2xl">
+                  <h1 className="tbase t_col">
+                    Results under this project will show here
+                  </h1>
                 </div>
               )}
             </div>

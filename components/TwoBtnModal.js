@@ -1,15 +1,27 @@
-'use client'
-import { Fragment, useRef, useState } from 'react'
-import { Dialog, Transition } from '@headlessui/react'
-import { ExclamationTriangleIcon } from '@heroicons/react/24/outline'
+"use client";
+import { Fragment, useRef, useState } from "react";
+import { Dialog, Transition } from "@headlessui/react";
+import { ExclamationTriangleIcon } from "@heroicons/react/24/outline";
 
-export default function TwoBtnModal({warningheading,warning,action,modal,ShowModal,CloseModal,MainAction}) {
-
-  const cancelButtonRef = useRef(null)
+export default function TwoBtnModal({
+  warningheading,
+  warning,
+  action,
+  modal,
+  ShowModal,
+  CloseModal,
+  MainAction,
+}) {
+  const cancelButtonRef = useRef(null);
 
   return (
     <Transition.Root show={modal} as={Fragment}>
-      <Dialog as="div" className="relative z-10  flex justify-center items-center" initialFocus={cancelButtonRef} onClose={ShowModal}>
+      <Dialog
+        as="div"
+        className="relative z-10 flex justify-center items-center"
+        initialFocus={cancelButtonRef}
+        onClose={ShowModal}
+      >
         <Transition.Child
           as={Fragment}
           enter="ease-out duration-300"
@@ -34,19 +46,23 @@ export default function TwoBtnModal({warningheading,warning,action,modal,ShowMod
               leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
             >
               <Dialog.Panel className="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg">
-                <div className="bg-white px-4 pb-4 pt-5 sm:p-6 sm:pb-4">
+                <div className="white_bg px-4 pb-4 pt-5 sm:p-6 sm:pb-4">
                   <div className="sm:flex sm:items-start">
                     <div className="mx-auto flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-red-100 sm:mx-0 sm:h-10 sm:w-10">
-                      <ExclamationTriangleIcon className="h-6 w-6 text-red-600" aria-hidden="true" />
+                      <ExclamationTriangleIcon
+                        className="h-6 w-6 text-red-600"
+                        aria-hidden="true"
+                      />
                     </div>
                     <div className="mt-3 text-center sm:ml-4 sm:mt-0 sm:text-left">
-                      <Dialog.Title as="h3" className="tbasebold black leading-6 text-gray-900">
+                      <Dialog.Title
+                        as="h3"
+                        className="tbasebold t_col leading-6 text-gray-900"
+                      >
                         {warningheading}
                       </Dialog.Title>
                       <div className="mt-2">
-                        <p className="text-md black">
-                          {warning}
-                        </p>
+                        <p className="text-md t_col">{warning}</p>
                       </div>
                     </div>
                   </div>
@@ -54,10 +70,10 @@ export default function TwoBtnModal({warningheading,warning,action,modal,ShowMod
                 <div className="bg-gray-50 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
                   <button
                     type="button"
-                    className="inline-flex w-full justify-center rounded-md bg-red-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-500 sm:ml-3 sm:w-auto"
-                    onClick={() =>{ 
-                      MainAction()
-                      CloseModal()
+                    className="inline-flex w-full justify-center rounded-md bg-red-600 px-3 py-2 text-sm text-white font-semibold shadow-sm hover:bg-red-500 sm:ml-3 sm:w-auto"
+                    onClick={() => {
+                      MainAction();
+                      CloseModal();
                     }}
                   >
                     {action}
@@ -77,5 +93,5 @@ export default function TwoBtnModal({warningheading,warning,action,modal,ShowMod
         </div>
       </Dialog>
     </Transition.Root>
-  )
+  );
 }

@@ -204,13 +204,14 @@ const settings = ({ params }) => {
       </div>
       {/* SET APP THEME */}
       <div className="flex flex-col my-2">
-        <h2 className="tbasebold t_col my-3"> Set App theme :</h2>
-        <div className="mx-auto rounded-2xl px-6 py-3 my-3 bg-gray-300 flex">
+        <h2 className="tbasebold t_col my-3"> App theme :</h2>
+        <div className="mx-auto rounded-2xl px-3 py-3 my-3 bg-gray-300 flex">
           <div className="flex flex-wrap p-3 justify-center items-center">
             {/* LIGHT */}
             <div className="flex flex-wrap items-center mx-2">
               <h2 className="mx-3 tbase">Light :</h2>
               <Switch
+                className="z-0"
                 checked={lightcheck}
                 onChange={() => handleThemeChange("light")}
                 inputProps={{ "aria-label": "controlled" }}
@@ -220,6 +221,7 @@ const settings = ({ params }) => {
             <div className="flex flex-wrap items-center mx-2">
               <h2 className="mx-3 tbase">Dark :</h2>
               <Switch
+                className="z-0"
                 checked={darkcheck}
                 onChange={() => handleThemeChange("dark")}
                 inputProps={{ "aria-label": "controlled" }}
@@ -229,6 +231,7 @@ const settings = ({ params }) => {
             <div className="flex flex-wrap items-center mx-2">
               <h2 className="mx-3 tbase">Use System theme :</h2>
               <Switch
+                className="z-0"
                 checked={system}
                 onChange={() => handleThemeChange("system")}
                 inputProps={{ "aria-label": "controlled" }}
