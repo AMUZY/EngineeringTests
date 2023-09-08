@@ -17,10 +17,10 @@ const ResultInfo = ({ result, projectid, resultid }) => {
         {result.title}
       </p>
       <div className="flex flex-row sm:w-[500px] md:w-[550px] xl:w-[700px] items-center justify-between">
-        <p className="hidden lg:block text-left mx-2 md:mx-4 xl:w-28 tbase t_colbold dorange">
+        <p className="text-left mx-2 md:mx-4 xl:w-28 tbase t_colbold dorange">
           {result.chosentest}
         </p>
-        <p className="text-left mx-2 md:mx-4 xl:w-28 tbase t_col  overflow-hidden whitespace-nowrap overflow-ellipsis">
+        <p className="hidden lg:block text-left mx-2 md:mx-4 xl:w-28 tbase t_col  overflow-hidden whitespace-nowrap overflow-ellipsis">
           {result.chosenproject}
         </p>
         <p className="hidden lg:block text-left mx-2 md:mx-4 xl:w-28 tbase t_col ">
