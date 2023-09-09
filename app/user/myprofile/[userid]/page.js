@@ -93,7 +93,7 @@ const page = ({ params }) => {
           </div>
           <CanDelBtn
             text={"DELETE MY ACCOUNT"}
-            addclass={"mb-16"}
+            addclass={"mb-16 tbase"}
             action={() => {
               ShowModal();
             }}

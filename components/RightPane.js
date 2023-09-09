@@ -384,25 +384,25 @@ const RightPane = ({
             <div className="order-2 w-full lg:w-[50%] p-4 rounded-2xl flex flex-col ">
               <div className="mb-3">
                 <h2 className="tbase t_col bold mb-4">Project Title :</h2>
-                <p className="my-2 rounded-2xl p-3 bg-gray-200">
+                <p className="my-2 tbase rounded-2xl p-3 bg-gray-200">
                   {projectPageInfo.title}
                 </p>
               </div>
               <div className="mb-3">
                 <h2 className="tbase t_col bold mb-4">Project Description :</h2>
-                <p className="my-2 rounded-2xl p-3 bg-gray-200">
+                <p className="my-2 tbase rounded-2xl p-3 bg-gray-200">
                   {projectPageInfo.desc}
                 </p>
               </div>
               <div className="mb-3">
                 <h2 className="tbase t_col bold mb-4">Date of creation :</h2>
-                <p className="my-2 rounded-2xl p-3 bg-gray-200">
+                <p className="my-2 tbase rounded-2xl p-3 bg-gray-200">
                   {projectPageInfo.date}
                 </p>
               </div>
               <div className="mb-3">
                 <h2 className="tbase t_col bold mb-4">Time created :</h2>
-                <p className="my-2 rounded-2xl p-3 bg-gray-200">
+                <p className="my-2 tbase rounded-2xl p-3 bg-gray-200">
                   {projectPageInfo.time}
                 </p>
               </div>
@@ -422,7 +422,7 @@ const RightPane = ({
                 </button>
                 <CanDelBtn
                   text={"DELETE PROJECT"}
-                  addclass={"mx-auto my-2"}
+                  addclass={"mx-auto tbase my-2"}
                   action={() => {
                     setWarningHead(`Delete Project`);
                     setWarning(`Are you sure you want to delete this project?`);
@@ -495,13 +495,13 @@ const RightPane = ({
               <div className="w-full order-2 lg:w-[50%] lg:p-4 max-h-full rounded-2xl flex flex-col ">
                 <div className="mb-3">
                   <h2 className="tbase t_col bold mb-4">Title of result :</h2>
-                  <p className="my-2 rounded-2xl p-3 bg-gray-200">
+                  <p className="my-2 tbase rounded-2xl p-3 bg-gray-200">
                     {resultinfo.title}
                   </p>
                 </div>
                 <div className="mb-3">
                   <h2 className="tbase t_col bold mb-4">Test Type :</h2>
-                  <p className="my-2 rounded-2xl p-3 bg-gray-200">
+                  <p className="my-2 tbase rounded-2xl p-3 bg-gray-200">
                     {resultinfo.chosentest}
                   </p>
                 </div>
@@ -509,19 +509,19 @@ const RightPane = ({
                   <h2 className="tbase t_col bold mb-4">
                     Conclusion of result :
                   </h2>
-                  <p className="my-2 rounded-2xl p-3 bg-gray-200">
+                  <p className="my-2 tbase rounded-2xl p-3 bg-gray-200">
                     {resultinfo.conclusion}
                   </p>
                 </div>
                 <div className="mb-3">
                   <h2 className="tbase t_col bold mb-4">Date of creation :</h2>
-                  <p className="my-2 rounded-2xl p-3 bg-gray-200">
+                  <p className="my-2 tbase rounded-2xl p-3 bg-gray-200">
                     {resultinfo.date}
                   </p>
                 </div>
                 <div className="mb-3">
                   <h2 className="tbase t_col bold mb-4">Time created :</h2>
-                  <p className="my-2 rounded-2xl p-3 bg-gray-200">
+                  <p className="my-2 tbase rounded-2xl p-3 bg-gray-200">
                     {resultinfo.time}
                   </p>
                 </div>
@@ -589,7 +589,7 @@ const RightPane = ({
                   session?.user._id || session?.user.id
                 }/${projectinfo._id}/${resultinfo.id}`}
                 text={"EDIT RESULT"}
-                addclass={"mx-4"}
+                addclass={"mx-4 tbase"}
               />
               <CanDelBtn
                 action={() => {
@@ -598,7 +598,7 @@ const RightPane = ({
                   ShowModal();
                 }}
                 text={"DELETE RESULT"}
-                addclass={"mx-4"}
+                addclass={"mx-4 tbase"}
               />
             </div>
           </div>
