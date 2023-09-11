@@ -240,7 +240,13 @@ const RightPane = ({
             {projectPageInfo && (
               <a
                 href={`/user/dashboard/myprojects/${projectPageInfo._id}`}
-                className="tbase t_col black mx-1 text-gray-500 overflow-ellipsis"
+                className="lg:hidden tbase t_col black mx-1 text-gray-500 overflow-ellipsis"
+              >{`${projectPageInfo.title}`}</a>
+            )}
+            {projectPageInfo && (
+              <a
+                href={`/user/dashboard/myprojects/${projectPageInfo._id}`}
+                className="hidden lg:block tbase t_col black mx-1 text-gray-500 overflow-ellipsis"
               >{`> ${projectPageInfo.title}`}</a>
             )}
             {resultinfo && (
@@ -299,7 +305,7 @@ const RightPane = ({
                   <p className="tbasebold t_col black mr-2 xl:mr-0">
                     Test Title{" "}
                   </p>
-                  <div className="flex flex-row sm:w-[500px] md:w-[550px] xl:w-[700px] justify-between">
+                  <div className="flex flex-row lg:w-[550px] xl:w-[700px] justify-between">
                     <span className="xl:hidden w-[1px] bg-gray-400"></span>
                     <p className="tbasebold t_col xl:w-28 text-left mx-2 md:mx-4 black">
                       Test Type
@@ -431,7 +437,7 @@ const RightPane = ({
                 />
               </div>
             </div>
-            <div className="lg:ml-4 w-full lg:order-2 lg:w-[50%] flex-grow max-h-[55rem]">
+            <div className="lg:ml-4 w-full lg:order-2 lg:w-[50%] flex-grow max-h-[50rem]">
               {projectPageInfo.results.length > 0 && (
                 <div
                   className={`${

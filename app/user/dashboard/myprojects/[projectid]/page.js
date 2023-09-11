@@ -7,30 +7,24 @@ import "react-toastify/dist/ReactToastify.css";
 import { useSession } from "next-auth/react";
 import { useState, useEffect } from "react";
 import { promisetoast } from "@toasts/Toasts";
+import useSWR from "swr";
 
 const page = ({ params }) => {
-  const [project, setProject] = useState();
   const { data: session } = useSession();
-  const [sess, setSess] = useState();
 
-  useEffect(() => {
-    if ((session?.user._id && !sess) || (session?.user.id && !sess)) {
+  const fetcher = (url) => {
+    if(session?.user._id || session?.user.id){
       const fetchProjects = new Promise(async (res, rej) => {
         await axios
-          .get(
-            `/api/project/other-http/${session?.user._id || session?.user.id}/${
-              params.projectid
-            }`
-          )
+          .get(url)
           .then((response) => {
             const data = response.data;
-            setProject(data);
-            res();
+            res(data);
           })
           .catch((error) => {
             rej();
           });
-      });
+      }).then((data)=>{return data});
 
       promisetoast(
         fetchProjects,
@@ -38,10 +32,18 @@ const page = ({ params }) => {
         "Project info fetched",
         "Failed to fetch project info, please refresh or check your internet"
       );
-
-      setSess(session);
+      return fetchProjects;
     }
-  }, []);
+  };
+
+  const {
+    data: project,
+  } = useSWR(
+    `/api/project/other-http/${session?.user._id || session?.user.id}/${
+      params.projectid
+    }`,
+    fetcher
+  );
 
   return (
     <>

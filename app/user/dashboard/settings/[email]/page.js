@@ -196,7 +196,7 @@ const settings = ({ params }) => {
             <input
               type="color"
               className="style2"
-              value={color}
+              value={color ? color : "undefined"}
               onChange={(e) => ChangeUiColor(e.target.value)}
             />
           </div>

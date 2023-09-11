@@ -64,7 +64,7 @@ const page = ({ params }) => {
         />
       ) : null}
       <div className="flex-grow flex flex-col h-full dashbox rounded-3xl p-3">
-        <div className="ml-3 flex items-center">
+        <div className="flex items-center">
           <button
             className="p-2 w-max flex flex-row items-center hover:scale-125 transition-all"
             onClick={() => {
@@ -73,7 +73,7 @@ const page = ({ params }) => {
           >
             {SVGS.backarrow_black}
           </button>
-          <p className="ml-2 tsubtitle t_col"> My Profile </p>
+          <p className="ml-1 tsubtitle t_col"> My Profile </p>
         </div>
         <div className="w-full flex-grow flex flex-col justify-between items-center">
           <div className="flex flex-col items-center">

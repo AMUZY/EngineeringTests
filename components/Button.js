@@ -20,7 +20,7 @@ export const FillBLueBtn = ({ src, href, text, addclass }) => {
       style={{
         backgroundColor: localStorage
           ? localStorage.getItem("backgroundColor")
-          : "currentcolor",
+          : "rgba(36, 52, 112, 0.8)",
       }}
       href={href}
       className={"bluefill colbox " + addclass}

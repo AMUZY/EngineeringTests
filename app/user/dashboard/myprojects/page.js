@@ -7,31 +7,25 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { promisetoast } from "@toasts/Toasts";
 import { useSession } from "next-auth/react";
+import useSWR from "swr";
 
 const myprofile = () => {
-  const [allprojects, setAllProjects] = useState([]);
   const { data: session } = useSession();
-  const [sess, setSess] = useState();
 
-  useEffect(() => {
-    if ((session?.user._id && !sess) || (session?.user.id && !sess)) {
+  const fetcher = (url) => {
+    if(session?.user._id || session?.user.id){
       const fetchProjects = new Promise(async (res, rej) => {
         await axios
-          .get(
-            `/api/project/other-http/${
-              session?.user._id || session?.user.id
-            }/undefined`
-          )
+          .get(url)
           .then((response) => {
             const data = response.data;
-            setAllProjects(data);
-            res();
+            res(data);
           })
           .catch((error) => {
             console.log(error);
             rej();
           });
-      });
+      }).then((data)=>{return data});
 
       promisetoast(
         fetchProjects,
@@ -39,10 +33,18 @@ const myprofile = () => {
         "Projects fetched",
         "Failed to fetch projects, please refresh or check your internet"
       );
-
-      setSess(session);
+      return fetchProjects;
     }
-  }, []);
+  };
+
+  const {
+    data: allprojects,
+  } = useSWR(
+    `/api/project/other-http/${
+      session?.user._id || session?.user.id
+    }/undefined`,
+    fetcher
+  );
 
   return (
     <>
