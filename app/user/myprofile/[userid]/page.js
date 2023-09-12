@@ -73,7 +73,7 @@ const page = ({ params }) => {
           >
             {SVGS.backarrow_black}
           </button>
-          <p className="ml-1 tsubtitle t_col"> My Profile </p>
+          <p className="tsubtitle t_col"> My Profile </p>
         </div>
         <div className="w-full flex-grow flex flex-col justify-between items-center">
           <div className="flex flex-col items-center">

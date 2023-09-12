@@ -80,7 +80,7 @@ export const PUT = async (req, { params }) => {
       });
     }
 
-    return new NextResponse("Project updated", { status: 200 });
+    return new NextResponse("Project updated", { status: 202 });
   } catch (error) {
     console.log(error);
     return new NextResponse("Couldn't update project", { status: 500 });

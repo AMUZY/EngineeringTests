@@ -21,7 +21,7 @@ export const POST = async (req, {params})=>{
             time : info.time
         })
 
-        return new NextResponse("Project created succesfully" , { status : 200 })
+        return new NextResponse("Project created succesfully" , { status : 201 })
 
     } catch (error) {
         console.log(error)

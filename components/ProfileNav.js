@@ -111,8 +111,8 @@ const ProfileNav = () => {
                 {/* POP UP MENU FOR MOBILE */}
                 <div
                   id="popup"
-                  className={`absolute z-10 w-max h-max shadow-xl bg-white flex-col rounded-lg ${
-                    profilebtn ? "flex" : "hidden"
+                  className={`absolute z-10 top-0 bottom-0 transition-all w-[45vw] h-full shadow-xl bg-white flex-col rounded-r-lg ${
+                    profilebtn ? "flex left-0" : "-left-1/2"
                   }`}
                 >
                   <span
@@ -141,14 +141,14 @@ const ProfileNav = () => {
                       href={`/user/create-project/${
                         session?.user._id || session?.user.id
                       }`}
-                      text={"+ P"}
+                      text={"+ Project"}
                       addclass={"my-1 text-center h-max"}
                     />
                     <FillBtn
                       href={`/user/create-result/${
                         session?.user._id || session?.user.id
                       }`}
-                      text={"+ R"}
+                      text={"+ Result"}
                       addclass={"my-1 text-center h-max"}
                     />
                   </div>
@@ -191,7 +191,7 @@ const ProfileNav = () => {
                 {SVGS.threedots}
                 {/* POP UP MENU FOR DESKTOP */}
                 <div
-                  className={`absolute top-8 -right-px lg:right-0 w-max lg:w-52 h-max shadow-xl bg-white flex-col rounded-lg ${
+                  className={`absolute top-8 -right-px lg:right-0 transition-opacity w-max px-3 h-max shadow-xl bg-white flex-col rounded-lg ${
                     profilebtn ? "flex" : "hidden"
                   }`}
                 >
