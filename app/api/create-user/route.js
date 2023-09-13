@@ -54,7 +54,9 @@ const handler = async (req , res )=>{
             return new NextResponse(error , { status : 409 })
         }else if(error.message === "Method Not Allowed"){
             return new NextResponse(error , { status : 405 })
-        }
+        }else{
+            return new NextResponse(error , { status : 500})
+          }
     }
 }
 

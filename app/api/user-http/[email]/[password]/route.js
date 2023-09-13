@@ -42,11 +42,13 @@ export const GET = async (req, { params }) => {
       throw new Error("Password Mismatch");
     }
   } catch (error) {
-    if(error.message === "Wrong Email or Password"){
-      return new NextResponse(error , { status : 500})
-    }else if(error.message === "Password Mismatch"){
-      return new NextResponse(error , { status : 403})
-    }
+      if(error.message === "Wrong Email or Password"){
+        return new NextResponse(error , { status : 500})
+      }else if(error.message === "Password Mismatch"){
+        return new NextResponse(error , { status : 403})
+      }else{
+        return new NextResponse(error , { status : 500})
+      }
     }
 };
 
