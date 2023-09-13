@@ -114,7 +114,7 @@ const signup = () => {
         "Error, something went wrong"
       );
     } else {
-      failuretoast("Passwords don't match");
+      failuretoast(error.response.data);
     }
 
   };

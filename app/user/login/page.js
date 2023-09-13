@@ -4,7 +4,7 @@ import Image from "next/image";
 import axios from "axios";
 import { ToastContainer } from "react-toastify";
 import { signIn, getProviders } from "next-auth/react";
-import { normaltoast, promisetoast, successtoast } from "@toasts/Toasts";
+import { failuretoast, normaltoast, promisetoast, successtoast } from "@toasts/Toasts";
 import "react-toastify/dist/ReactToastify.css";
 import { useRouter } from "next/navigation";
 import { loginUser } from "@helpers/helper";
@@ -91,7 +91,7 @@ const login = () => {
           })
           .catch((error) => {
             rej();
-            normaltoast(error.response.data);
+            failuretoast(error.response.data);
             setLoading(false);
           });
       });

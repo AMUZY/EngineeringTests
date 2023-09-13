@@ -27,7 +27,7 @@ export const GET = async (req, { params }) => {
     });
 
     if (!UserExists) {
-      throw new Error("Wrong Email or Password");
+      throw new Error ("Wrong Email or Password");
     }
 
     const result = await compare(LogUser.password, UserExists.password).catch(
@@ -37,13 +37,17 @@ export const GET = async (req, { params }) => {
     );
 
     if (result) {
-      throw new Error("Logged In Successfully");
+      return new NextResponse("Logged In Successfully", { status : 200 });
     } else {
       throw new Error("Password Mismatch");
     }
   } catch (error) {
-    return new NextResponse(error, { status: 500 });
-  }
+    if(error.message === "Wrong Email or Password"){
+      return new NextResponse(error , { status : 500})
+    }else if(error.message === "Password Mismatch"){
+      return new NextResponse(error , { status : 403})
+    }
+    }
 };
 
 export const PUT = async (req, { params }) => {
