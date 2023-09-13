@@ -56,9 +56,11 @@ const RightPane = ({
   // BELOW USEFFECT TO setIncomingItems ACCORDING TO PAGE IN USE
   useEffect(() => {
     if (homepageProjects) {
-      let temparray = [];
+      let temparray = []
       for (let i = 0; i < homepageProjects.length; i++) {
-        temparray.push(homepageProjects[i]);
+          for(let j = 0; j < homepageProjects[i].results.length; j++){
+            temparray.push({...homepageProjects[i].results[j], projectid : homepageProjects[i]._id})
+          }
       }
       setSearchedItems(temparray);
     } else if (projects) {
@@ -74,20 +76,21 @@ const RightPane = ({
   // FUNCTION THAT UPDATES THE LIST
   function UpdateList(searchword) {
     if (homepageProjects) {
-      console.log(homepageProjects);
-      const tempSearchedArray = homepageProjects.filter((inItem) => {
-        for (let i = 0; i < homepageProjects.length; i++) {
-          if (inItem.results[i]) {
-            return inItem.results[i].title
-              .toLowerCase()
-              .includes(searchword.toLowerCase());
+      let projectResults = []
+      for (let i = 0; i < homepageProjects.length; i++) {
+          for(let j = 0; j < homepageProjects[i].results.length; j++){
+            projectResults.push({...homepageProjects[i].results[j], projectid : homepageProjects[i]._id})
           }
-        }
+      }
+      const tempSearchedArray = projectResults.filter((result) => {
+        return result.title
+          .toLowerCase()
+          .includes(searchword.toLowerCase());
       });
       if (searchval.trim().length > 0) {
         setSearchedItems(tempSearchedArray);
       } else {
-        setSearchedItems(homepageProjects);
+        setSearchedItems(projectResults);
       }
     }
     if (projects) {
@@ -325,17 +328,15 @@ const RightPane = ({
                   </div>
                 </div>
                 <div className="w-full flex-col">
-                  {searchedItems.map((project) => {
-                    return project.results.map((result) => {
+                  {searchedItems.map((result) => {
                       return (
                         <ResultInfo
                           key={uuidv4()}
                           result={result}
-                          projectid={project._id}
+                          projectid={result.projectid}
                           resultid={result.id}
                         />
                       );
-                    });
                   })}
                 </div>
               </div>
@@ -451,7 +452,7 @@ const RightPane = ({
                       <Link
                         key={uuidv4()}
                         href={`/user/dashboard/myprojects/${projectPageInfo._id}/${result.id}`}
-                        className="flex flex-col py-6 px-8 mx-1 lg:mx-0 mb-2 xl:mb-3  h-max lg:h-max rounded-2xl w-96 lg:w-full hover:scale-95 transition-all"
+                        className="flex flex-col py-6 px-8 my-1 lg:my-2 mx-1 lg:mx-0 mb-2 xl:mb-3 border border-[#ff6700] h-max lg:h-max rounded-2xl w-96 lg:w-full hover:scale-95 transition-all"
                       >
                         {result.chosenchart == "Bar Chart" ? (
                           <BarChart

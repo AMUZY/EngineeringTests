@@ -2,10 +2,10 @@
 import React, { useEffect, useState } from "react";
 import { Bar, defaults } from "react-chartjs-2";
 import Chart from "chart.js/auto";
-import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { normaltoast } from "@toasts/Toasts";
 import { NormalBtn } from "./Button";
+import {v4 as uuidv4} from "uuid"
 
 const BarChart = ({
   shuffle,
@@ -127,13 +127,13 @@ const BarChart = ({
                 <div className="flex flex-row flex-wrap my-1">
                   <h2 className="mx-2 tbasebold"> Weight Percentages : </h2>
                   {labels.map((label) => {
-                    return <h2 className="mx-1 tbase">{label},</h2>;
+                    return <h2 key = {uuidv4()} className="mx-1 tbase">{label},</h2>;
                   })}
                 </div>
                 <div className="flex flex-row flex-wrap my-1">
                   <h2 className="mx-2 tbasebold"> Reinforcements : </h2>
                   {comps.map((reinf) => {
-                    return <h2 className="mx-1 tbase">{reinf},</h2>;
+                    return <h2 key = {uuidv4()} className="mx-1 tbase">{reinf},</h2>;
                   })}
                 </div>
               </div>
