@@ -53,7 +53,7 @@ const FAQ = () => {
             <FAQrow id={1} Expand = {Expand} question={`Do I have to pay to use EngineeringTests?`} answer={`No, registration is currently free but fees maybe incured later on prior to which users will be duly notified`} />
             <FAQrow id={2} Expand = {Expand} question={`Can I create presentation slides with EngineeringTests?`} answer={`You can only download your results in PDF format to be used in presentation or word documents`} />
             <FAQrow id={3} Expand = {Expand} question={`For how long will my charts be available here?`} answer={`They will be available for all the while our servers are up and running`} />
-            <FAQrow id={4} Expand = {Expand} question={`Can I delete my account with EngineeringTests?`} answer={`Yes you can but note that your subsctiption will be cancelled`} />
+            <FAQrow id={4} Expand = {Expand} question={`Can I delete my account with EngineeringTests?`} answer={`Yes you can`} />
         </div>
     </div>
   )
