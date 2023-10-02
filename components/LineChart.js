@@ -6,8 +6,9 @@ import "react-toastify/dist/ReactToastify.css";
 import { normaltoast } from "@toasts/Toasts";
 import { NormalBtn } from "./Button";
 import {v4 as uuidv4} from "uuid"
+import { memo } from "react";
 
-const LineChart = ({
+const LineChart = memo(({
   shuffle,
   title,
   subtitle,
@@ -165,6 +166,6 @@ const LineChart = ({
       )}
     </div>
   );
-};
+});
 
 export default LineChart;
