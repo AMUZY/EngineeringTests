@@ -64,7 +64,7 @@ const page = ({ params }) => {
         })
         .then(() => {
           setTimeout(() => {
-            router.push("/dashboard/myprojects");
+            router.push("/user/dashboard/myprojects");
           }, 2000);
           res();
         })

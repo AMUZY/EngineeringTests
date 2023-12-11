@@ -151,7 +151,7 @@ const page = ({ params }) => {
         })
         .then(() => {
           res();
-          router.push(`/dashboard/home`);
+          router.push(`/user/dashboard/home`);
         })
         .catch(() => {
           rej();
@@ -190,25 +190,25 @@ const page = ({ params }) => {
     let templabelarray = [];
     let tempcompsarray = [];
     let temptable = [];
-    result.labels.map((label) => {
+    result.labels.map((label, colindex) => {
       let tempobj = {
-        index: result.labels.indexOf(label),
+        index: colindex,
         value: label,
       };
       templabelarray.push(tempobj);
     });
-    result.comps.map((comp) => {
+    result.comps.map((comp, rowindex) => {
       let tempobj = {
-        index: result.comps.indexOf(comp),
+        index: rowindex,
         value: comp,
       };
       tempcompsarray.push(tempobj);
     });
     result.table.map((row) => {
       let temparray = [];
-      row.map((item) => {
+      row.map((item, cellindex) => {
         let tempobj = {
-          index: row.indexOf(item),
+          index: cellindex,
           value: item,
         };
         temparray.push(tempobj);
@@ -617,7 +617,7 @@ const page = ({ params }) => {
                         <div className="table mt-4 mx-auto">
                           <div className="entire_column">
                             <div className="column_cell"></div>
-                            {result.labels.map((column) => {
+                            {result.labels.map((column, colindex) => {
                               return (
                                 <input
                                   key={uuidv4()}
@@ -628,9 +628,7 @@ const page = ({ params }) => {
                                     }
                                   }}
                                   className="column_cell"
-                                  placeholder={
-                                    result.labels[result.labels.indexOf(column)]
-                                  }
+                                  placeholder={result.labels[colindex]}
                                 />
                               );
                             })}
@@ -654,10 +652,10 @@ const page = ({ params }) => {
                               })}
                             </div>
                             <div className="flex flex-col">
-                              {result.table.map((row) => {
+                              {result.table.map((row, rowindex) => {
                                 return (
                                   <div key={uuidv4()} className="entire_row">
-                                    {row.map((item) => {
+                                    {row.map((item, cellindex) => {
                                       return (
                                         <input
                                           key={uuidv4()}
@@ -689,9 +687,7 @@ const page = ({ params }) => {
                                             }
                                           }}
                                           placeholder={
-                                            result.table[
-                                              result.table.indexOf(row)
-                                            ][row.indexOf(item)]
+                                            result.table[rowindex][cellindex]
                                           }
                                         />
                                       );

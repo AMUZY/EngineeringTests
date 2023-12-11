@@ -8,11 +8,17 @@ import "react-toastify/dist/ReactToastify.css";
 import { normaltoast, failuretoast, promisetoast } from "@toasts/Toasts";
 import { useRouter } from "next/navigation";
 import { loginUser } from "@helpers/helper";
+import { ValidateEmail,ValidatePassword, ValidateUsername } from "@helpers/validateForm";
 
 let username = "";
 let email = "";
 let password = "";
 let confirmpassword = "";
+
+let err = {
+  errorComp : <></>,
+  btnStat : true
+}
 
 const UPDATEINFO = {
   USERNAME: "username",
@@ -60,6 +66,11 @@ const signup = () => {
   const [iseye2open, setIsEye2Open] = useState(false);
   const [ptype, setPType] = useState("password");
   const [ptype2, setPType2] = useState("password");
+  const [nameError,setNameError] = useState(err)
+  const [emailError,setEmailError] = useState(err)
+  const [pwordError,setPwordError] = useState(err)
+  const [pwordConfirm,setPwordConfirm] = useState(err)
+  let submit = !user.username.length > 0 || !user.email.length > 0 || !user.password.length > 0 || !user.confirmpassword.length > 0
 
   useEffect(() => {
     const setAllProviders = async () => {
@@ -94,6 +105,7 @@ const signup = () => {
 
               if (login && !login.ok) {
                 setSubmitError(login.error || "");
+                console.log(submiterror)
               } else {
                 router.push("/");
               }
@@ -186,6 +198,11 @@ const signup = () => {
                       type: UPDATEINFO.USERNAME,
                       payload: e.target.value,
                     });
+                    if(ValidateUsername(e.target.value) || e.target.value.length === 0){
+                      setNameError({...emailError, errorComp : <></>, btnStat : false})
+                    }
+                    else
+                      setNameError({...emailError, errorComp : <p className="my-2 tbase text-red-400">username should be 3-8 characters including "_" only</p>, btnStat : true})
                   }}
                   type="text"
                   id="username"
@@ -194,6 +211,7 @@ const signup = () => {
                 />
               </div>
             </div>
+            {nameError.errorComp}
             <div className={container}>
               <label className={labelclass} htmlFor="email">
                 {" "}
@@ -208,6 +226,11 @@ const signup = () => {
                       type: UPDATEINFO.EMAIL,
                       payload: e.target.value,
                     });
+                    if(ValidateEmail(e.target.value) || e.target.value.length === 0){
+                      setEmailError({...emailError, errorComp : <></>, btnStat : false})
+                    }
+                    else
+                      setEmailError({...emailError, errorComp : <p className="my-2 tbase text-red-400">This is not a valid email!</p>, btnStat : true})
                   }}
                   type="text"
                   id="email"
@@ -216,6 +239,7 @@ const signup = () => {
                 />
               </div>
             </div>
+            {emailError.errorComp}
             <div className={container}>
               <label className={labelclass} htmlFor="password">
                 {" "}
@@ -230,6 +254,18 @@ const signup = () => {
                       type: UPDATEINFO.PASSWORD,
                       payload: e.target.value,
                     });
+                    if(user.confirmpassword){
+                      console.log(e.target.value)
+                      if(user.confirmpassword === e.target.value || e.target.value.length === 0)
+                        setPwordConfirm({...pwordConfirm, errorComp : <></>, btnStat : false})
+                      else
+                        setPwordConfirm({...pwordConfirm, errorComp : <p className="my-2 tbase text-red-400">Passwords don't match!</p>, btnStat : true})
+                    }
+                    if(ValidatePassword(e.target.value) || e.target.value.length === 0){
+                      setPwordError({...pwordError, errorComp : <></>, btnStat : false})
+                    }
+                    else
+                      setPwordError({...pwordError, errorComp : <p className="my-2 tbase text-red-400">Password should not be short,not contain "@" and not be less than 5, or more than 15 characters</p>, btnStat : true})
                   }}
                   type={ptype}
                   id="password"
@@ -254,6 +290,7 @@ const signup = () => {
                 />
               </div>
             </div>
+            {pwordError.errorComp}
             <div className={container}>
               <label className={labelclass} htmlFor="confirmpassword">
                 {" "}
@@ -268,6 +305,12 @@ const signup = () => {
                       type: UPDATEINFO.CONFIRMPASSWORD,
                       payload: e.target.value,
                     });
+                    if(user.password){
+                      if(user.password === e.target.value || e.target.value.length === 0)
+                        setPwordConfirm({...pwordConfirm, errorComp : <></>, btnStat : false})
+                      else
+                        setPwordConfirm({...pwordConfirm, errorComp : <p className="my-2 tbase text-red-400">Passwords don't match!</p>, btnStat : true})
+                    }
                   }}
                   type={ptype2}
                   id="confirmpassword"
@@ -292,11 +335,12 @@ const signup = () => {
                 />
               </div>
             </div>
+            {pwordConfirm.errorComp}
             {/* BUTTON TO CREATE ACCOUNT  */}
             <button
-              disabled={loading}
+              disabled={loading || nameError.btnStat || emailError.btnStat || pwordError.btnStat || pwordConfirm.btnStat || submit}
               className={`my-3 mx-auto fill w-full md:w-max  ${
-                loading
+                loading || nameError.btnStat || emailError.btnStat || pwordError.btnStat || pwordConfirm.btnStat || submit
                   ? "border-gray-500 bg-gray-500 text-gray-400 hover:bg-gray-500 hover:text-gray-400 cursor-not-allowed"
                   : "cursor-pointer"
               }`}

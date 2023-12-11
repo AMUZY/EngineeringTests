@@ -82,6 +82,7 @@ const login = () => {
 
               if (login && !login.ok) {
                 setSubmitError(login.error || "");
+                console.log(submiterror)
               } else {
                 router.push("/");
               }

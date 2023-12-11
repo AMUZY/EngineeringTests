@@ -551,7 +551,7 @@ const page = ({ params }) => {
                     />
 
                     {show ? (
-                      <p className="text-xl">
+                      <p className="tbase">
                         {" "}
                         {`${columnno ? columnno : 0} column(s) and ${
                           rowno ? rowno : 0
@@ -566,21 +566,21 @@ const page = ({ params }) => {
                           {columns.length > 0 ? (
                             <div className="entire_column">
                               <div className="column_cell"></div>
-                              {columns.map((column) => {
+                              {columns.map((column, index) => {
                                 return (
                                   <input
                                     onBlur={(e) => {
                                       if (CheckIfSettingSaved()) {
                                         let tempstr = e.target.value;
-                                        labels[columns.indexOf(column)] =
+                                        labels[index] =
                                           tempstr;
                                       }
                                     }}
                                     key={uuidv4()}
-                                    value={labels[columns.indexOf(column)]}
+                                    value={labels[index]}
                                     className="column_cell"
                                     placeholder={`wt% ${
-                                      columns.indexOf(column) + 1
+                                      index + 1
                                     }`}
                                   />
                                 );
@@ -591,7 +591,7 @@ const page = ({ params }) => {
                           )}
                         </div>
                         <div className="rows">
-                          {rows.map((row) => {
+                          {rows.map((row, rowindex) => {
                             let temprowarray = new Array(row.length);
                             return (
                               <div key={uuidv4()} className="entire_row">
@@ -599,14 +599,14 @@ const page = ({ params }) => {
                                   onBlur={(e) => {
                                     if (CheckIfSettingSaved()) {
                                       let tempstr = e.target.value;
-                                      comps[rows.indexOf(row)] = tempstr;
+                                      comps[rowindex] = tempstr;
                                     }
                                   }}
                                   className="row_cell"
-                                  value={comps[rows.indexOf(row)]}
-                                  placeholder={`reinf ${rows.indexOf(row) + 1}`}
+                                  value={comps[rowindex]}
+                                  placeholder={`reinf ${rowindex + 1}`}
                                 />
-                                {row.map((item) => {
+                                {row.map((item, rowitemindex) => {
                                   return (
                                     <input
                                       onBlur={(e) => {
@@ -614,7 +614,7 @@ const page = ({ params }) => {
                                           let tempstr = Number(e.target.value);
                                           if (table[0]) {
                                             if (
-                                              temprowarray[row.indexOf(item)] !=
+                                              temprowarray[rowitemindex] !=
                                               tempstr
                                             ) {
                                               if (
@@ -624,9 +624,9 @@ const page = ({ params }) => {
                                                 ) == "number"
                                               ) {
                                                 temprowarray[
-                                                  row.indexOf(item)
+                                                  rowitemindex
                                                 ] = NoDuplicate(tempstr, table);
-                                                table[rows.indexOf(row)] =
+                                                table[rowindex] =
                                                   temprowarray;
                                               } else {
                                                 failuretoast(
@@ -634,16 +634,16 @@ const page = ({ params }) => {
                                                 );
                                                 e.target.value = 0;
                                                 temprowarray[
-                                                  row.indexOf(item)
+                                                  rowitemindex
                                                 ] = 0;
-                                                table[rows.indexOf(row)] =
+                                                table[rowindex] =
                                                   temprowarray;
                                               }
                                             }
                                           } else {
-                                            temprowarray[row.indexOf(item)] =
+                                            temprowarray[rowitemindex] =
                                               tempstr;
-                                            table[rows.indexOf(row)] =
+                                            table[rowindex] =
                                               temprowarray;
                                           }
                                         }
@@ -651,14 +651,14 @@ const page = ({ params }) => {
                                       key={uuidv4()}
                                       className="row_input"
                                       value={
-                                        table[rows.indexOf(row)] &&
-                                        table[rows.indexOf(row)][
-                                          row.indexOf(item)
+                                        table[rowindex] &&
+                                        table[rowindex][
+                                          rowitemindex
                                         ]
                                       }
                                       placeholder={`col ${
-                                        row.indexOf(item) + 1
-                                      }, row ${rows.indexOf(row) + 1}`}
+                                        rowitemindex + 1
+                                      }, row ${rowindex + 1}`}
                                     />
                                   );
                                 })}

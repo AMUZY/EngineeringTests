@@ -6,7 +6,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { normaltoast } from "@toasts/Toasts";
 import { NormalBtn } from "./Button";
 import {v4 as uuidv4} from "uuid"
-import { memo } from "react";
+import { memo,useCallback } from "react";
 
 const BarChart = memo(({
   shuffle,
@@ -21,7 +21,7 @@ const BarChart = memo(({
 }) => {
   const [chartstate, setChartState] = useState(false);
 
-  const UpdateData = () => {
+  const UpdateData = useCallback(() => {
     let temparray = [];
     for (let i = 0; i < table.length; i++) {
       const dataobj = {
@@ -44,11 +44,11 @@ const BarChart = memo(({
       temparray.push(dataobj);
     }
     return temparray;
-  };
+  },[ title,subtitle,labels,comps,table ])
 
   const [chart, setChart] = useState();
 
-  function UpdateChart() {
+  const UpdateChart = () => {
     if (chartstate === false && table.length === 0 && edit === false) {
       normaltoast(`add a column and row first`);
     }
@@ -115,7 +115,7 @@ const BarChart = memo(({
 
   useEffect(() => {
     UpdateChart();
-  }, [edit, labels, comps, table]);
+  }, []);
 
   return (
     <div className="flex flex-col justify-center w-full h-full">
@@ -168,4 +168,4 @@ const BarChart = memo(({
   );
 });
 
-export default BarChart;
+export default memo(BarChart);

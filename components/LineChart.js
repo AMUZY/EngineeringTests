@@ -6,7 +6,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { normaltoast } from "@toasts/Toasts";
 import { NormalBtn } from "./Button";
 import {v4 as uuidv4} from "uuid"
-import { memo } from "react";
+import { memo, useCallback } from "react";
 
 const LineChart = memo(({
   shuffle,
@@ -21,7 +21,7 @@ const LineChart = memo(({
 }) => {
   const [chartstate, setChartState] = useState(false);
 
-  const UpdateData = () => {
+  const UpdateData = useCallback(() => {
     let temparray = [];
     for (let i = 0; i < table.length; i++) {
       const dataobj = {
@@ -44,7 +44,7 @@ const LineChart = memo(({
       temparray.push(dataobj);
     }
     return temparray;
-  };
+  },[ title,subtitle,labels,comps,table ])
 
   const [chart, setChart] = useState();
 
@@ -115,7 +115,7 @@ const LineChart = memo(({
 
   useEffect(() => {
     UpdateChart();
-  }, [edit, labels, comps, table]);
+  }, []);
 
   return (
     <div className="flex flex-col justify-center w-full h-full">
@@ -168,4 +168,4 @@ const LineChart = memo(({
   );
 });
 
-export default LineChart;
+export default memo(LineChart);
