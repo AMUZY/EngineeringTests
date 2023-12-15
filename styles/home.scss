@@ -53,15 +53,7 @@ $grey: 3A3B3C;
     }
 
 .video{
-    transform: translateY(50%);
-    max-width: 160%;
-    z-index: -1;
-    top: 0;
-    right: 0;
-    left: -25%;
-    bottom: 0;
-    position: absolute;
-    opacity: .8;
+    display: none;
 }
 
 // BOXES
@@ -220,6 +212,14 @@ $grey: 3A3B3C;
 
 @media only screen and (min-width : "768px") {
     .video{
+        display: block;
+        max-width: 160%;
+        z-index: -1;
+        top: 25;
+        right: 0;
+        bottom: 25;
+        position: absolute;
+        opacity: .8;
         transform: translateY(0);
         max-width: 100%;
         left: 0;
@@ -255,5 +255,11 @@ $grey: 3A3B3C;
 @media only screen and (min-width : "976px") {
     .cardgrid{
         grid-gap: 5em;
+    }
+    .video{
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
     }
 }
